@@ -597,18 +597,12 @@ function renderMock(screen) {
             <select id="ai-mode-select">
               <option value="mock">Демо без API</option>
               <option value="direct">Прямой запрос из браузера</option>
-              <option value="proxy">Через серверный прокси</option>
             </select>
           </label>
           <label>
             Временный OpenAI API key
             <input id="ai-key-input" type="password" placeholder="sk-...">
-            <small>Только для локальной проверки. На GitHub Pages ключ будет виден в браузере, поэтому для публичной версии нужен прокси.</small>
-          </label>
-          <label>
-            Proxy URL
-            <input id="ai-proxy-input" type="url" placeholder="https://your-worker.example.com/openai">
-            <small>Публичная версия на GitHub Pages должна ходить сюда, а ключ хранится на стороне прокси.</small>
+            <small>Для одноразовой локальной демки. Можно также вставить ключ прямо в js/ai-service.js в поле browserApiKey.</small>
           </label>
           <button class="primary-action" type="button" id="save-ai-settings">Сохранить настройки</button>
           <div class="ai-status" id="ai-settings-status">Модель: ${window.BrighterlyAI?.config?.model || "gpt-5-nano"}</div>
@@ -728,20 +722,17 @@ async function handleAiTaskAction(action, taskIndex, button) {
 function bindAiSettings() {
   const modeSelect = document.querySelector("#ai-mode-select");
   const keyInput = document.querySelector("#ai-key-input");
-  const proxyInput = document.querySelector("#ai-proxy-input");
   const saveButton = document.querySelector("#save-ai-settings");
 
   if (!modeSelect || !saveButton) return;
 
   modeSelect.value = window.BrighterlyAI.getMode();
   keyInput.value = window.BrighterlyAI.getApiKey();
-  proxyInput.value = window.BrighterlyAI.getProxyUrl();
 
   saveButton.addEventListener("click", () => {
     window.BrighterlyAI.saveBrowserConfig({
       mode: modeSelect.value,
-      apiKey: keyInput.value.trim(),
-      proxyUrl: proxyInput.value.trim()
+      apiKey: keyInput.value.trim()
     });
     setAiStatus(`Настройки сохранены. Режим: ${modeSelect.value}.`, "success");
   });
@@ -750,7 +741,6 @@ function bindAiSettings() {
 function bindScreenInteractions(screen) {
   if (screen.type === "teacher-ai-settings") {
     bindAiSettings();
-    return;
   }
 
   mockMain.querySelectorAll("[data-ai-action]").forEach((button) => {
@@ -758,6 +748,19 @@ function bindScreenInteractions(screen) {
       const taskIndex = Number(button.dataset.taskIndex);
       handleAiTaskAction(button.dataset.aiAction, taskIndex, button);
     });
+  });
+}
+
+function syncNestedScreenHeight() {
+  const shell = document.querySelector(".browser-shell");
+  const bar = document.querySelector(".browser-bar");
+  const appFrame = document.querySelector(".app-frame");
+  if (!shell || !bar || !appFrame) return;
+
+  requestAnimationFrame(() => {
+    const barHeight = bar.getBoundingClientRect().height;
+    const appHeight = appFrame.getBoundingClientRect().height;
+    shell.style.height = `${Math.ceil(barHeight + appHeight)}px`;
   });
 }
 
@@ -840,6 +843,8 @@ function renderSelectedScreen() {
     item.textContent = note;
     screenNotes.append(item);
   });
+
+  syncNestedScreenHeight();
 }
 
 function renderSummary() {
@@ -868,3 +873,5 @@ featureTabs.forEach((tab) => {
 });
 
 render();
+
+window.addEventListener("resize", syncNestedScreenHeight);

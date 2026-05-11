@@ -2,8 +2,8 @@ const AI_SERVICE_CONFIG = {
   model: "gpt-5-nano",
   endpoint: "https://api.openai.com/v1/responses",
   mode: localStorage.getItem("brighterly_ai_mode") || "mock",
-  proxyUrl: localStorage.getItem("brighterly_ai_proxy_url") || "",
-  // Local demo only. Do not commit a real key here.
+  // Paste a temporary demo key here if you want direct API calls in the browser.
+  // Do not use this for anything beyond a private one-off demo.
   browserApiKey: ""
 };
 
@@ -55,19 +55,11 @@ function getMode() {
   return localStorage.getItem("brighterly_ai_mode") || AI_SERVICE_CONFIG.mode;
 }
 
-function getProxyUrl() {
-  return localStorage.getItem("brighterly_ai_proxy_url") || AI_SERVICE_CONFIG.proxyUrl;
-}
-
-function saveBrowserConfig({ mode, apiKey, proxyUrl }) {
+function saveBrowserConfig({ mode, apiKey }) {
   if (mode) localStorage.setItem("brighterly_ai_mode", mode);
   if (apiKey !== undefined) {
     if (apiKey) localStorage.setItem("OPENAI_API_KEY", apiKey);
     else localStorage.removeItem("OPENAI_API_KEY");
-  }
-  if (proxyUrl !== undefined) {
-    if (proxyUrl) localStorage.setItem("brighterly_ai_proxy_url", proxyUrl);
-    else localStorage.removeItem("brighterly_ai_proxy_url");
   }
 }
 
@@ -108,30 +100,13 @@ function extractOutputText(responseJson) {
 async function callOpenAI(payload) {
   const mode = getMode();
 
-  if (mode === "mock") {
+  if (mode !== "direct") {
     return mockOpenAI(payload);
-  }
-
-  if (mode === "proxy") {
-    const proxyUrl = getProxyUrl();
-    if (!proxyUrl) throw new Error("Proxy URL is empty. Add it in AI settings.");
-
-    const proxyResponse = await fetch(proxyUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-
-    if (!proxyResponse.ok) {
-      throw new Error(`Proxy request failed: ${proxyResponse.status}`);
-    }
-
-    return proxyResponse.json();
   }
 
   const apiKey = getApiKey();
   if (!apiKey) {
-    throw new Error("OPENAI_API_KEY is empty. Add a temporary key in AI settings.");
+    throw new Error("OpenAI API key is empty. Add a temporary demo key in AI settings or in js/ai-service.js.");
   }
 
   const response = await fetch(AI_SERVICE_CONFIG.endpoint, {
@@ -275,7 +250,6 @@ window.BrighterlyAI = {
   saveBrowserConfig,
   getApiKey,
   getMode,
-  getProxyUrl,
   simplifyTask,
   generateAlternativeTask,
   generatePracticeSet

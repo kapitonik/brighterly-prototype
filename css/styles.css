@@ -10,6 +10,7 @@
   --violet: #4338ca;
   --amber: #b45309;
   --shadow: 0 18px 45px rgba(16, 24, 40, 0.12);
+  --nested-screen-scale: 0.67;
 }
 
 * {
@@ -257,6 +258,7 @@ h1 {
   border: 1px solid #c9d7e6;
   background: var(--paper);
   box-shadow: 0 16px 36px rgba(16, 24, 40, 0.12);
+  overflow: hidden;
 }
 
 .browser-bar {
@@ -297,7 +299,10 @@ h1 {
 .app-frame {
   display: grid;
   grid-template-columns: 210px minmax(0, 1fr);
-  min-height: 598px;
+  width: calc(100% / var(--nested-screen-scale));
+  min-height: calc(598px / var(--nested-screen-scale));
+  transform: scale(var(--nested-screen-scale));
+  transform-origin: top left;
 }
 
 .app-nav {
