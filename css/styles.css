@@ -79,7 +79,7 @@ h1 {
 
 .feature-tabs {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
   margin-bottom: 14px;
 }
@@ -146,18 +146,21 @@ h1 {
 
 .screen-workspace {
   display: grid;
-  grid-template-columns: 300px minmax(0, 1fr);
-  min-height: 690px;
+  grid-template-columns: 1fr;
+  min-height: 0;
 }
 
 .flow-panel {
-  border-right: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+  gap: 18px;
+  border-bottom: 1px solid var(--line);
   background: #f8fafc;
-  padding: 18px;
+  padding: 14px 22px;
 }
 
 .panel-block + .panel-block {
-  margin-top: 24px;
+  margin-top: 0;
 }
 
 .panel-label {
@@ -170,7 +173,8 @@ h1 {
 }
 
 .role-switcher {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -185,6 +189,7 @@ h1 {
 }
 
 .role-button {
+  width: auto;
   min-height: 46px;
   padding: 10px 12px;
   font-weight: 800;
@@ -206,22 +211,23 @@ h1 {
 
 .screen-list {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 10px;
 }
 
 .screen-button {
   display: grid;
-  grid-template-columns: 36px 1fr;
+  grid-template-columns: 34px 1fr;
   gap: 10px;
   align-items: start;
-  min-height: 76px;
-  padding: 12px;
+  min-height: 64px;
+  padding: 10px;
 }
 
 .screen-number {
   display: grid;
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   place-items: center;
   background: var(--ink);
   color: #ffffff;
@@ -334,7 +340,15 @@ h1 {
 .app-nav a {
   padding: 10px 12px;
   color: #cbd5e1;
+  cursor: pointer;
   text-decoration: none;
+}
+
+.app-nav a:hover,
+.app-nav a:focus-visible {
+  background: rgba(148, 163, 184, 0.14);
+  color: #ffffff;
+  outline: none;
 }
 
 .app-nav a.is-active {
@@ -394,12 +408,11 @@ h1 {
 
 .mock-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 260px;
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
 }
 
-.mock-main,
-.mock-side {
+.mock-main {
   min-height: 430px;
   border: 1px solid var(--line);
   background: #f8fafc;
@@ -444,27 +457,6 @@ h1 {
   color: var(--muted);
   font-size: 14px;
   line-height: 1.45;
-}
-
-.mock-side {
-  padding: 18px;
-}
-
-.mock-side ul {
-  display: grid;
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.mock-side li {
-  padding: 12px;
-  border-left: 4px solid var(--teal);
-  background: #ffffff;
-  color: #344054;
-  font-size: 14px;
-  line-height: 1.4;
 }
 
 .prototype-screen {
@@ -639,33 +631,6 @@ h1 {
 .task-actions button:first-child {
   border-color: var(--teal);
   color: var(--teal-deep);
-}
-
-.ai-status {
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  background: #ffffff;
-  color: #344054;
-  font-size: 14px;
-  line-height: 1.45;
-}
-
-.ai-status[data-tone="success"] {
-  border-color: #99d8cf;
-  background: #f0fdfa;
-  color: #0f766e;
-}
-
-.ai-status[data-tone="error"] {
-  border-color: #fecaca;
-  background: #fef2f2;
-  color: #991b1b;
-}
-
-.ai-status[data-tone="loading"] {
-  border-color: #bfdbfe;
-  background: #eff6ff;
-  color: #1d4ed8;
 }
 
 .game-settings {
@@ -879,6 +844,10 @@ h1 {
   background: #ffffff;
 }
 
+.student-focus-screen {
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+}
+
 .recap-header h4 {
   margin: 10px 0 8px;
   font-size: 28px;
@@ -936,20 +905,285 @@ h1 {
   line-height: 1.35;
 }
 
-.student-problem textarea {
-  width: 100%;
-  min-height: 92px;
-  padding: 12px;
-  border: 1px solid var(--line);
-  resize: vertical;
-  font: inherit;
-}
-
 .hint-box {
   padding: 12px;
   border-left: 4px solid var(--amber);
   background: #fff7ed;
   color: #7c2d12;
+}
+
+.visual-question {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.fraction-model,
+.quest-hero,
+.battery-panel,
+.daily-track,
+.reward-grid {
+  border: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.fraction-model {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+}
+
+.fraction-row {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+
+.fraction-row span {
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.fraction-row.is-result {
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.fraction-bar {
+  display: grid;
+  gap: 4px;
+  min-height: 34px;
+}
+
+.fraction-bar.thirds {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.fraction-bar.fourths {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.fraction-bar.twelfths {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.fraction-bar i {
+  display: block;
+  border: 1px solid #b8c7d8;
+  background: #f8fafc;
+}
+
+.fraction-bar i.is-filled {
+  border-color: #0f766e;
+  background: #5eead4;
+}
+
+.fraction-bar i.accent {
+  border-color: #7c3aed;
+  background: #c4b5fd;
+}
+
+.fraction-equation {
+  padding: 10px 12px;
+  background: #eef2ff;
+  color: var(--violet);
+  font-weight: 900;
+  text-align: center;
+}
+
+.answer-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.answer-choice {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 10px;
+  align-items: center;
+  min-height: 54px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.answer-choice span {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  background: #eef2ff;
+  color: var(--violet);
+  font-weight: 900;
+}
+
+.answer-choice strong {
+  font-size: 18px;
+}
+
+.answer-choice.is-selected {
+  border-color: var(--teal);
+  background: #f0fdfa;
+}
+
+.answer-choice.is-selected span {
+  background: var(--teal);
+  color: #ffffff;
+}
+
+.quest-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f0fdfa 0%, #eef2ff 100%);
+}
+
+.quest-hero h4 {
+  margin: 10px 0 8px;
+  font-size: 28px;
+  line-height: 1.12;
+}
+
+.quest-hero p {
+  margin: 0;
+  color: #475467;
+  line-height: 1.45;
+}
+
+.quest-hero.is-game {
+  background: linear-gradient(135deg, #fff7ed 0%, #eef2ff 100%);
+}
+
+.quest-reward {
+  flex: 0 0 132px;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid #c7d2fe;
+  text-align: center;
+}
+
+.quest-reward strong {
+  display: block;
+  color: var(--violet);
+  font-size: 36px;
+  line-height: 1;
+}
+
+.quest-reward span {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.battery-panel {
+  display: grid;
+  grid-template-columns: 1.1fr repeat(2, minmax(0, 0.75fr));
+  gap: 12px;
+  padding: 14px;
+}
+
+.battery-panel > div {
+  padding: 12px;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+}
+
+.battery-panel strong {
+  display: block;
+  color: var(--ink);
+}
+
+.battery-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.battery-icon {
+  position: relative;
+  display: block;
+  width: 44px;
+  height: 24px;
+  border: 2px solid #94a3b8;
+  background: #f8fafc;
+}
+
+.battery-icon::after {
+  position: absolute;
+  top: 6px;
+  right: -6px;
+  width: 4px;
+  height: 8px;
+  background: #94a3b8;
+  content: "";
+}
+
+.battery-icon.is-charged {
+  border-color: #0f766e;
+  background:
+    linear-gradient(90deg, #5eead4 0 78%, transparent 78% 100%),
+    #ecfeff;
+}
+
+.battery-icon.is-charged::after {
+  background: #0f766e;
+}
+
+.daily-track,
+.reward-grid {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+}
+
+.daily-track {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.daily-track-card,
+.reward-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.daily-track-card.done,
+.reward-card.is-active {
+  border-color: #b8e4dd;
+  background: #f0fdfa;
+}
+
+.daily-track-card.current {
+  border-color: #c7d2fe;
+  background: #eef2ff;
+}
+
+.daily-track-card strong,
+.reward-card strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.daily-track-card span,
+.reward-card span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.reward-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .rule-grid {
@@ -1007,52 +1241,6 @@ h1 {
   text-transform: uppercase;
 }
 
-.settings-list {
-  display: grid;
-  gap: 10px;
-}
-
-.settings-list label {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  padding: 14px;
-  border: 1px solid var(--line);
-  background: #ffffff;
-  font-weight: 800;
-}
-
-.ai-settings-form label {
-  display: grid;
-  align-items: start;
-}
-
-.ai-settings-form .setting-check {
-  display: flex;
-  align-items: center;
-}
-
-.ai-settings-form input:not([type="checkbox"]),
-.ai-settings-form select {
-  width: 100%;
-  min-height: 42px;
-  padding: 9px 10px;
-  border: 1px solid var(--line);
-  font: inherit;
-}
-
-.ai-settings-form input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-}
-
-.ai-settings-form small {
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.4;
-}
-
 @media (max-width: 1120px) {
   .feature-tabs {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1066,6 +1254,10 @@ h1 {
   .lesson-plan,
   .game-settings,
   .attempt-table,
+  .visual-question,
+  .battery-panel,
+  .daily-track,
+  .reward-grid,
   .lesson-summary-grid,
   .summary-review-grid,
   .summary-timeline {
@@ -1095,7 +1287,8 @@ h1 {
 
   .topbar,
   .feature-summary,
-  .app-toolbar {
+  .app-toolbar,
+  .quest-hero {
     display: block;
   }
 
@@ -1113,6 +1306,11 @@ h1 {
     grid-template-columns: 1fr;
   }
 
+  .flow-panel {
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
+
   .feature-summary,
   .web-preview,
   .app-content {
@@ -1122,7 +1320,6 @@ h1 {
   .browser-shell,
   .app-frame,
   .mock-main,
-  .mock-side,
   .week-card {
     min-height: 0;
   }
@@ -1139,5 +1336,9 @@ h1 {
   .primary-action {
     width: 100%;
     margin-top: 16px;
+  }
+
+  .quest-reward {
+    margin-top: 14px;
   }
 }

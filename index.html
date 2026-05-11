@@ -34,10 +34,6 @@
           <span>04</span>
           Ігрові механіки
         </button>
-        <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="ai">
-          <span>05</span>
-          Налаштування ШІ
-        </button>
       </nav>
 
       <section class="prototype-stage" aria-live="polite">
@@ -53,7 +49,7 @@
         </section>
 
         <section class="screen-workspace">
-          <aside class="flow-panel" aria-label="Сценарій функції">
+          <section class="flow-panel" aria-label="Сценарій функції">
             <div class="panel-block">
               <p class="panel-label">Застосунок</p>
               <div class="role-switcher" id="role-switcher"></div>
@@ -63,7 +59,7 @@
               <p class="panel-label">Екрани сценарію</p>
               <div class="screen-list" id="screen-list"></div>
             </div>
-          </aside>
+          </section>
 
           <section class="web-preview" aria-label="Макет вибраного екрана">
             <div class="browser-shell">
@@ -105,10 +101,6 @@
                         <small id="placeholder-caption">This frame supports multiple roles and screens inside one feature.</small>
                       </div>
                     </div>
-                    <aside class="mock-side">
-                      <p class="panel-label">Context</p>
-                      <ul id="screen-notes"></ul>
-                    </aside>
                   </div>
                 </section>
               </div>
@@ -118,7 +110,6 @@
       </section>
     </main>
 
-    <script src="js/ai-service.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>

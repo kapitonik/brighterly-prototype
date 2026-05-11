@@ -1,4 +1,4 @@
-const aiTasks = [
+const practiceTasks = [
   {
     label: "Common denominator",
     prompt: "Which common denominator works for 1/3 + 1/4?",
@@ -30,8 +30,6 @@ const aiTasks = [
     reason: "Prepares the student for mixed practice during the week."
   }
 ];
-
-let reviewTasks = aiTasks.map((task) => ({ ...task }));
 
 const weekPlan = [
   {
@@ -125,6 +123,7 @@ const features = {
             caption: "До відправлення учню",
             appTitle: "Review AI Practice Drafts",
             appAction: "Approve 5 Tasks",
+            navIndex: 1,
             notes: [
               "AI drafts tasks from lesson mistakes",
               "Teacher approves or edits every task",
@@ -137,9 +136,10 @@ const features = {
             caption: "2-3 завдання на день",
             appTitle: "Weekly Practice Plan",
             appAction: "Save Plan",
+            navIndex: 2,
             notes: [
               "Same task pool, different practice mode",
-              "Lives limit retries inside one daily session",
+              "Batteries protect the streak after missed days",
               "A day pass protects the learning streak"
             ]
           },
@@ -149,6 +149,7 @@ const features = {
             caption: "За 10 хвилин до заняття",
             appTitle: "Pre-Lesson Signal",
             appAction: "Open Lesson Plan",
+            navIndex: 3,
             notes: [
               "Teacher sees how the student warmed up",
               "Weekly mistakes feed into the next lesson opening",
@@ -170,6 +171,7 @@ const features = {
             caption: "Протягом 24 годин після уроку",
             appTitle: "Quick Review",
             appAction: "Answer",
+            navIndex: 0,
             notes: [
               "Up to 5 tasks focused on weak spots",
               "5-7 minutes without feeling like heavy homework",
@@ -182,9 +184,10 @@ const features = {
             caption: "2-3 завдання на день",
             appTitle: "Weekly Practice",
             appAction: "Start Today",
+            navIndex: 1,
             notes: [
               "Daily sessions stay short",
-              "Lives apply only inside one practice attempt",
+              "Batteries protect the streak without punishing the student too hard",
               "Hint charges are spent on deeper help"
             ]
           },
@@ -194,6 +197,7 @@ const features = {
             caption: "За 10 хвилин до заняття",
             appTitle: "Pre-Lesson Warm-Up",
             appAction: "I'm Ready",
+            navIndex: 2,
             notes: [
               "Short cheat sheet with needed rules",
               "Next lesson plan",
@@ -223,6 +227,7 @@ const features = {
             caption: "Ключові моменти й теми",
             appTitle: "Lesson Summary",
             appAction: "Open Progress",
+            navIndex: 0,
             notes: ["Reviewed by the teacher", "Parent receives the summary within 5 minutes", "Connected to post-lesson practice"]
           },
           {
@@ -231,6 +236,7 @@ const features = {
             caption: "Динаміка за темами",
             appTitle: "Child Progress",
             appAction: "View Tasks",
+            navIndex: 1,
             notes: ["Focused on outcomes", "No micromanagement", "Clear value for subscription renewal"]
           }
         ]
@@ -248,6 +254,7 @@ const features = {
             caption: "Перед відправленням батькам",
             appTitle: "Summary Review",
             appAction: "Send to Parent",
+            navIndex: 1,
             notes: ["AI prepares a draft in a few minutes", "Teacher verifies facts", "Parent receives a clear next step"]
           }
         ]
@@ -273,6 +280,7 @@ const features = {
             caption: "Стан тижня",
             appTitle: "Achievement Overview",
             appAction: "Open Details",
+            navIndex: 0,
             notes: ["Parent acts as a supporter", "Progress is visible", "Less anxiety between lessons"]
           },
           {
@@ -281,6 +289,7 @@ const features = {
             caption: "Математика й англійська",
             appTitle: "Subject Progress",
             appAction: "View History",
+            navIndex: 1,
             notes: ["Monthly progress", "Clear subject areas", "Connected to lesson summaries"]
           }
         ]
@@ -291,7 +300,7 @@ const features = {
     kicker: "Функція 04",
     title: "Ігрові механіки",
     description:
-      "Серії днів, життя, заряд підказок і пропуски дня підтримують практику, але не карають дитину надто жорстко.",
+      "Серії днів, батарейки, заряд підказок і пропуски дня підтримують практику, але не карають дитину надто жорстко.",
     roles: [
       {
         id: "student",
@@ -302,11 +311,12 @@ const features = {
         screens: [
           {
             type: "student-game",
-            title: "Серія та життя",
+            title: "Серія та батарейки",
             caption: "Регулярність без зайвого тиску",
-            appTitle: "Streaks and Lives",
+            appTitle: "Streaks and Batteries",
             appAction: "Continue Streak",
-            notes: ["Daily lives", "Hint charges", "Day pass protects the streak"]
+            navIndex: 1,
+            notes: ["Daily set", "Streak batteries", "Day pass protects the streak"]
           },
           {
             type: "student-tournament",
@@ -314,36 +324,8 @@ const features = {
             caption: "Бали за корисну практику",
             appTitle: "Weekly Challenge",
             appAction: "View Ranking",
+            navIndex: 2,
             notes: ["Comparison without pressure", "Points for useful effort", "Weekly wrap-up"]
-          }
-        ]
-      }
-    ]
-  },
-  ai: {
-    kicker: "Функція 05",
-    title: "Налаштування ШІ",
-    description:
-      "У першій версії ШІ генерує завдання та пояснення, але викладач перевіряє добірку до відправлення учню.",
-    roles: [
-      {
-        id: "teacher",
-        label: "Викладач",
-        appLabel: "Teacher",
-        path: "teacher/ai-settings",
-        nav: ["Rules", "Difficulty", "Review", "History"],
-        screens: [
-          {
-            type: "teacher-ai-settings",
-            title: "Правила генерації",
-            caption: "Що ШІ може робити сам",
-            appTitle: "Generation Rules",
-            appAction: "Save Rules",
-            notes: [
-              "AI cannot send tasks without approval",
-              "Level: US Grade 5",
-              "Topic: fractions with unlike denominators"
-            ]
           }
         ]
       }
@@ -362,7 +344,6 @@ const browserUrl = document.querySelector("#browser-url");
 const screenRole = document.querySelector("#screen-role");
 const screenTitle = document.querySelector("#screen-title");
 const screenAction = document.querySelector("#screen-action");
-const screenNotes = document.querySelector("#screen-notes");
 const appNav = document.querySelector(".app-nav nav");
 const mockMain = document.querySelector("#mock-main");
 
@@ -385,7 +366,7 @@ function getCurrentScreen() {
 }
 
 function taskRows() {
-  return reviewTasks
+  return practiceTasks
     .map(
       (task, index) => `
         <article class="task-review-card">
@@ -399,9 +380,9 @@ function taskRows() {
           <p class="task-prompt">${task.prompt}</p>
           <div class="task-answer">Expected answer: <strong>${task.answer}</strong></div>
           <div class="task-actions">
-            <button type="button" data-ai-action="keep" data-task-index="${index}">Keep</button>
-            <button type="button" data-ai-action="simplify" data-task-index="${index}">Simplify with AI</button>
-            <button type="button" data-ai-action="alternative" data-task-index="${index}">Replace with AI</button>
+            <button type="button">Approve</button>
+            <button type="button">Edit wording</button>
+            <button type="button">Move to weekly practice</button>
           </div>
         </article>
       `
@@ -456,6 +437,86 @@ function metricCards(metrics) {
     .join("");
 }
 
+function fractionModel() {
+  return `
+    <div class="fraction-model" aria-label="Fraction visual model">
+      <div class="fraction-row">
+        <span>1/3</span>
+        <div class="fraction-bar thirds">
+          <i class="is-filled"></i><i></i><i></i>
+        </div>
+      </div>
+      <div class="fraction-row">
+        <span>1/4</span>
+        <div class="fraction-bar fourths">
+          <i class="is-filled"></i><i></i><i></i><i></i>
+        </div>
+      </div>
+      <div class="fraction-row is-result">
+        <span>?</span>
+        <div class="fraction-bar twelfths">
+          <i class="is-filled"></i><i class="is-filled"></i><i class="is-filled"></i><i class="is-filled"></i>
+          <i class="is-filled accent"></i><i class="is-filled accent"></i><i class="is-filled accent"></i>
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </div>
+      <div class="fraction-equation">1/3 + 1/4 = 4/12 + 3/12</div>
+    </div>
+  `;
+}
+
+function answerChoices(choices, selectedIndex) {
+  return `
+    <div class="answer-options" role="list">
+      ${choices
+        .map(
+          (choice, index) => `
+            <button class="answer-choice${index === selectedIndex ? " is-selected" : ""}" type="button">
+              <span>${String.fromCharCode(65 + index)}</span>
+              <strong>${choice}</strong>
+            </button>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function batteryRow(total = 3, charged = 3) {
+  return `
+    <div class="battery-row" aria-label="${charged} of ${total} streak batteries left">
+      ${Array.from({ length: total })
+        .map((_, index) => `<span class="battery-icon${index < charged ? " is-charged" : ""}"></span>`)
+        .join("")}
+    </div>
+  `;
+}
+
+function dailyTrack() {
+  const days = [
+    { label: "Mon", state: "done", points: "+30" },
+    { label: "Tue", state: "current", points: "+30" },
+    { label: "Wed", state: "", points: "Locked" },
+    { label: "Thu", state: "", points: "Locked" },
+    { label: "Fri", state: "", points: "Review" }
+  ];
+
+  return `
+    <div class="daily-track">
+      ${days
+        .map(
+          (day) => `
+            <div class="daily-track-card ${day.state}">
+              <strong>${day.label}</strong>
+              <span>${day.points}</span>
+            </div>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
 function renderMock(screen) {
   const fallback = `
     <div class="mock-empty">
@@ -470,17 +531,15 @@ function renderMock(screen) {
       <div class="prototype-screen">
         <section class="insight-strip">
           <div>
-            <span class="ai-badge">Generated by AI</span>
-            <h4>5 tasks on fractions with unlike denominators</h4>
+            <span class="ai-badge">Draft prepared</span>
+            <h4>5 practice tasks from lesson mistakes</h4>
             <p>Grade: US Grade 5 · Common Core 5.NF.A.1 / 5.NF.A.2</p>
           </div>
-          <button class="secondary-action" type="button" data-ai-action="generate-set">Regenerate</button>
           <div class="confidence-card">
             <strong>86%</strong>
-            <span>match confidence</span>
+            <span>fit to lesson errors</span>
           </div>
         </section>
-        <div class="ai-status" id="ai-status">AI mode: ${window.BrighterlyAI?.getMode?.() || "mock"}. In demo mode, responses are mocked without API calls.</div>
         <section class="diagnostic-grid">
           <div>
             <p class="panel-label">Lesson mistakes</p>
@@ -509,7 +568,7 @@ function renderMock(screen) {
         </section>
         <section class="game-settings">
           ${metricCards([
-            { value: "3", label: "lives per day" },
+            { value: "3", label: "streak batteries" },
             { value: "2", label: "hint charges" },
             { value: "1", label: "day pass" },
             { value: "5-7 min", label: "per daily session" }
@@ -547,11 +606,11 @@ function renderMock(screen) {
     `,
     "student-recap": `
       <div class="prototype-screen">
-        <section class="student-task-shell">
+        <section class="student-task-shell student-focus-screen">
           <div class="recap-header">
             <span class="stage-pill">Stage 1 · first 24 hours</span>
             <h4>Quick review after the lesson</h4>
-            <p>5 short questions focused on what felt hardest today.</p>
+            <p>5 short tap-friendly questions focused on what felt hardest today.</p>
           </div>
           <div class="task-progress">
             <span class="is-done">1</span>
@@ -560,26 +619,54 @@ function renderMock(screen) {
             <span>4</span>
             <span>5</span>
           </div>
-          <article class="student-problem">
-            <span>Task 3 of 5 · find the mistake</span>
-            <strong>A student wrote: 1/2 + 2/5 = 3/7. Why is this incorrect?</strong>
-            <textarea aria-label="Student answer" placeholder="Explain in your own words"></textarea>
-            <div class="hint-box">AI hint: check whether the fraction parts are the same size.</div>
-          </article>
+          <section class="visual-question">
+            ${fractionModel()}
+            <article class="student-problem">
+              <span>Task 3 of 5 · choose the answer</span>
+              <strong>What is 1/3 + 1/4?</strong>
+              ${answerChoices(["3/7", "7/12", "2/7", "4/12"], 1)}
+              <div class="hint-box">Hint: first make both fractions into twelfths.</div>
+            </article>
+          </section>
         </section>
       </div>
     `,
     "student-week": `
       <div class="prototype-screen">
-        <section class="game-settings">
-          ${metricCards([
-            { value: "3/3", label: "lives" },
-            { value: "2", label: "hint charges" },
-            { value: "1", label: "day pass" },
-            { value: "4 days", label: "streak" }
-          ])}
+        <section class="quest-hero">
+          <div>
+            <span class="stage-pill">Daily set</span>
+            <h4>Finish 3 tasks to keep the streak</h4>
+            <p>Complete the daily set to earn points. If a day is missed, one battery protects the streak.</p>
+          </div>
+          <div class="quest-reward">
+            <strong>+30</strong>
+            <span>points today</span>
+          </div>
         </section>
-        <section class="week-grid">${weekCards()}</section>
+        <section class="battery-panel">
+          <div>
+            <p class="panel-label">Streak batteries</p>
+            ${batteryRow(3, 2)}
+          </div>
+          <div>
+            <p class="panel-label">Today</p>
+            <strong>2 of 3 tasks done</strong>
+          </div>
+          <div>
+            <p class="panel-label">Hint charges</p>
+            <strong>2 left</strong>
+          </div>
+        </section>
+        <section class="visual-question">
+          ${fractionModel()}
+          <article class="student-problem">
+            <span>Daily task · 60 seconds</span>
+            <strong>Which answer matches the model?</strong>
+            ${answerChoices(["5/12", "7/12", "8/12", "3/4"], 1)}
+          </article>
+        </section>
+        ${dailyTrack()}
       </div>
     `,
     "student-warmup": `
@@ -588,10 +675,18 @@ function renderMock(screen) {
           <span>Stage 3</span>
           <div>
             <h4>Warm-up 10 minutes before class</h4>
-            <p>The student can read a quick note and try 1-2 easy examples. Solving everything is optional.</p>
+            <p>Review one rule, try one easy example, and let the teacher see the warm-up result before class.</p>
           </div>
         </section>
         <section class="rule-grid">${warmupCards()}</section>
+        <section class="visual-question">
+          ${fractionModel()}
+          <article class="student-problem">
+            <span>Preview example · optional</span>
+            <strong>What should you do before adding 1/3 and 1/4?</strong>
+            ${answerChoices(["Add 3 + 4", "Find a common denominator", "Make both numerators 1", "Subtract first"], 1)}
+          </article>
+        </section>
         <section class="lesson-plan">
           <div>
             <p class="panel-label">Lesson plan</p>
@@ -602,8 +697,8 @@ function renderMock(screen) {
             </ol>
           </div>
           <div>
-            <p class="panel-label">Try if you want</p>
-            <div class="preview-problem">Two sandwiches are shared among 3 children. What fraction does each child get?</div>
+            <p class="panel-label">Teacher sees</p>
+            <div class="preview-problem">Warm-up opened · 1 optional example attempted · denominator rule reviewed</div>
           </div>
         </section>
       </div>
@@ -697,166 +792,44 @@ function renderMock(screen) {
         </section>
       </div>
     `,
-    "teacher-ai-settings": `
-      <div class="prototype-screen">
-        <section class="settings-list ai-settings-form">
-          <label>
-            Request mode
-            <select id="ai-mode-select">
-              <option value="mock">Demo without API</option>
-              <option value="direct">Direct browser request</option>
-            </select>
-          </label>
-          <label>
-            Temporary OpenAI API key
-            <input id="ai-key-input" type="password" placeholder="sk-...">
-            <small>For a one-off local demo. You can also paste the key directly into js/ai-service.js in browserApiKey.</small>
-          </label>
-          <button class="primary-action" type="button" id="save-ai-settings">Save Settings</button>
-          <div class="ai-status" id="ai-settings-status">Model: ${window.BrighterlyAI?.config?.model || "gpt-5-nano"}</div>
-          <label class="setting-check"><input type="checkbox" checked> AI can suggest tasks after the lesson</label>
-          <label class="setting-check"><input type="checkbox" checked> Send to student only after teacher review</label>
-          <label class="setting-check"><input type="checkbox" checked> Generate mistake explanations in simple language</label>
-          <label class="setting-check"><input type="checkbox"> Allow automatic sending for very easy tasks</label>
-        </section>
-        <section class="diagnostic-grid">
-          <div class="approval-box">Level: US Grade 5</div>
-          <div class="approval-box">Current topic: fractions with unlike denominators</div>
-        </section>
-      </div>
-    `,
     "student-game": `
       <div class="prototype-screen">
-        <section class="game-settings">
-          ${metricCards([
-            { value: "4", label: "day streak" },
-            { value: "3/3", label: "lives today" },
-            { value: "2", label: "hint charges" },
-            { value: "1", label: "day pass" }
-          ])}
-        </section>
-        <section class="stage-banner">
-          <span>How it works</span>
+        <section class="quest-hero is-game">
           <div>
-            <h4>The streak continues after a daily minimum</h4>
-            <p>The student does not need to solve a lot: 2-3 tasks are enough, but regular return matters.</p>
+            <span class="stage-pill">Daily Quest</span>
+            <h4>Do today's set. Earn points. Keep the streak.</h4>
+            <p>A daily set is 2-3 short tasks. Missing a day spends one battery instead of breaking the streak.</p>
           </div>
+          <div class="quest-reward">
+            <strong>4</strong>
+            <span>day streak</span>
+          </div>
+        </section>
+        <section class="battery-panel">
+          <div>
+            <p class="panel-label">Batteries</p>
+            ${batteryRow(3, 2)}
+          </div>
+          <div>
+            <p class="panel-label">Today's reward</p>
+            <strong>+30 points</strong>
+          </div>
+          <div>
+            <p class="panel-label">Daily set</p>
+            <strong>3 short tasks</strong>
+          </div>
+        </section>
+        <section class="reward-grid">
+          <article class="reward-card is-active"><strong>1</strong><span>Warm-up task</span></article>
+          <article class="reward-card is-active"><strong>2</strong><span>Visual fraction</span></article>
+          <article class="reward-card"><strong>3</strong><span>Final check</span></article>
+          <article class="reward-card"><strong>+10</strong><span>bonus for no hints</span></article>
         </section>
       </div>
     `
   };
 
   mockMain.innerHTML = templates[screen.type] || fallback;
-  bindScreenInteractions(screen);
-}
-
-function getPracticeContext() {
-  return {
-    grade: "US Grade 5",
-    commonCore: ["5.NF.A.1", "5.NF.A.2"],
-    topic: "Adding and subtracting fractions with unlike denominators",
-    lessonErrors: [
-      "student adds denominators directly",
-      "student forgets to scale the numerator",
-      "student does not estimate whether the answer is reasonable"
-    ],
-    timeWindow: "within 24 hours after the lesson",
-    maxTasks: 5,
-    teacherValidationRequired: true
-  };
-}
-
-function setAiStatus(message, tone = "neutral") {
-  const status = document.querySelector("#ai-status") || document.querySelector("#ai-settings-status");
-  if (!status) return;
-  status.textContent = message;
-  status.dataset.tone = tone;
-}
-
-function setButtonLoading(button, isLoading) {
-  if (!button) return;
-  button.disabled = isLoading;
-  if (isLoading) {
-    button.dataset.originalText = button.textContent;
-    button.textContent = "AI is thinking...";
-  } else if (button.dataset.originalText) {
-    button.textContent = button.dataset.originalText;
-    delete button.dataset.originalText;
-  }
-}
-
-async function handleAiTaskAction(action, taskIndex, button) {
-  const task = reviewTasks[taskIndex];
-  if (!task && action !== "generate-set") return;
-
-  try {
-    setButtonLoading(button, true);
-
-    if (action === "keep") {
-      setAiStatus("Task kept as-is. The teacher approved this item.", "success");
-      return;
-    }
-
-    if (action === "simplify") {
-      setAiStatus("Sending the task to the OpenAI API for simplification...", "loading");
-      reviewTasks[taskIndex] = await window.BrighterlyAI.simplifyTask(task);
-      renderSelectedScreen();
-      setAiStatus("AI simplified the task. Review the wording before sending it to the student.", "success");
-      return;
-    }
-
-    if (action === "alternative") {
-      setAiStatus("Requesting an alternative task...", "loading");
-      reviewTasks[taskIndex] = await window.BrighterlyAI.generateAlternativeTask(task);
-      renderSelectedScreen();
-      setAiStatus("AI suggested an alternative. The teacher still needs to review it.", "success");
-      return;
-    }
-
-    if (action === "generate-set") {
-      setAiStatus("Generating a new set of 5 tasks...", "loading");
-      const result = await window.BrighterlyAI.generatePracticeSet(getPracticeContext());
-      reviewTasks = result.tasks.map((item) => ({ ...item }));
-      renderSelectedScreen();
-      setAiStatus("New task set is ready. Review each task before sending.", "success");
-    }
-  } catch (error) {
-    setAiStatus(error.message, "error");
-  } finally {
-    setButtonLoading(button, false);
-  }
-}
-
-function bindAiSettings() {
-  const modeSelect = document.querySelector("#ai-mode-select");
-  const keyInput = document.querySelector("#ai-key-input");
-  const saveButton = document.querySelector("#save-ai-settings");
-
-  if (!modeSelect || !saveButton) return;
-
-  modeSelect.value = window.BrighterlyAI.getMode();
-  keyInput.value = window.BrighterlyAI.getApiKey();
-
-  saveButton.addEventListener("click", () => {
-    window.BrighterlyAI.saveBrowserConfig({
-      mode: modeSelect.value,
-      apiKey: keyInput.value.trim()
-    });
-    setAiStatus(`Settings saved. Mode: ${modeSelect.value}.`, "success");
-  });
-}
-
-function bindScreenInteractions(screen) {
-  if (screen.type === "teacher-ai-settings") {
-    bindAiSettings();
-  }
-
-  mockMain.querySelectorAll("[data-ai-action]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const taskIndex = Number(button.dataset.taskIndex);
-      handleAiTaskAction(button.dataset.aiAction, taskIndex, button);
-    });
-  });
 }
 
 function syncNestedScreenHeight() {
@@ -923,13 +896,23 @@ function renderScreens() {
 
 function renderNav() {
   const role = getCurrentRole();
+  const screen = getCurrentScreen();
+  const activeNavIndex = screen.navIndex ?? 0;
   appNav.innerHTML = "";
 
   role.nav.forEach((item, index) => {
     const link = document.createElement("a");
     link.href = "#";
     link.textContent = item;
-    if (index === 0) link.classList.add("is-active");
+    if (index === activeNavIndex) link.classList.add("is-active");
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      const matchingScreenIndex = role.screens.findIndex((candidate) => (candidate.navIndex ?? 0) === index);
+      if (matchingScreenIndex >= 0) {
+        state.screenIndex = matchingScreenIndex;
+        render();
+      }
+    });
     appNav.append(link);
   });
 }
@@ -945,13 +928,6 @@ function renderSelectedScreen() {
   screenTitle.textContent = screen.appTitle || screen.title;
   screenAction.textContent = screen.appAction || screen.action;
   renderMock(screen);
-
-  screenNotes.innerHTML = "";
-  screen.notes.forEach((note) => {
-    const item = document.createElement("li");
-    item.textContent = note;
-    screenNotes.append(item);
-  });
 
   syncNestedScreenHeight();
 }
