@@ -349,8 +349,6 @@ const features = {
 const featureTabs = document.querySelectorAll(".feature-tab");
 const roleSwitcher = document.querySelector("#role-switcher");
 const screenList = document.querySelector("#screen-list");
-const featureKicker = document.querySelector("#feature-kicker");
-const featureTitle = document.querySelector("#feature-title");
 const featureDescription = document.querySelector("#feature-description");
 const appRoleLabel = document.querySelector("#app-role-label");
 const browserUrl = document.querySelector("#browser-url");
@@ -576,13 +574,13 @@ function expressionPreviewModel() {
   `;
 }
 
-function answerChoices(choices, selectedIndex) {
+function answerChoices(choices, correctIndex) {
   return `
     <div class="answer-options" role="list">
       ${choices
         .map(
           (choice, index) => `
-            <button class="answer-choice${index === selectedIndex ? " is-selected" : ""}" type="button">
+            <button class="answer-choice" type="button" data-correct="${index === correctIndex ? "true" : "false"}">
               <span>${String.fromCharCode(65 + index)}</span>
               <strong>${choice}</strong>
             </button>
@@ -603,23 +601,28 @@ function batteryRow(total = 3, charged = 3) {
   `;
 }
 
-function dailyTrack() {
-  const days = [
-    { label: "Mon", state: "done", points: "+30" },
-    { label: "Tue", state: "current", points: "+30" },
-    { label: "Wed", state: "", points: "Locked" },
-    { label: "Thu", state: "", points: "Locked" },
-    { label: "Fri", state: "", points: "Review" }
+function dailyTrack(days) {
+  const trackDays = days || [
+    { label: "Пн", state: "done",     points: "+30" },
+    { label: "Вт", state: "done",     points: "+30" },
+    { label: "Ср", state: "missed",   points: "−🔋" },
+    { label: "Чт", state: "today",    points: "+30" },
+    { label: "Пт", state: "upcoming", points: ""    },
+    { label: "Сб", state: "upcoming", points: ""    },
+    { label: "Нд", state: "review",   points: "📖"  }
   ];
 
   return `
-    <div class="daily-track">
-      ${days
+    <div class="day-track">
+      ${trackDays
         .map(
           (day) => `
-            <div class="daily-track-card ${day.state}">
-              <strong>${day.label}</strong>
-              <span>${day.points}</span>
+            <div class="day-dot ${day.state}">
+              <div class="day-dot-circle">
+                ${day.state === "done" ? "✓" : day.state === "missed" ? "✕" : ""}
+              </div>
+              <span class="day-dot-label">${day.label}</span>
+              <span class="day-dot-points">${day.points || ""}</span>
             </div>
           `
         )
@@ -717,135 +720,115 @@ function renderMock(screen) {
     `,
     "student-recap-processing": `
       <div class="prototype-screen">
-        <section class="student-task-shell lesson-recap-screen">
-          <div class="recap-header recap-hero">
-            <div>
-              <span class="stage-pill">Just finished · processing</span>
-              <h4>Preparing your lesson card</h4>
-              <p>The lesson sheet is ready now. Personal notes and practice checks will unlock after the transcript is processed and reviewed.</p>
-            </div>
-            <div class="recap-time is-processing">
-              <strong>62%</strong>
-              <span>transcript ready</span>
-            </div>
-          </div>
+        <section class="recap-hero-simple is-processing">
+          <span class="stage-pill">After class · processing</span>
+          <h4>Preparing your Lesson Card…</h4>
+          <p>Usually ready 2–3 minutes after class. Topics appear below as they process.</p>
+        </section>
 
-          <section class="processing-grid">
-            <article class="available-card">
-              <p class="panel-label">Available now</p>
-              <strong>Business Math quick sheet</strong>
-              <div class="mini-rule-list">
-                <span>Unit price = total price / amount</span>
-                <span>Discount makes the final price lower</span>
-                <span>Sales tax is added after the item price</span>
-              </div>
-            </article>
-
-            <article class="processing-card">
-              <p class="panel-label">Still processing</p>
-              <div class="processing-step is-done"><strong>Lesson plan</strong><span>ready</span></div>
-              <div class="processing-step is-current"><strong>Voice transcript</strong><span>about 2 min left</span></div>
-              <div class="processing-step"><strong>Personal mistakes</strong><span>waiting for transcript</span></div>
-              <div class="processing-step"><strong>Teacher review</strong><span>not started yet</span></div>
-            </article>
-          </section>
-
-          <section class="transcript-panel">
-            <div>
-              <p class="panel-label">Lesson recording</p>
-              <strong>50 min class · saved</strong>
-              <div class="audio-wave" aria-hidden="true">
-                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-              </div>
+        <section class="topic-list">
+          <article class="topic-card is-skeleton">
+            <div class="topic-card-head">
+              <span class="skeleton-line" style="width:7rem;height:1em"></span>
+              <span class="skeleton-chip"></span>
             </div>
-            <div class="transcript-preview">
-              <p class="panel-label">Transcript preview</p>
-              <p><strong>Teacher:</strong> Let's compare the unit price first.</p>
-              <p><strong>Student:</strong> So I divide the price by the ounces?</p>
-              <p class="is-muted">More transcript lines are still being processed...</p>
+            <span class="skeleton-line" style="width:90%"></span>
+            <span class="skeleton-line topic-example" style="width:68%"></span>
+          </article>
+          <article class="topic-card is-skeleton">
+            <div class="topic-card-head">
+              <span class="skeleton-line" style="width:5rem;height:1em"></span>
+              <span class="skeleton-chip"></span>
             </div>
-          </section>
+            <span class="skeleton-line" style="width:84%"></span>
+            <span class="skeleton-line topic-example" style="width:72%"></span>
+          </article>
+          <article class="topic-card is-skeleton">
+            <div class="topic-card-head">
+              <span class="skeleton-line" style="width:6rem;height:1em"></span>
+              <span class="skeleton-chip"></span>
+            </div>
+            <span class="skeleton-line" style="width:78%"></span>
+            <span class="skeleton-line topic-example" style="width:60%"></span>
+          </article>
+        </section>
 
-          <section class="recap-checks is-locked">
-            <article class="student-problem">
-              <span>Unlocks after review</span>
-              <strong>Personal check questions will appear here.</strong>
-              <div class="locked-options">
-                <button type="button" disabled>A</button>
-                <button type="button" disabled>B</button>
-                <button type="button" disabled>C</button>
-                <button type="button" disabled>D</button>
-              </div>
-            </article>
-            <article class="student-problem">
-              <span>Why wait?</span>
-              <strong>The system needs the transcript to avoid guessing what was hard for you.</strong>
-              <div class="hint-box">The teacher can approve the final version before the recap becomes active.</div>
-            </article>
-          </section>
+        <section class="recap-results">
+          <div class="result-pill is-skeleton"><span class="skeleton-line" style="width:6rem"></span></div>
+          <div class="result-pill is-skeleton"><span class="skeleton-line" style="width:8rem"></span></div>
+        </section>
+
+        <section class="recap-checks">
+          <article class="student-problem is-locked">
+            <span>Unlocks after processing</span>
+            <strong>Your check question will appear here.</strong>
+            <div class="answer-options">
+              ${["A","B","C","D"].map(l => `<button class="answer-choice" type="button" disabled><span>${l}</span><strong>–</strong></button>`).join("")}
+            </div>
+          </article>
         </section>
       </div>
     `,
     "student-recap": `
       <div class="prototype-screen">
-        <section class="student-task-shell lesson-recap-screen">
-          <div class="recap-header recap-hero">
-            <div>
-              <span class="stage-pill">Stage 1 · after class</span>
-              <h4>Today's Lesson Card</h4>
-              <p>A calm recap of what we practiced today. Two quick tap questions at the end help lock it in.</p>
+        <section class="recap-hero-simple">
+          <span class="stage-pill">After class · Lesson Card</span>
+          <h4>Business Math · today's recap</h4>
+          <p>Tap through the topics, then answer the check question at the end.</p>
+        </section>
+
+        <section class="topic-list">
+          <article class="topic-card">
+            <div class="topic-card-head">
+              <strong>Unit price</strong>
+              <span class="topic-result is-ok">✓ got it</span>
             </div>
-            <div class="recap-time">
-              <strong>3 min</strong>
-              <span>no streak pressure</span>
+            <p>Divide the total price by the amount to compare items fairly.</p>
+            <div class="topic-example"><span>Example</span><em>12 oz for $3.60 → $3.60 ÷ 12 = $0.30/oz</em></div>
+          </article>
+          <article class="topic-card">
+            <div class="topic-card-head">
+              <strong>Discount</strong>
+              <span class="topic-result is-review">review</span>
             </div>
+            <p>Sale price is the original price minus the discount amount.</p>
+            <div class="topic-example"><span>Example</span><em>$40 hoodie, 25% off → $40 − $10 = $30</em></div>
+          </article>
+          <article class="topic-card">
+            <div class="topic-card-head">
+              <strong>Sales tax</strong>
+              <span class="topic-result is-ok">✓ got it</span>
+            </div>
+            <p>Tax is added on top of the item price after any discounts.</p>
+            <div class="topic-example"><span>Example</span><em>$30 item + 10% tax → $30 + $3 = $33</em></div>
+          </article>
+          <article class="topic-card">
+            <div class="topic-card-head">
+              <strong>Algebraic expression</strong>
+              <span class="topic-result is-review">review</span>
+            </div>
+            <p>Write a price rule with a variable before you calculate anything.</p>
+            <div class="topic-example"><span>Example</span><em>$4 per strip + $3 fixed fee → 4s + 3</em></div>
+          </article>
+        </section>
+
+        <section class="recap-results">
+          <div class="result-pill is-positive">
+            <strong>What clicked</strong>
+            <span>Unit prices and reading price tables</span>
           </div>
+          <div class="result-pill">
+            <strong>Next up</strong>
+            <span>Discounts, tax, and expressions</span>
+          </div>
+        </section>
 
-          <section class="lesson-card-sheet">
-            <article class="lesson-card-main">
-              <p class="panel-label">Today we learned</p>
-              <div class="topic-grid">
-                <div class="topic-tile"><strong>Unit price</strong><span>Divide total price by amount to compare fairly.</span></div>
-                <div class="topic-tile"><strong>Discount</strong><span>The sale price is lower than the original price.</span></div>
-                <div class="topic-tile"><strong>Sales tax</strong><span>Tax is added after the item price.</span></div>
-                <div class="topic-tile"><strong>Total cost</strong><span>Read the story before choosing the operation.</span></div>
-              </div>
-            </article>
-
-            <article class="lesson-example-card">
-              <p class="panel-label">Example from class</p>
-              <strong>A hoodie costs $40 and is 25% off.</strong>
-              <ol>
-                <li>25% of $40 is $10.</li>
-                <li>$40 - $10 = $30.</li>
-                <li>The sale price is $30.</li>
-              </ol>
-            </article>
-          </section>
-
-          <section class="recap-reflection">
-            <article class="reflection-card is-positive">
-              <p class="panel-label">What clicked today</p>
-              <strong>You found unit prices in simple shopping examples.</strong>
-            </article>
-            <article class="reflection-card">
-              <p class="panel-label">What we will practice</p>
-              <strong>Discounts, tax, and turning price rules into expressions.</strong>
-            </article>
-          </section>
-
-          <section class="recap-checks">
-            <article class="student-problem">
-              <span>Check 1 · choose the answer</span>
-              <strong>A $20 item is 10% off. What happens to the final price?</strong>
-              ${answerChoices(["It is more than $20", "It is less than $20", "It stays $20", "It becomes $30"], 1)}
-            </article>
-            <article class="student-problem">
-              <span>Check 2 · choose the expression</span>
-              <strong>A photo booth charges $4 per strip plus a $3 fee. Which expression fits s strips?</strong>
-              ${answerChoices(["4s + 3", "4 + 3s", "7s", "s + 43"], 0)}
-            </article>
-          </section>
+        <section class="recap-checks">
+          <article class="student-problem">
+            <span>Quick check · tap your answer</span>
+            <strong>A $20 item is 10% off. What is the sale price?</strong>
+            ${answerChoices(["$22", "$18", "$10", "$20"], 1)}
+          </article>
         </section>
       </div>
     `,
@@ -854,8 +837,8 @@ function renderMock(screen) {
         <section class="quest-hero">
           <div>
             <span class="stage-pill">Daily set</span>
-            <h4>Finish 3 practice tasks to keep the streak</h4>
-            <p>Complete the daily set to earn points. If a day is missed, one battery protects the streak.</p>
+            <h4>Finish today's 3 tasks to keep the streak</h4>
+            <p>Complete the set to earn points. Miss a day? One battery covers it automatically.</p>
           </div>
           <div class="quest-reward">
             <strong>+30</strong>
@@ -869,22 +852,27 @@ function renderMock(screen) {
           </div>
           <div>
             <p class="panel-label">Today</p>
-            <strong>2 of 3 tasks done</strong>
+            <strong>2 of 3 done</strong>
           </div>
           <div>
             <p class="panel-label">Hint charges</p>
             <strong>2 left</strong>
           </div>
         </section>
-        <section class="visual-question">
-          ${dealComparisonModel()}
-          <article class="student-problem">
-            <span>Daily task · 60 seconds</span>
-            <strong>Which deal has the lower price per ounce?</strong>
-            ${answerChoices(["12 oz for $3.60", "20 oz for $5.00", "They are equal", "Need more information"], 1)}
-          </article>
+        <article class="student-problem">
+          <span>Daily task · 60 seconds</span>
+          <strong>Which deal has the lower price per ounce?</strong>
+          <div class="deal-compare">
+            <div class="deal-card-inline"><span>Deal A</span><strong>12 oz</strong><em>$3.60</em></div>
+            <div class="deal-vs">vs</div>
+            <div class="deal-card-inline"><span>Deal B</span><strong>20 oz</strong><em>$5.00</em></div>
+          </div>
+          ${answerChoices(["Deal A · $0.30/oz", "Deal B · $0.25/oz", "They are equal", "Need more info"], 1)}
+        </article>
+        <section class="streak-track-panel">
+          <p class="panel-label">This week</p>
+          ${dailyTrack()}
         </section>
-        ${dailyTrack()}
       </div>
     `,
     "student-warmup": `
@@ -1015,33 +1003,37 @@ function renderMock(screen) {
         <section class="quest-hero is-game">
           <div>
             <span class="stage-pill">Daily Quest</span>
-            <h4>Do today's set. Earn points. Keep the streak.</h4>
-            <p>A daily set is 2-3 short tasks. Missing a day spends one battery instead of breaking the streak.</p>
+            <h4>4-day streak 🔥</h4>
+            <p>Do today's set and keep it going. Miss a day? A battery covers it — no pressure.</p>
           </div>
           <div class="quest-reward">
-            <strong>4</strong>
-            <span>day streak</span>
+            <strong>+30</strong>
+            <span>points today</span>
           </div>
+        </section>
+        <section class="streak-track-panel is-hero">
+          <p class="panel-label">Streak this week</p>
+          ${dailyTrack()}
         </section>
         <section class="battery-panel">
           <div>
-            <p class="panel-label">Batteries</p>
+            <p class="panel-label">Miss protection</p>
             ${batteryRow(3, 2)}
           </div>
           <div>
-            <p class="panel-label">Today's reward</p>
-            <strong>+30 points</strong>
+            <p class="panel-label">Today's set</p>
+            <strong>3 short tasks</strong>
           </div>
           <div>
-            <p class="panel-label">Daily set</p>
-            <strong>3 short tasks</strong>
+            <p class="panel-label">Bonus</p>
+            <strong>+10 no hints</strong>
           </div>
         </section>
         <section class="reward-grid">
-          <article class="reward-card is-active"><strong>1</strong><span>Warm-up task</span></article>
-          <article class="reward-card is-active"><strong>2</strong><span>Unit-rate check</span></article>
-          <article class="reward-card"><strong>3</strong><span>Final check</span></article>
-          <article class="reward-card"><strong>+10</strong><span>bonus for no hints</span></article>
+          <article class="reward-card is-active"><strong>1</strong><span>Done ✓</span></article>
+          <article class="reward-card is-active"><strong>2</strong><span>Done ✓</span></article>
+          <article class="reward-card"><strong>3</strong><span>Up next</span></article>
+          <article class="reward-card is-bonus"><strong>+10</strong><span>no hints</span></article>
         </section>
       </div>
     `,
@@ -1092,21 +1084,38 @@ function renderFeatureTabs() {
 
 function renderRoles() {
   roleSwitcher.innerHTML = "";
+  const featureRoleIds = new Set(getCurrentFeature().roles.map((r) => r.id));
 
   getFeatureRoles().forEach((role) => {
+    const hasContent = featureRoleIds.has(role.id);
+    const screenCount = hasContent
+      ? getCurrentFeature().roles.find((r) => r.id === role.id)?.screens.length ?? 0
+      : 0;
+    const subLabel = hasContent ? `${screenCount} екран${screenCount === 1 ? "" : "и"}` : "не задіяно";
+
     const button = document.createElement("button");
     button.type = "button";
-    button.className = `role-button${role.id === state.roleId ? " is-active" : ""}`;
+    button.disabled = !hasContent;
+    button.className = [
+      "role-button",
+      role.id === state.roleId ? "is-active" : "",
+      !hasContent ? "is-disabled" : ""
+    ].filter(Boolean).join(" ");
     button.innerHTML = `
       <span class="role-icon role-icon-${role.id}" aria-hidden="true"></span>
-      <span>${role.label}</span>
+      <span>
+        <strong>${role.label}</strong>
+        <small>${subLabel}</small>
+      </span>
     `;
-    button.setAttribute("aria-label", role.label);
-    button.addEventListener("click", () => {
-      state.roleId = role.id;
-      state.screenIndex = 0;
-      render();
-    });
+    button.setAttribute("aria-label", hasContent ? `${role.label}, ${subLabel}` : `${role.label} — не задіяно`);
+    if (hasContent) {
+      button.addEventListener("click", () => {
+        state.roleId = role.id;
+        state.screenIndex = 0;
+        render();
+      });
+    }
     roleSwitcher.append(button);
   });
 }
@@ -1115,24 +1124,25 @@ function renderScreens() {
   const role = getCurrentRole();
   screenList.innerHTML = "";
 
+  const select = document.createElement("select");
+  select.className = "screen-select";
+  select.setAttribute("aria-label", "Вибір екрана");
+
   role.screens.forEach((screen, index) => {
-    const label = screenLabels[screen.type] || { title: screen.title, caption: screen.caption };
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = `screen-button${index === state.screenIndex ? " is-active" : ""}`;
-    button.innerHTML = `
-      <span class="screen-number">${String(index + 1).padStart(2, "0")}</span>
-      <span>
-        <strong>${label.title}</strong>
-        <small>${label.caption || ""}</small>
-      </span>
-    `;
-    button.addEventListener("click", () => {
-      state.screenIndex = index;
-      render();
-    });
-    screenList.append(button);
+    const option = document.createElement("option");
+    option.value = String(index);
+    option.selected = index === state.screenIndex;
+    const caption = screen.caption ? ` · ${screen.caption}` : "";
+    option.textContent = `${String(index + 1).padStart(2, "0")}  ${screen.title}${caption}`;
+    select.append(option);
   });
+
+  select.addEventListener("change", () => {
+    state.screenIndex = Number(select.value);
+    render();
+  });
+
+  screenList.append(select);
 }
 
 function renderNav() {
@@ -1175,8 +1185,6 @@ function renderSelectedScreen() {
 
 function renderSummary() {
   const feature = getCurrentFeature();
-  featureKicker.textContent = feature.kicker;
-  featureTitle.textContent = feature.title;
   featureDescription.textContent = feature.description;
 }
 
@@ -1189,10 +1197,36 @@ function render() {
   renderSelectedScreen();
 }
 
+// Interactive answer choices — 3 states: idle / wrong / correct
+mockMain.addEventListener("click", (e) => {
+  const btn = e.target.closest(".answer-choice");
+  if (!btn) return;
+  const options = btn.closest(".answer-options");
+  if (!options || options.classList.contains("is-answered")) return;
+
+  options.classList.add("is-answered");
+  btn.classList.add("is-selected");
+
+  if (btn.dataset.correct === "true") {
+    options.classList.add("is-correct");
+    btn.classList.add("is-correct-answer");
+  } else {
+    options.classList.add("is-wrong");
+    btn.classList.add("is-wrong-answer");
+    const correct = options.querySelector("[data-correct='true']");
+    if (correct) correct.classList.add("is-correct-answer");
+  }
+});
+
 featureTabs.forEach((tab) => {
   tab.addEventListener("click", () => {
     state.featureId = tab.dataset.feature;
     state.screenIndex = 0;
+    // If current role has no content in the new feature, switch to first available role
+    const availableRoleIds = features[state.featureId].roles.map((r) => r.id);
+    if (!availableRoleIds.includes(state.roleId)) {
+      state.roleId = availableRoleIds[0];
+    }
     render();
   });
 });
@@ -1200,3 +1234,4 @@ featureTabs.forEach((tab) => {
 render();
 
 window.addEventListener("resize", syncNestedScreenHeight);
+    

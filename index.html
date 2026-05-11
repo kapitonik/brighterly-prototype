@@ -19,33 +19,25 @@
 
       <section class="prototype-stage" aria-live="polite">
         <section class="demo-controls" aria-label="Керування демо">
-          <div class="feature-summary">
-            <p class="eyebrow" id="feature-kicker">Функція 01</p>
-            <h2 id="feature-title">Тиждень підготовки</h2>
-            <p id="feature-description">
-              Сценарій для Grade 7: учень закріплює Business Math, а перед наступним
-              заняттям готується до Algebraic Expressions.
-            </p>
-          </div>
-
           <nav class="feature-tabs" aria-label="Функції" role="tablist">
             <button class="feature-tab is-active" type="button" role="tab" aria-selected="true" data-feature="practice">
               <span>01</span>
-              Підготовка
+              Підготовка і практика
             </button>
             <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="summary">
               <span>02</span>
-              Підсумки
+              Підсумки для батьків
             </button>
             <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="parent">
               <span>03</span>
-              Досягнення
+              Панель досягнень
             </button>
             <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="game">
               <span>04</span>
-              Механіки
+              Ігрові механіки
             </button>
           </nav>
+          <p class="feature-desc" id="feature-description"></p>
         </section>
 
         <section class="screen-workspace">
@@ -56,7 +48,7 @@
             </div>
 
             <div class="panel-block">
-              <p class="panel-label">Екрани сценарію</p>
+              <p class="panel-label">Екран</p>
               <div class="screen-list" id="screen-list"></div>
             </div>
           </section>
