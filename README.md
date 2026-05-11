@@ -24,8 +24,22 @@ python -m http.server 8000 --bind 127.0.0.1
 brighterly-prototype/
   index.html
   css/styles.css
+  js/ai-service.js
   js/app.js
+  api-proxy/cloudflare-worker.js
 ```
+
+## ИИ-запросы
+
+ИИ-логика вынесена в `js/ai-service.js`.
+
+Поддержаны три режима:
+
+1. `Демо без API` — безопасный режим по умолчанию, запросы имитируются.
+2. `Прямой запрос из браузера` — только для локальной проверки, ключ хранится в `localStorage` и виден в браузере.
+3. `Через серверный прокси` — правильный вариант для GitHub Pages.
+
+Для публичной версии на GitHub Pages используйте прокси из `api-proxy/cloudflare-worker.js`: ключ хранится в Cloudflare Worker, а страница отправляет туда готовый payload для OpenAI Responses API.
 
 ## Публикация через GitHub Pages
 

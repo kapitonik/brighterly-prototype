@@ -31,6 +31,8 @@ const aiTasks = [
   }
 ];
 
+let reviewTasks = aiTasks.map((task) => ({ ...task }));
+
 const weekPlan = [
   {
     day: "Пн",
@@ -338,7 +340,7 @@ function getCurrentScreen() {
 }
 
 function taskRows() {
-  return aiTasks
+  return reviewTasks
     .map(
       (task, index) => `
         <article class="task-review-card">
@@ -352,9 +354,9 @@ function taskRows() {
           <p class="task-prompt">${task.prompt}</p>
           <div class="task-answer">Ожидаемый ответ: <strong>${task.answer}</strong></div>
           <div class="task-actions">
-            <button type="button">Оставить</button>
-            <button type="button">Упростить</button>
-            <button type="button">Заменить</button>
+            <button type="button" data-ai-action="keep" data-task-index="${index}">Оставить</button>
+            <button type="button" data-ai-action="simplify" data-task-index="${index}">Упростить через ИИ</button>
+            <button type="button" data-ai-action="alternative" data-task-index="${index}">Заменить через ИИ</button>
           </div>
         </article>
       `
@@ -423,11 +425,13 @@ function renderMock(screen) {
             <h4>5 задач по теме «дроби с разными знаменателями»</h4>
             <p>Уровень: 5 класс США · Common Core 5.NF.A.1 / 5.NF.A.2</p>
           </div>
+          <button class="secondary-action" type="button" data-ai-action="generate-set">Сгенерировать заново</button>
           <div class="confidence-card">
             <strong>86%</strong>
             <span>уверенность в подборке</span>
           </div>
         </section>
+        <div class="ai-status" id="ai-status">Режим ИИ: ${window.BrighterlyAI?.getMode?.() || "mock"}. В демо-режиме ответы имитируются без запроса к API.</div>
         <section class="diagnostic-grid">
           <div>
             <p class="panel-label">Ошибки с урока</p>
@@ -587,11 +591,31 @@ function renderMock(screen) {
     `,
     "teacher-ai-settings": `
       <div class="prototype-screen">
-        <section class="settings-list">
-          <label><input type="checkbox" checked> ИИ может предлагать задачи после урока</label>
-          <label><input type="checkbox" checked> Отправка ученику только после проверки преподавателем</label>
-          <label><input type="checkbox" checked> Генерировать объяснение ошибки простыми словами</label>
-          <label><input type="checkbox"> Разрешить автоматическую отправку лёгких задач</label>
+        <section class="settings-list ai-settings-form">
+          <label>
+            Режим запросов
+            <select id="ai-mode-select">
+              <option value="mock">Демо без API</option>
+              <option value="direct">Прямой запрос из браузера</option>
+              <option value="proxy">Через серверный прокси</option>
+            </select>
+          </label>
+          <label>
+            Временный OpenAI API key
+            <input id="ai-key-input" type="password" placeholder="sk-...">
+            <small>Только для локальной проверки. На GitHub Pages ключ будет виден в браузере, поэтому для публичной версии нужен прокси.</small>
+          </label>
+          <label>
+            Proxy URL
+            <input id="ai-proxy-input" type="url" placeholder="https://your-worker.example.com/openai">
+            <small>Публичная версия на GitHub Pages должна ходить сюда, а ключ хранится на стороне прокси.</small>
+          </label>
+          <button class="primary-action" type="button" id="save-ai-settings">Сохранить настройки</button>
+          <div class="ai-status" id="ai-settings-status">Модель: ${window.BrighterlyAI?.config?.model || "gpt-5-nano"}</div>
+          <label class="setting-check"><input type="checkbox" checked> ИИ может предлагать задачи после урока</label>
+          <label class="setting-check"><input type="checkbox" checked> Отправка ученику только после проверки преподавателем</label>
+          <label class="setting-check"><input type="checkbox" checked> Генерировать объяснение ошибки простыми словами</label>
+          <label class="setting-check"><input type="checkbox"> Разрешить автоматическую отправку лёгких задач</label>
         </section>
         <section class="diagnostic-grid">
           <div class="approval-box">Уровень: 5 класс США</div>
@@ -621,6 +645,120 @@ function renderMock(screen) {
   };
 
   mockMain.innerHTML = templates[screen.type] || fallback;
+  bindScreenInteractions(screen);
+}
+
+function getPracticeContext() {
+  return {
+    grade: "US Grade 5",
+    commonCore: ["5.NF.A.1", "5.NF.A.2"],
+    topic: "Adding and subtracting fractions with unlike denominators",
+    lessonErrors: [
+      "student adds denominators directly",
+      "student forgets to scale the numerator",
+      "student does not estimate whether the answer is reasonable"
+    ],
+    timeWindow: "within 24 hours after the lesson",
+    maxTasks: 5,
+    teacherValidationRequired: true
+  };
+}
+
+function setAiStatus(message, tone = "neutral") {
+  const status = document.querySelector("#ai-status") || document.querySelector("#ai-settings-status");
+  if (!status) return;
+  status.textContent = message;
+  status.dataset.tone = tone;
+}
+
+function setButtonLoading(button, isLoading) {
+  if (!button) return;
+  button.disabled = isLoading;
+  if (isLoading) {
+    button.dataset.originalText = button.textContent;
+    button.textContent = "ИИ думает...";
+  } else if (button.dataset.originalText) {
+    button.textContent = button.dataset.originalText;
+    delete button.dataset.originalText;
+  }
+}
+
+async function handleAiTaskAction(action, taskIndex, button) {
+  const task = reviewTasks[taskIndex];
+  if (!task && action !== "generate-set") return;
+
+  try {
+    setButtonLoading(button, true);
+
+    if (action === "keep") {
+      setAiStatus("Задача оставлена без изменений. Преподаватель подтвердил этот пункт.", "success");
+      return;
+    }
+
+    if (action === "simplify") {
+      setAiStatus("Отправляем задачу в OpenAI API на упрощение...", "loading");
+      reviewTasks[taskIndex] = await window.BrighterlyAI.simplifyTask(task);
+      renderSelectedScreen();
+      setAiStatus("ИИ упростил задачу. Проверь формулировку перед отправкой ученику.", "success");
+      return;
+    }
+
+    if (action === "alternative") {
+      setAiStatus("Отправляем запрос на альтернативную задачу...", "loading");
+      reviewTasks[taskIndex] = await window.BrighterlyAI.generateAlternativeTask(task);
+      renderSelectedScreen();
+      setAiStatus("ИИ предложил альтернативу. Преподаватель всё ещё должен её проверить.", "success");
+      return;
+    }
+
+    if (action === "generate-set") {
+      setAiStatus("Генерируем новый набор из 5 задач...", "loading");
+      const result = await window.BrighterlyAI.generatePracticeSet(getPracticeContext());
+      reviewTasks = result.tasks.map((item) => ({ ...item }));
+      renderSelectedScreen();
+      setAiStatus("Новый набор задач готов. Проверь каждую задачу перед отправкой.", "success");
+    }
+  } catch (error) {
+    setAiStatus(error.message, "error");
+  } finally {
+    setButtonLoading(button, false);
+  }
+}
+
+function bindAiSettings() {
+  const modeSelect = document.querySelector("#ai-mode-select");
+  const keyInput = document.querySelector("#ai-key-input");
+  const proxyInput = document.querySelector("#ai-proxy-input");
+  const saveButton = document.querySelector("#save-ai-settings");
+
+  if (!modeSelect || !saveButton) return;
+
+  modeSelect.value = window.BrighterlyAI.getMode();
+  keyInput.value = window.BrighterlyAI.getApiKey();
+  proxyInput.value = window.BrighterlyAI.getProxyUrl();
+
+  saveButton.addEventListener("click", () => {
+    window.BrighterlyAI.saveBrowserConfig({
+      mode: modeSelect.value,
+      apiKey: keyInput.value.trim(),
+      proxyUrl: proxyInput.value.trim()
+    });
+    setAiStatus(`Настройки сохранены. Режим: ${modeSelect.value}.`, "success");
+  });
+}
+
+function bindScreenInteractions(screen) {
+  if (screen.type === "teacher-ai-settings") {
+    bindAiSettings();
+    return;
+  }
+
+  mockMain.querySelectorAll("[data-ai-action]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const taskIndex = Number(button.dataset.taskIndex);
+      handleAiTaskAction(button.dataset.aiAction, taskIndex, button);
+    });
+  });
 }
 
 function renderFeatureTabs() {
