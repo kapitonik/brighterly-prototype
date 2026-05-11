@@ -383,9 +383,9 @@ h1 {
 }
 
 .mock-main {
-  display: grid;
-  place-items: center;
-  padding: 26px;
+  display: block;
+  padding: 20px;
+  overflow: auto;
 }
 
 .mock-empty {
@@ -444,6 +444,399 @@ h1 {
   line-height: 1.4;
 }
 
+.prototype-screen {
+  display: grid;
+  gap: 16px;
+}
+
+.insight-strip,
+.stage-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.insight-strip h4,
+.stage-banner h4 {
+  margin: 6px 0 6px;
+  font-size: 24px;
+  line-height: 1.12;
+}
+
+.insight-strip p,
+.stage-banner p {
+  margin: 0;
+  color: #475467;
+  line-height: 1.45;
+}
+
+.ai-badge,
+.stage-pill,
+.stage-banner > span {
+  display: inline-block;
+  padding: 6px 9px;
+  background: #e8f8f5;
+  color: var(--teal-deep);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.confidence-card {
+  flex: 0 0 130px;
+  padding: 14px;
+  border: 1px solid #b8e4dd;
+  background: #f0fdfa;
+  text-align: center;
+}
+
+.confidence-card strong {
+  display: block;
+  color: var(--teal-deep);
+  font-size: 34px;
+  line-height: 1;
+}
+
+.confidence-card span,
+.task-review-head small,
+.week-card small,
+.metric-card span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.diagnostic-grid,
+.teacher-signal,
+.lesson-plan {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-cloud span {
+  padding: 8px 10px;
+  background: #eef2ff;
+  color: var(--violet);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.approval-box,
+.summary-draft,
+.signal-card,
+.preview-problem {
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: #344054;
+  line-height: 1.45;
+}
+
+.signal-card.strong {
+  border-color: #b8e4dd;
+  background: #f0fdfa;
+}
+
+.task-review-list {
+  display: grid;
+  gap: 12px;
+}
+
+.task-review-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.task-review-head {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+.task-index {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  background: var(--ink);
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.task-review-head strong {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.task-prompt {
+  margin: 12px 0 10px;
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+.task-answer {
+  padding: 10px 12px;
+  background: #f8fafc;
+  color: #344054;
+  font-size: 14px;
+}
+
+.task-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.task-actions button {
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--ink);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.task-actions button:first-child {
+  border-color: var(--teal);
+  color: var(--teal-deep);
+}
+
+.game-settings {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.metric-card {
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.metric-card strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--teal-deep);
+  font-size: 26px;
+  line-height: 1;
+}
+
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.week-card {
+  min-height: 208px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.week-card.is-current {
+  border-color: var(--teal);
+  background: #f0fdfa;
+}
+
+.week-day {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 12px;
+  place-items: center;
+  background: var(--ink);
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.week-card.is-current .week-day {
+  background: var(--teal);
+}
+
+.week-card strong {
+  display: block;
+  margin-bottom: 5px;
+  line-height: 1.25;
+}
+
+.week-card ul {
+  display: grid;
+  gap: 6px;
+  margin: 12px 0 0;
+  padding-left: 17px;
+  color: #344054;
+  font-size: 14px;
+}
+
+.student-task-shell {
+  display: grid;
+  gap: 16px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.recap-header h4 {
+  margin: 10px 0 8px;
+  font-size: 28px;
+}
+
+.recap-header p {
+  margin-bottom: 0;
+  color: #475467;
+}
+
+.task-progress {
+  display: flex;
+  gap: 8px;
+}
+
+.task-progress span {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.task-progress .is-done {
+  border-color: var(--teal);
+  background: #e8f8f5;
+  color: var(--teal-deep);
+}
+
+.task-progress .is-current {
+  background: var(--ink);
+  color: #ffffff;
+}
+
+.student-problem {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+}
+
+.student-problem span {
+  color: var(--violet);
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.student-problem strong {
+  font-size: 22px;
+  line-height: 1.35;
+}
+
+.student-problem textarea {
+  width: 100%;
+  min-height: 92px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  resize: vertical;
+  font: inherit;
+}
+
+.hint-box {
+  padding: 12px;
+  border-left: 4px solid var(--amber);
+  background: #fff7ed;
+  color: #7c2d12;
+}
+
+.rule-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.rule-card {
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.rule-card span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--teal-deep);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.rule-card p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.lesson-plan ol {
+  margin: 0;
+  padding-left: 20px;
+  color: #344054;
+  line-height: 1.65;
+}
+
+.attempt-table {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.attempt-table div {
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.attempt-table span {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.settings-list {
+  display: grid;
+  gap: 10px;
+}
+
+.settings-list label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  font-weight: 800;
+}
+
 @media (max-width: 1120px) {
   .feature-tabs {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -451,7 +844,12 @@ h1 {
 
   .screen-workspace,
   .app-frame,
-  .mock-layout {
+  .mock-layout,
+  .diagnostic-grid,
+  .teacher-signal,
+  .lesson-plan,
+  .game-settings,
+  .attempt-table {
     grid-template-columns: 1fr;
   }
 
@@ -463,7 +861,9 @@ h1 {
 
   .app-nav nav,
   .role-switcher,
-  .screen-list {
+  .screen-list,
+  .week-grid,
+  .rule-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -488,7 +888,9 @@ h1 {
   .feature-tabs,
   .app-nav nav,
   .role-switcher,
-  .screen-list {
+  .screen-list,
+  .week-grid,
+  .rule-grid {
     grid-template-columns: 1fr;
   }
 
@@ -501,8 +903,18 @@ h1 {
   .browser-shell,
   .app-frame,
   .mock-main,
-  .mock-side {
+  .mock-side,
+  .week-card {
     min-height: 0;
+  }
+
+  .insight-strip,
+  .stage-banner {
+    display: block;
+  }
+
+  .confidence-card {
+    margin-top: 14px;
   }
 
   .primary-action {

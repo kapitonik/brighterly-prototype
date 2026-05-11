@@ -1,118 +1,177 @@
+const aiTasks = [
+  {
+    label: "Общий знаменатель",
+    prompt: "Какой общий знаменатель подойдёт для 1/3 + 1/4?",
+    answer: "12",
+    reason: "На уроке ученик пытался складывать дроби без приведения к одинаковым частям."
+  },
+  {
+    label: "Сложение дробей",
+    prompt: "Реши: 1/3 + 1/4",
+    answer: "7/12",
+    reason: "Проверяем, переносит ли ученик найденный знаменатель в вычисление."
+  },
+  {
+    label: "Поиск ошибки",
+    prompt: "Ученик написал: 1/2 + 2/5 = 3/7. Почему это неверно?",
+    answer: "Нельзя складывать знаменатели. Сначала нужен общий знаменатель.",
+    reason: "Это была главная ошибка в конце урока."
+  },
+  {
+    label: "Текстовая задача",
+    prompt: "Mia used 2/3 cup of oats and 1/4 cup of nuts. How many cups did she use in total?",
+    answer: "11/12 cup",
+    reason: "Тот же навык в школьном контексте США."
+  },
+  {
+    label: "Вычитание",
+    prompt: "Заверши шаг: 3/4 - 1/6 = 9/12 - ?/12",
+    answer: "2",
+    reason: "Готовит к смешанным задачам недели."
+  }
+];
+
+const weekPlan = [
+  {
+    day: "Пн",
+    focus: "Общий знаменатель",
+    tasks: ["2/5 + 1/10", "3/8 + 1/4"],
+    status: "Открыто"
+  },
+  {
+    day: "Вт",
+    focus: "Вычитание",
+    tasks: ["5/6 - 1/3", "7/10 - 1/5"],
+    status: "Откроется завтра"
+  },
+  {
+    day: "Ср",
+    focus: "Текстовые задачи",
+    tasks: ["3/4 cup - 1/3 cup", "2/3 mile + 1/6 mile"],
+    status: "2–3 задачи"
+  },
+  {
+    day: "Чт",
+    focus: "Смешанные числа",
+    tasks: ["1 1/2 + 2/3", "2 1/4 - 5/6"],
+    status: "2–3 задачи"
+  },
+  {
+    day: "Пт",
+    focus: "Итог недели",
+    tasks: ["Найди ошибку", "Реши задачу", "Объясни шаг"],
+    status: "Финальная тренировка"
+  }
+];
+
+const warmupExamples = [
+  {
+    title: "Правило",
+    body: "Чтобы складывать дроби, части должны быть одинакового размера. Поэтому сначала ищем общий знаменатель."
+  },
+  {
+    title: "Пример",
+    body: "1/3 + 1/4 = 4/12 + 3/12 = 7/12"
+  },
+  {
+    title: "Новый шаг",
+    body: "2 × 3/4 можно представить как 3/4 + 3/4. Это мостик к умножению дроби на целое число."
+  }
+];
+
 const features = {
   practice: {
     kicker: "Функция 01",
-    title: "Закрепление после урока",
+    title: "Неделя закрепления",
     description:
-      "ИИ разбирает урок, предлагает задания преподавателю, ученик закрепляет материал, а результат возвращается к следующему занятию.",
+      "ИИ готовит практику по итогам урока, преподаватель проверяет задачи, ученик проходит три коротких этапа между занятиями.",
     roles: [
       {
         id: "teacher",
         label: "Преподаватель",
-        path: "teacher/lesson-review",
-        nav: ["Уроки", "Задания", "Прогресс", "Сообщения"],
+        path: "teacher/practice-week",
+        nav: ["Урок", "ИИ-задачи", "Неделя", "Разогрев"],
         screens: [
           {
-            title: "Разбор прошедшего урока",
-            caption: "Темы, ошибки и сильные места",
-            action: "Подтвердить подборку",
-            placeholderTitle: "Макет разбора урока",
-            placeholderCaption: "Здесь будет таблица ошибок, тем и предложенных заданий.",
-            notes: ["Ошибки из записи урока", "5–7 заданий на неделю", "Быстрое подтверждение преподавателем"]
+            type: "teacher-ai-review",
+            title: "Проверка ИИ-подборки",
+            caption: "До отправки ученику",
+            action: "Подтвердить 5 задач",
+            notes: [
+              "ИИ генерирует задачи из ошибок урока",
+              "Преподаватель подтверждает или правит",
+              "Ученик видит задания как продолжение урока"
+            ]
           },
           {
-            title: "Редактирование подборки",
-            caption: "Замена и настройка заданий",
-            action: "Сохранить задания",
-            placeholderTitle: "Макет редактирования",
-            placeholderCaption: "Преподаватель сможет заменить задание, изменить сложность и добавить комментарий.",
-            notes: ["Контроль качества", "Задание выглядит как продолжение урока", "Время подтверждения меньше минуты"]
+            type: "teacher-week-plan",
+            title: "План практики на неделю",
+            caption: "2–3 задачи в день",
+            action: "Сохранить план",
+            notes: [
+              "Та же сущность, но другой режим",
+              "Жизни ограничивают попытки в дневной сессии",
+              "Пропуск дня защищает серию"
+            ]
           },
           {
-            title: "Отчёт перед следующим уроком",
-            caption: "Что ученик сделал между занятиями",
-            action: "Открыть план урока",
-            placeholderTitle: "Макет отчёта",
-            placeholderCaption: "Перед занятием преподаватель увидит выполненные задания и новые ошибки.",
-            notes: ["Память между уроками", "Меньше времени на повторную диагностику", "Следующий урок начинается с данных"]
-          }
-        ]
-      },
-      {
-        id: "student",
-        label: "Ученик",
-        path: "student/practice",
-        nav: ["Сегодня", "Задания", "Серии", "Награды"],
-        screens: [
-          {
-            title: "Задание от преподавателя",
-            caption: "Персональная подборка после урока",
-            action: "Начать",
-            placeholderTitle: "Макет задания ученика",
-            placeholderCaption: "Ученик видит короткую подборку, связанную с прошедшим уроком.",
-            notes: ["Не случайная тренировка", "Понятная связь с уроком", "Короткий ежедневный формат"]
-          },
-          {
-            title: "Выполнение задания",
-            caption: "Пошаговое решение и подсказки",
-            action: "Проверить ответ",
-            placeholderTitle: "Макет выполнения",
-            placeholderCaption: "Здесь будет рабочая область с задачей, ответом и безопасной подсказкой.",
-            notes: ["Подсказка не решает задачу за ученика", "Ошибки сохраняются", "Прогресс возвращается преподавателю"]
-          }
-        ]
-      }
-    ]
-  },
-  warmup: {
-    kicker: "Функция 02",
-    title: "Разминка перед уроком",
-    description:
-      "Короткая подготовка в зале ожидания помогает ученику вспомнить прошлую тему до начала живого занятия.",
-    roles: [
-      {
-        id: "student",
-        label: "Ученик",
-        path: "student/waiting-room",
-        nav: ["Зал ожидания", "Разминка", "Урок", "Серия"],
-        screens: [
-          {
-            title: "Зал ожидания",
-            caption: "3–5 минут до урока",
-            action: "Начать разминку",
-            placeholderTitle: "Макет зала ожидания",
-            placeholderCaption: "Здесь будет короткое задание перед подключением преподавателя.",
-            notes: ["Повторение прошлой темы", "Мягкий вход в урок", "Ученик приходит подготовленным"]
-          },
-          {
-            title: "Результат разминки",
-            caption: "Что передать преподавателю",
-            action: "Перейти к уроку",
-            placeholderTitle: "Макет результата",
-            placeholderCaption: "Система покажет, что получилось, а где ученик снова ошибся.",
-            notes: ["Сигнал преподавателю", "Меньше времени на разогрев", "Связь с темой урока"]
-          }
-        ]
-      },
-      {
-        id: "teacher",
-        label: "Преподаватель",
-        path: "teacher/warmup-signal",
-        nav: ["Сегодня", "Ученик", "Разминка", "План"],
-        screens: [
-          {
+            type: "teacher-before-lesson",
             title: "Сигнал перед уроком",
-            caption: "Как ученик прошёл разминку",
-            action: "Открыть урок",
-            placeholderTitle: "Макет сигнала",
-            placeholderCaption: "Перед началом урока преподаватель увидит результат разминки.",
-            notes: ["Готовность ученика", "Повторяющиеся ошибки", "Тема для первого вопроса"]
+            caption: "За 10 минут до занятия",
+            action: "Открыть план урока",
+            notes: [
+              "Видно, как ученик разогрелся",
+              "Ошибки недели попадают в начало урока",
+              "Преподаватель начинает с данных, а не с догадок"
+            ]
+          }
+        ]
+      },
+      {
+        id: "student",
+        label: "Ученик",
+        path: "student/practice-week",
+        nav: ["Сегодня", "Неделя", "Разогрев", "Серия"],
+        screens: [
+          {
+            type: "student-recap",
+            title: "Быстрое закрепление",
+            caption: "В течение 24 часов после урока",
+            action: "Ответить",
+            notes: [
+              "До 5 задач на самые слабые места",
+              "5–7 минут без ощущения большой домашки",
+              "ИИ объясняет ошибку простыми шагами"
+            ]
+          },
+          {
+            type: "student-week",
+            title: "Практика в течение недели",
+            caption: "2–3 задачи в день",
+            action: "Начать день",
+            notes: [
+              "Дневная сессия короткая",
+              "Жизни работают внутри попытки",
+              "Заряд тратится на подробные подсказки"
+            ]
+          },
+          {
+            type: "student-warmup",
+            title: "Разогрев перед уроком",
+            caption: "За 10 минут до занятия",
+            action: "Я готов к уроку",
+            notes: [
+              "Шпаргалка по нужным правилам",
+              "План следующего урока",
+              "Простые примеры для ознакомления"
+            ]
           }
         ]
       }
     ]
   },
   summary: {
-    kicker: "Функция 03",
+    kicker: "Функция 02",
     title: "Итоги урока для родителей",
     description:
       "Родитель видит, что происходило на уроке, какой прогресс сделал ребёнок и что будет закрепляться дальше.",
@@ -124,19 +183,17 @@ const features = {
         nav: ["Итоги", "Прогресс", "Задания", "Оплата"],
         screens: [
           {
+            type: "parent-summary",
             title: "Итоги урока",
             caption: "Ключевые моменты и темы",
             action: "Открыть прогресс",
-            placeholderTitle: "Макет итогов урока",
-            placeholderCaption: "Здесь будут ключевые моменты, темы урока и следующие шаги.",
             notes: ["Меньше чёрного ящика", "Понятная ценность для родителя", "Связь с домашней практикой"]
           },
           {
+            type: "parent-progress",
             title: "Прогресс ребёнка",
             caption: "Динамика по темам",
             action: "Посмотреть задания",
-            placeholderTitle: "Макет прогресса",
-            placeholderCaption: "Родитель увидит рост по темам, серии и выполненные задания.",
             notes: ["Фокус на результате", "Без микроконтроля", "Основание для продления подписки"]
           }
         ]
@@ -148,51 +205,18 @@ const features = {
         nav: ["Урок", "Итоги", "Правки", "Отправка"],
         screens: [
           {
+            type: "teacher-summary-check",
             title: "Проверка итогов",
             caption: "Перед отправкой родителю",
             action: "Отправить родителю",
-            placeholderTitle: "Макет проверки",
-            placeholderCaption: "Преподаватель сможет быстро проверить текст и ключевые моменты.",
             notes: ["Контроль тона", "Без лишней нагрузки", "Родитель получает проверенную информацию"]
           }
         ]
       }
     ]
   },
-  game: {
-    kicker: "Функция 04",
-    title: "Игровые механики",
-    description:
-      "Серии дней, очки и недельный турнир превращают короткую практику в привычку между уроками.",
-    roles: [
-      {
-        id: "student",
-        label: "Ученик",
-        path: "student/streaks",
-        nav: ["Сегодня", "Серия", "Турнир", "Награды"],
-        screens: [
-          {
-            title: "Серия дней",
-            caption: "Регулярность по предметам",
-            action: "Продолжить серию",
-            placeholderTitle: "Макет серии",
-            placeholderCaption: "Здесь будет прогресс серии по математике и английскому.",
-            notes: ["Ежедневная привычка", "Разные предметы — разные серии", "Короткое действие каждый день"]
-          },
-          {
-            title: "Еженедельный турнир",
-            caption: "Очки за практику",
-            action: "Посмотреть рейтинг",
-            placeholderTitle: "Макет турнира",
-            placeholderCaption: "Турнир покажет место ученика и личную цель на неделю.",
-            notes: ["Сравнение без давления", "Очки за полезные действия", "Итог недели"]
-          }
-        ]
-      }
-    ]
-  },
   parent: {
-    kicker: "Функция 05",
+    kicker: "Функция 03",
     title: "Панель достижений",
     description:
       "Родитель видит прогресс ребёнка, выполненные задания, серии и динамику без лишнего контроля.",
@@ -204,20 +228,75 @@ const features = {
         nav: ["Обзор", "Предметы", "Серии", "Турнир"],
         screens: [
           {
+            type: "parent-achievements",
             title: "Обзор достижений",
             caption: "Состояние недели",
             action: "Открыть детали",
-            placeholderTitle: "Макет панели родителя",
-            placeholderCaption: "Здесь будет сводка по предметам, сериям и выполненным заданиям.",
             notes: ["Родитель как болельщик", "Видимый прогресс", "Меньше тревожности"]
           },
           {
+            type: "parent-subjects",
             title: "Динамика по предметам",
             caption: "Математика и английский",
             action: "Посмотреть историю",
-            placeholderTitle: "Макет динамики",
-            placeholderCaption: "Покажем, где ребёнок продвинулся и какие темы требуют внимания.",
             notes: ["Динамика за месяц", "Понятные предметные зоны", "Связь с итогами уроков"]
+          }
+        ]
+      }
+    ]
+  },
+  game: {
+    kicker: "Функция 04",
+    title: "Игровые механики",
+    description:
+      "Серии дней, жизни, заряд подсказок и пропуски дня поддерживают практику, но не наказывают ребёнка слишком жёстко.",
+    roles: [
+      {
+        id: "student",
+        label: "Ученик",
+        path: "student/streaks",
+        nav: ["Сегодня", "Серия", "Турнир", "Награды"],
+        screens: [
+          {
+            type: "student-game",
+            title: "Серия и жизни",
+            caption: "Регулярность без лишнего давления",
+            action: "Продолжить серию",
+            notes: ["Жизни на день", "Заряд для подсказок", "Пропуск защищает серию"]
+          },
+          {
+            type: "student-tournament",
+            title: "Еженедельный турнир",
+            caption: "Очки за полезную практику",
+            action: "Посмотреть рейтинг",
+            notes: ["Сравнение без давления", "Очки за полезные действия", "Итог недели"]
+          }
+        ]
+      }
+    ]
+  },
+  ai: {
+    kicker: "Функция 05",
+    title: "Настройки ИИ",
+    description:
+      "В первой версии ИИ генерирует задачи и объяснения, но преподаватель проверяет подборку до отправки ученику.",
+    roles: [
+      {
+        id: "teacher",
+        label: "Преподаватель",
+        path: "teacher/ai-settings",
+        nav: ["Правила", "Сложность", "Проверка", "История"],
+        screens: [
+          {
+            type: "teacher-ai-settings",
+            title: "Правила генерации",
+            caption: "Что ИИ может делать сам",
+            action: "Сохранить правила",
+            notes: [
+              "ИИ не отправляет задания без подтверждения",
+              "Уровень: 5 класс США",
+              "Тема: дроби с разными знаменателями"
+            ]
           }
         ]
       }
@@ -236,10 +315,9 @@ const browserUrl = document.querySelector("#browser-url");
 const screenRole = document.querySelector("#screen-role");
 const screenTitle = document.querySelector("#screen-title");
 const screenAction = document.querySelector("#screen-action");
-const placeholderTitle = document.querySelector("#placeholder-title");
-const placeholderCaption = document.querySelector("#placeholder-caption");
 const screenNotes = document.querySelector("#screen-notes");
 const appNav = document.querySelector(".app-nav nav");
+const mockMain = document.querySelector("#mock-main");
 
 const state = {
   featureId: "practice",
@@ -257,6 +335,292 @@ function getCurrentRole() {
 
 function getCurrentScreen() {
   return getCurrentRole().screens[state.screenIndex];
+}
+
+function taskRows() {
+  return aiTasks
+    .map(
+      (task, index) => `
+        <article class="task-review-card">
+          <div class="task-review-head">
+            <span class="task-index">${index + 1}</span>
+            <div>
+              <strong>${task.label}</strong>
+              <small>${task.reason}</small>
+            </div>
+          </div>
+          <p class="task-prompt">${task.prompt}</p>
+          <div class="task-answer">Ожидаемый ответ: <strong>${task.answer}</strong></div>
+          <div class="task-actions">
+            <button type="button">Оставить</button>
+            <button type="button">Упростить</button>
+            <button type="button">Заменить</button>
+          </div>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function weekCards() {
+  return weekPlan
+    .map(
+      (day, index) => `
+        <article class="week-card${index === 0 ? " is-current" : ""}">
+          <div class="week-day">${day.day}</div>
+          <strong>${day.focus}</strong>
+          <small>${day.status}</small>
+          <ul>
+            ${day.tasks.map((task) => `<li>${task}</li>`).join("")}
+          </ul>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function warmupCards() {
+  return warmupExamples
+    .map(
+      (item) => `
+        <article class="rule-card">
+          <span>${item.title}</span>
+          <p>${item.body}</p>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function metricCards(metrics) {
+  return metrics
+    .map(
+      (metric) => `
+        <div class="metric-card">
+          <strong>${metric.value}</strong>
+          <span>${metric.label}</span>
+        </div>
+      `
+    )
+    .join("");
+}
+
+function renderMock(screen) {
+  const fallback = `
+    <div class="mock-empty">
+      <span class="empty-icon" aria-hidden="true"></span>
+      <strong>Макет будет добавлен здесь</strong>
+      <small>Каркас поддерживает разные роли и несколько экранов внутри функции.</small>
+    </div>
+  `;
+
+  const templates = {
+    "teacher-ai-review": `
+      <div class="prototype-screen">
+        <section class="insight-strip">
+          <div>
+            <span class="ai-badge">Сгенерировано ИИ</span>
+            <h4>5 задач по теме «дроби с разными знаменателями»</h4>
+            <p>Уровень: 5 класс США · Common Core 5.NF.A.1 / 5.NF.A.2</p>
+          </div>
+          <div class="confidence-card">
+            <strong>86%</strong>
+            <span>уверенность в подборке</span>
+          </div>
+        </section>
+        <section class="diagnostic-grid">
+          <div>
+            <p class="panel-label">Ошибки с урока</p>
+            <div class="tag-cloud">
+              <span>складывает знаменатели</span>
+              <span>теряет числитель</span>
+              <span>не проверяет разумность ответа</span>
+            </div>
+          </div>
+          <div>
+            <p class="panel-label">Решение преподавателя</p>
+            <div class="approval-box">Проверить задачи, поправить формулировки и отправить ученику в первые 24 часа.</div>
+          </div>
+        </section>
+        <section class="task-review-list">${taskRows()}</section>
+      </div>
+    `,
+    "teacher-week-plan": `
+      <div class="prototype-screen">
+        <section class="stage-banner">
+          <span>Этап 2</span>
+          <div>
+            <h4>Практика в течение недели</h4>
+            <p>Каждый день открывается 2–3 задачи. Сложность растёт от общего знаменателя к текстовым задачам.</p>
+          </div>
+        </section>
+        <section class="game-settings">
+          ${metricCards([
+            { value: "3", label: "жизни на день" },
+            { value: "2", label: "заряда подсказок" },
+            { value: "1", label: "пропуск дня" },
+            { value: "5–7 мин", label: "на дневную сессию" }
+          ])}
+        </section>
+        <section class="week-grid">${weekCards()}</section>
+      </div>
+    `,
+    "teacher-before-lesson": `
+      <div class="prototype-screen">
+        <section class="stage-banner">
+          <span>Этап 3</span>
+          <div>
+            <h4>Перед новым уроком</h4>
+            <p>За 10 минут до занятия учитель видит, как ученик повторил материал и попробовал вводные примеры.</p>
+          </div>
+        </section>
+        <section class="teacher-signal">
+          <div class="signal-card strong">
+            <strong>Готовность: средняя</strong>
+            <p>Ученик открыл шпаргалку, решил 1 из 2 примеров и снова ошибся в общем знаменателе.</p>
+          </div>
+          <div class="signal-card">
+            <strong>Рекомендуемое начало урока</strong>
+            <p>Начать с 1/3 + 1/4 на визуальной модели, затем перейти к 2 × 3/4.</p>
+          </div>
+        </section>
+        <section class="attempt-table">
+          <div><span>Шпаргалка</span><strong>Открыта · 2 мин</strong></div>
+          <div><span>Повторение</span><strong>3/5 задач верно</strong></div>
+          <div><span>Новые примеры</span><strong>1 попытка</strong></div>
+          <div><span>Главный риск</span><strong>общий знаменатель</strong></div>
+        </section>
+      </div>
+    `,
+    "student-recap": `
+      <div class="prototype-screen">
+        <section class="student-task-shell">
+          <div class="recap-header">
+            <span class="stage-pill">Этап 1 · первые 24 часа</span>
+            <h4>Быстрый повтор после урока</h4>
+            <p>5 коротких вопросов по тому, что сегодня было сложнее всего.</p>
+          </div>
+          <div class="task-progress">
+            <span class="is-done">1</span>
+            <span class="is-done">2</span>
+            <span class="is-current">3</span>
+            <span>4</span>
+            <span>5</span>
+          </div>
+          <article class="student-problem">
+            <span>Задача 3 из 5 · найди ошибку</span>
+            <strong>Ученик написал: 1/2 + 2/5 = 3/7. Почему это неверно?</strong>
+            <textarea aria-label="Ответ ученика" placeholder="Объясни своими словами"></textarea>
+            <div class="hint-box">Подсказка ИИ: проверь, одинакового ли размера части в дробях.</div>
+          </article>
+        </section>
+      </div>
+    `,
+    "student-week": `
+      <div class="prototype-screen">
+        <section class="game-settings">
+          ${metricCards([
+            { value: "3/3", label: "жизни" },
+            { value: "2", label: "заряда подсказок" },
+            { value: "1", label: "пропуск дня" },
+            { value: "4 дня", label: "серия" }
+          ])}
+        </section>
+        <section class="week-grid">${weekCards()}</section>
+      </div>
+    `,
+    "student-warmup": `
+      <div class="prototype-screen">
+        <section class="stage-banner">
+          <span>Этап 3</span>
+          <div>
+            <h4>Разогрев за 10 минут до урока</h4>
+            <p>Можно просто прочитать и попробовать 1–2 лёгких примера. Решать всё не обязательно.</p>
+          </div>
+        </section>
+        <section class="rule-grid">${warmupCards()}</section>
+        <section class="lesson-plan">
+          <div>
+            <p class="panel-label">План урока</p>
+            <ol>
+              <li>Разобрать ошибки недели.</li>
+              <li>Повторить сложение дробей через общие части.</li>
+              <li>Перейти к умножению дроби на целое число.</li>
+            </ol>
+          </div>
+          <div>
+            <p class="panel-label">Попробуй, если хочешь</p>
+            <div class="preview-problem">Два сэндвича делят между 3 детьми. Какая часть достанется каждому?</div>
+          </div>
+        </section>
+      </div>
+    `,
+    "parent-summary": `
+      <div class="prototype-screen simple-dashboard">
+        <section class="stage-banner">
+          <span>После урока</span>
+          <div>
+            <h4>Сегодня работали с дробями</h4>
+            <p>Главная цель недели: уверенно складывать дроби с разными знаменателями.</p>
+          </div>
+        </section>
+        <section class="game-settings">
+          ${metricCards([
+            { value: "3/5", label: "задачи верно" },
+            { value: "1", label: "главная ошибка" },
+            { value: "5 мин", label: "практика после урока" }
+          ])}
+        </section>
+      </div>
+    `,
+    "teacher-summary-check": `
+      <div class="prototype-screen simple-dashboard">
+        <section class="insight-strip">
+          <div>
+            <span class="ai-badge">Черновик ИИ</span>
+            <h4>Итоги урока для родителя</h4>
+            <p>Преподаватель проверяет тон, факты и следующий шаг перед отправкой.</p>
+          </div>
+        </section>
+        <article class="summary-draft">Сегодня Lily тренировалась складывать дроби с разными знаменателями. Ей уже удаётся находить общий знаменатель, но нужно закрепить проверку ответа.</article>
+      </div>
+    `,
+    "teacher-ai-settings": `
+      <div class="prototype-screen">
+        <section class="settings-list">
+          <label><input type="checkbox" checked> ИИ может предлагать задачи после урока</label>
+          <label><input type="checkbox" checked> Отправка ученику только после проверки преподавателем</label>
+          <label><input type="checkbox" checked> Генерировать объяснение ошибки простыми словами</label>
+          <label><input type="checkbox"> Разрешить автоматическую отправку лёгких задач</label>
+        </section>
+        <section class="diagnostic-grid">
+          <div class="approval-box">Уровень: 5 класс США</div>
+          <div class="approval-box">Текущая тема: дроби с разными знаменателями</div>
+        </section>
+      </div>
+    `,
+    "student-game": `
+      <div class="prototype-screen">
+        <section class="game-settings">
+          ${metricCards([
+            { value: "4", label: "дня серии" },
+            { value: "3/3", label: "жизни сегодня" },
+            { value: "2", label: "заряда подсказок" },
+            { value: "1", label: "пропуск дня" }
+          ])}
+        </section>
+        <section class="stage-banner">
+          <span>Как работает</span>
+          <div>
+            <h4>Серия сохраняется за дневной минимум</h4>
+            <p>Ученик не обязан решать много: достаточно 2–3 задач, но важно возвращаться регулярно.</p>
+          </div>
+        </section>
+      </div>
+    `
+  };
+
+  mockMain.innerHTML = templates[screen.type] || fallback;
 }
 
 function renderFeatureTabs() {
@@ -330,8 +694,7 @@ function renderSelectedScreen() {
   screenRole.textContent = role.label;
   screenTitle.textContent = screen.title;
   screenAction.textContent = screen.action;
-  placeholderTitle.textContent = screen.placeholderTitle;
-  placeholderCaption.textContent = screen.placeholderCaption;
+  renderMock(screen);
 
   screenNotes.innerHTML = "";
   screen.notes.forEach((note) => {
