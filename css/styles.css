@@ -920,7 +920,7 @@ h1 {
   align-items: stretch;
 }
 
-.quadratic-model,
+.learning-model,
 .quest-hero,
 .battery-panel,
 .daily-track,
@@ -929,60 +929,120 @@ h1 {
   background: #ffffff;
 }
 
-.quadratic-model {
+.learning-model {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 16px;
+  gap: 14px;
   align-items: stretch;
   padding: 18px;
 }
 
-.graph-card {
-  min-width: 0;
-  padding: 12px;
+.model-card,
+.deal-card,
+.expression-card {
   background: #f8fafc;
   border: 1px solid var(--line);
 }
 
-.graph-grid {
-  min-height: 154px;
-  background:
-    linear-gradient(#e5edf6 1px, transparent 1px) 0 0 / 32px 32px,
-    linear-gradient(90deg, #e5edf6 1px, transparent 1px) 0 0 / 32px 32px,
-    #ffffff;
+.model-card {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
 }
 
-.graph-grid svg {
+.ratio-stack {
+  display: grid;
+  gap: 12px;
+}
+
+.ratio-row {
+  display: grid;
+  grid-template-columns: 68px minmax(0, 1fr) 70px;
+  gap: 10px;
+  align-items: center;
+}
+
+.ratio-row span,
+.ratio-row strong {
+  font-weight: 900;
+}
+
+.rate-bar {
+  height: 16px;
+  background: #e2e8f0;
+  border: 1px solid #cbd5e1;
+}
+
+.rate-bar i {
   display: block;
-  width: 100%;
   height: 100%;
-  min-height: 154px;
+  background: #5eead4;
 }
 
-.graph-grid .axis {
-  stroke: #64748b;
-  stroke-width: 2;
+.deal-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
 }
 
-.graph-grid .parabola {
-  fill: none;
-  stroke: #0d9488;
-  stroke-linecap: round;
-  stroke-width: 5;
+.deal-card {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
 }
 
-.graph-grid .vertex {
-  fill: #4338ca;
+.deal-card span,
+.expression-token span {
+  color: var(--teal);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
-.graph-grid .root {
-  fill: #b45309;
+.deal-card strong,
+.expression-token strong {
+  font-size: 20px;
 }
 
-.graph-grid text {
-  fill: #334155;
-  font-size: 12px;
+.deal-card small {
+  color: var(--muted);
   font-weight: 800;
+}
+
+.deal-card.is-better {
+  border-color: var(--teal);
+  background: #ecfdf5;
+}
+
+.expression-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr);
+  gap: 10px;
+  align-items: stretch;
+  padding: 14px;
+}
+
+.expression-token {
+  display: grid;
+  gap: 8px;
+  align-content: center;
+  min-height: 104px;
+  padding: 14px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+.expression-token.is-fixed {
+  background: #eef2ff;
+}
+
+.expression-plus {
+  display: grid;
+  place-items: center;
+  color: var(--violet);
+  font-size: 26px;
+  font-weight: 900;
 }
 
 .model-steps {
@@ -1023,7 +1083,7 @@ h1 {
   line-height: 1.35;
 }
 
-.quadratic-equation {
+.model-equation {
   grid-column: 1 / -1;
   padding: 10px 12px;
   background: #eef2ff;
@@ -1294,7 +1354,7 @@ h1 {
   .game-settings,
   .attempt-table,
   .visual-question,
-  .quadratic-model,
+  .learning-model,
   .model-steps,
   .battery-panel,
   .daily-track,

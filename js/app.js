@@ -1,105 +1,105 @@
 const practiceTasks = [
   {
-    label: "Choose the tool",
-    prompt: "A quadratic model is written in factored form: R(p) = p(200 - 5p). What should you look for first?",
-    answer: "Zeros and possible ticket prices",
-    reason: "The student mixed up when to use zeros, vertex form, and the quadratic formula."
+    label: "Unit rate",
+    prompt: "A pack of 6 granola bars costs $9. What is the cost per bar?",
+    answer: "$1.50 per bar",
+    reason: "The student found equivalent ratios but sometimes forgot to divide down to 1 unit."
   },
   {
-    label: "Projectile vertex",
-    prompt: "A ball is modeled by h(t) = -5t^2 + 20t + 2. When does it reach its maximum height?",
-    answer: "t = 2 seconds",
-    reason: "Checks whether the student can identify the vertex from a real-world model."
+    label: "Discount",
+    prompt: "A hoodie costs $40 and is 25% off. What is the sale price?",
+    answer: "$30",
+    reason: "Checks whether the student can connect percents to a business math context."
   },
   {
-    label: "Ground time",
-    prompt: "For f(t) = -16t^2 + 80t + 64, what equation finds when the object hits the ground?",
-    answer: "-16t^2 + 80t + 64 = 0",
-    reason: "Connects zeros of a quadratic function to an event in context."
+    label: "Sales tax",
+    prompt: "A game costs $24 before tax. Sales tax is 8%. Which expression gives the total?",
+    answer: "24 x 1.08",
+    reason: "Builds the connection between percent increase and total cost."
   },
   {
-    label: "Revenue model",
-    prompt: "A school sells tickets at p dollars. Revenue is R(p)=p(200-5p). Which price gives maximum revenue?",
-    answer: "$20",
-    reason: "Builds exam-ready reasoning about vertex and optimization."
+    label: "Missing value",
+    prompt: "Trail mix costs $6 for 1.5 lb. How much would 4 lb cost at the same rate?",
+    answer: "$16",
+    reason: "Uses proportional reasoning in a real shopping context."
   },
   {
-    label: "SAT-style check",
-    prompt: "The graph of y = -2(x-3)^2 + 18 opens downward. What is the maximum value?",
-    answer: "18",
-    reason: "A short multiple-choice style question for high-school test readiness."
+    label: "Expression bridge",
+    prompt: "A photo booth charges $4 per strip plus a $3 fee. Which expression shows the total for s strips?",
+    answer: "4s + 3",
+    reason: "Prepares the next worksheet topic: algebraic expressions."
   }
 ];
 
 const weekPlan = [
   {
     day: "Mon",
-    focus: "Vertex and maximum",
-    tasks: ["h(t)=-5t^2+20t+2", "y=-2(x-3)^2+18"],
+    focus: "Unit rate",
+    tasks: ["$9 for 6 bars", "18 miles in 2 hours"],
     status: "Available"
   },
   {
     day: "Tue",
-    focus: "Zeros in context",
-    tasks: ["f(t)=0", "x-intercepts from factored form"],
+    focus: "Discounts",
+    tasks: ["25% off $40", "sale price from percent"],
     status: "Opens tomorrow"
   },
   {
     day: "Wed",
-    focus: "Projectile motion",
-    tasks: ["height over time", "valid vs invalid root"],
-    status: "2-3 exam tasks"
+    focus: "Tax and tip",
+    tasks: ["8% tax", "15% tip"],
+    status: "2-3 tasks"
   },
   {
     day: "Thu",
-    focus: "Revenue optimization",
-    tasks: ["ticket pricing", "maximum revenue"],
-    status: "2-3 exam tasks"
+    focus: "Compare deals",
+    tasks: ["price per ounce", "best value"],
+    status: "2-3 tasks"
   },
   {
     day: "Fri",
-    focus: "Mixed test set",
-    tasks: ["choose the tool", "solve", "interpret answer"],
-    status: "Final test prep"
+    focus: "Expression bridge",
+    tasks: ["4s + 3", "combine like terms"],
+    status: "Next lesson prep"
   }
 ];
 
 const warmupExamples = [
   {
-    title: "Vertex",
-    body: "For y = ax^2 + bx + c, the x-value of the vertex is -b/(2a). In context, the vertex often means a maximum or minimum."
+    title: "Next topic",
+    body: "Algebraic expressions use letters for unknown amounts, like s for the number of photo strips."
   },
   {
-    title: "Zeros",
-    body: "Zeros are where y = 0. In a projectile problem, that can mean the time when the object hits the ground."
+    title: "Expression",
+    body: "If each strip costs $4 and there is a $3 fee, the total can be written as 4s + 3."
   },
   {
-    title: "Exam move",
-    body: "Before solving, identify what the question asks for: vertex, zeros, y-intercept, or a value of the function."
+    title: "Simplify",
+    body: "Combine like terms: 3x + 2x = 5x."
   }
 ];
 
 const lessonSummary = {
   studentName: "Lily",
-  topic: "quadratic functions, projectile motion, and revenue optimization",
+  topic: "business math: unit prices, discounts, and sales tax",
   duration: "50 min",
-  totalTasks: 12,
+  totalTasks: 10,
   independentTasks: 7,
-  guidedTasks: 3,
-  repeatTasks: 2,
+  guidedTasks: 2,
+  repeatTasks: 1,
   aiDraftReady: "2 min",
   parentDelivery: "within 5 min",
   strengths: [
-    "recognizes when a quadratic model opens downward",
-    "connects the vertex to maximum height or maximum revenue"
+    "finds unit prices accurately in simple shopping contexts",
+    "understands that discounts make the final price lower"
   ],
   focusAreas: [
-    "sometimes starts solving before identifying what the question asks",
-    "needs more practice choosing between vertex, zeros, and substitution"
+    "sometimes confuses discount amount with final price",
+    "needs more practice turning a pricing rule into an expression"
   ],
   nextPractice: [
-    "5 short exam-style questions in the first 24 hours",
-    "2-3 quadratic-modeling tasks per day before the next lesson"
+    "5 short business math questions in the first 24 hours",
+    "2-3 daily tasks before previewing algebraic expressions"
   ]
 };
 
@@ -108,7 +108,7 @@ const features = {
     kicker: "Функція 01",
     title: "Тиждень підготовки",
     description:
-      "Сценарій для Grade 9 / Algebra I: після 50-хвилинного уроку учень закріплює квадратичні функції через короткі тестові задачі між заняттями.",
+      "Сценарій для Grade 7: після уроку з Business Math учень закріплює ціни, знижки й податки, а перед наступним заняттям готується до Algebraic Expressions.",
     roles: [
       {
         id: "teacher",
@@ -121,13 +121,13 @@ const features = {
             type: "teacher-ai-review",
             title: "Перевірка добірки ШІ",
             caption: "До відправлення учню",
-            appTitle: "Review Exam-Prep Practice",
+            appTitle: "Review Practice Drafts",
             appAction: "Approve 5 Tasks",
             navIndex: 1,
             notes: [
               "Practice is based on lesson mistakes",
               "Teacher approves or edits every task",
-              "The student sees exam-style tasks as a continuation of the lesson"
+              "The student sees practice as a continuation of the lesson"
             ]
           },
           {
@@ -199,9 +199,9 @@ const features = {
             appAction: "I'm Ready",
             navIndex: 2,
             notes: [
-              "Short cheat sheet with quadratic-function tools",
+              "Short cheat sheet for the next worksheet topic",
               "Next lesson plan",
-              "SAT-style preview examples"
+              "Simple algebraic expression examples"
             ]
           }
         ]
@@ -212,7 +212,7 @@ const features = {
     kicker: "Функція 02",
     title: "Підсумки уроку для батьків",
     description:
-      "Батьки швидко бачать прогрес за темою Algebra I, сильні місця, ризики перед тестами та наступний крок підготовки.",
+      "Батьки швидко бачать прогрес за темою Business Math, сильні місця, прогалини та наступну тему в підготовці.",
     roles: [
       {
         id: "parent",
@@ -300,7 +300,7 @@ const features = {
     kicker: "Функція 04",
     title: "Ігрові механіки",
     description:
-      "Серії днів, батарейки, заряд підказок і пропуски дня підтримують регулярну підготовку до шкільних і вступних тестів.",
+      "Серії днів, батарейки, заряд підказок і пропуски дня підтримують регулярну практику без зайвого тиску на учня.",
     roles: [
       {
         id: "student",
@@ -437,28 +437,79 @@ function metricCards(metrics) {
     .join("");
 }
 
-function quadraticModel() {
+function rateTableModel() {
   return `
-    <div class="quadratic-model" aria-label="Quadratic graph visual model">
-      <div class="graph-card">
-        <div class="graph-grid">
-          <svg viewBox="0 0 260 160" role="img" aria-label="Downward-opening parabola for h(t) = -5t squared + 20t + 2">
-            <line x1="26" y1="132" x2="238" y2="132" class="axis"></line>
-            <line x1="44" y1="18" x2="44" y2="144" class="axis"></line>
-            <path d="M 44 122 C 82 28, 178 28, 220 132" class="parabola"></path>
-            <circle cx="132" cy="36" r="5" class="vertex"></circle>
-            <circle cx="218" cy="132" r="5" class="root"></circle>
-            <text x="118" y="24">vertex</text>
-            <text x="198" y="150">zero</text>
-          </svg>
+    <div class="learning-model" aria-label="Unit-rate visual model">
+      <div class="model-card">
+        <p class="panel-label">Unit rate</p>
+        <div class="ratio-stack">
+          <div class="ratio-row">
+            <span>6 bars</span>
+            <div class="rate-bar"><i style="width: 100%"></i></div>
+            <strong>$9</strong>
+          </div>
+          <div class="ratio-row">
+            <span>1 bar</span>
+            <div class="rate-bar"><i style="width: 17%"></i></div>
+            <strong>$1.50</strong>
+          </div>
         </div>
       </div>
       <div class="model-steps">
-        <div><span>1</span><strong>Read the context</strong><small>height, revenue, or graph</small></div>
-        <div><span>2</span><strong>Pick the tool</strong><small>vertex, zeros, or formula</small></div>
-        <div><span>3</span><strong>Interpret</strong><small>check units and context</small></div>
+        <div><span>1</span><strong>Find the total</strong><small>$9 for 6 bars</small></div>
+        <div><span>2</span><strong>Divide by 6</strong><small>make one unit</small></div>
+        <div><span>3</span><strong>Name the rate</strong><small>dollars per bar</small></div>
       </div>
-      <div class="quadratic-equation">h(t) = -5t^2 + 20t + 2</div>
+      <div class="model-equation">$9 / 6 = $1.50 per bar</div>
+    </div>
+  `;
+}
+
+function dealComparisonModel() {
+  return `
+    <div class="learning-model" aria-label="Compare unit prices visual model">
+      <div class="deal-cards">
+        <article class="deal-card">
+          <span>Deal A</span>
+          <strong>12 oz for $3.60</strong>
+          <small>$0.30 per oz</small>
+        </article>
+        <article class="deal-card is-better">
+          <span>Deal B</span>
+          <strong>20 oz for $5.00</strong>
+          <small>$0.25 per oz</small>
+        </article>
+      </div>
+      <div class="model-steps">
+        <div><span>1</span><strong>Same unit</strong><small>price per ounce</small></div>
+        <div><span>2</span><strong>Compare</strong><small>lower unit price wins</small></div>
+        <div><span>3</span><strong>Explain</strong><small>use the rate, not size</small></div>
+      </div>
+      <div class="model-equation">unit price = total price / amount</div>
+    </div>
+  `;
+}
+
+function expressionPreviewModel() {
+  return `
+    <div class="learning-model" aria-label="Algebraic expression visual model">
+      <div class="expression-card">
+        <div class="expression-token">
+          <span>$4 each</span>
+          <strong>4s</strong>
+        </div>
+        <div class="expression-plus">+</div>
+        <div class="expression-token is-fixed">
+          <span>fixed fee</span>
+          <strong>3</strong>
+        </div>
+      </div>
+      <div class="model-steps">
+        <div><span>1</span><strong>Choose a variable</strong><small>s = strips</small></div>
+        <div><span>2</span><strong>Write each part</strong><small>4 per strip, 3 fee</small></div>
+        <div><span>3</span><strong>Evaluate</strong><small>try s = 5</small></div>
+      </div>
+      <div class="model-equation">total cost = 4s + 3</div>
     </div>
   `;
 }
@@ -530,26 +581,26 @@ function renderMock(screen) {
         <section class="insight-strip">
           <div>
             <span class="ai-badge">Draft prepared</span>
-            <h4>5 exam-style tasks from a 50-minute Algebra I lesson</h4>
-            <p>Grade: US Grade 9 · Quadratic functions · HSA-REI.B.4 / HSF-IF.C.7</p>
+            <h4>5 practice tasks from a 50-minute Grade 7 lesson</h4>
+            <p>Grade: US Grade 7 · Business Math worksheet · unit price, discounts, sales tax</p>
           </div>
           <div class="confidence-card">
             <strong>86%</strong>
-            <span>fit to test gaps</span>
+            <span>fit to lesson gaps</span>
           </div>
         </section>
         <section class="diagnostic-grid">
           <div>
             <p class="panel-label">Lesson gaps</p>
             <div class="tag-cloud">
-              <span>chooses formula too early</span>
-              <span>mixes vertex and zeros</span>
+              <span>reverses the rate</span>
+              <span>divides only one column</span>
               <span>forgets context units</span>
             </div>
           </div>
           <div>
             <p class="panel-label">Teacher decision</p>
-            <div class="approval-box">Review exam-style tasks, adjust difficulty, and send the first 24-hour check after the lesson.</div>
+            <div class="approval-box">Review the tasks, adjust wording, and send the first 24-hour check after the lesson.</div>
           </div>
         </section>
         <section class="task-review-list">${taskRows()}</section>
@@ -560,8 +611,8 @@ function renderMock(screen) {
         <section class="stage-banner">
           <span>Stage 2</span>
           <div>
-            <h4>Weekly exam-prep practice</h4>
-            <p>Each day unlocks 2-3 tasks. Difficulty grows from identifying the tool to solving contextual quadratic models.</p>
+            <h4>Weekly practice</h4>
+            <p>Each day unlocks 2-3 tasks. Difficulty grows from unit prices and discounts to a light algebraic-expression bridge.</p>
           </div>
         </section>
         <section class="game-settings">
@@ -581,24 +632,24 @@ function renderMock(screen) {
           <span>Stage 3</span>
           <div>
             <h4>Before the next lesson</h4>
-            <p>10 minutes before class, the teacher sees which quadratic tools the student reviewed and which test-style examples they tried.</p>
+            <p>10 minutes before class, the teacher sees how the student reviewed business math and previewed the next algebraic expressions topic.</p>
           </div>
         </section>
         <section class="teacher-signal">
           <div class="signal-card strong">
             <strong>Readiness: medium</strong>
-            <p>The student opened the quadratic toolbox, solved 1 of 2 examples, and still confused zeros with the vertex.</p>
+            <p>The student solved the unit-price review, opened the expression preview, and still needs help turning fixed fees into + terms.</p>
           </div>
           <div class="signal-card">
             <strong>Recommended lesson opening</strong>
-            <p>Start with the projectile graph, ask what the vertex means, then compare it with the time when height equals zero.</p>
+            <p>Start with a photo booth rule: $4 per strip plus a $3 fee. Ask the student to write the expression before calculating.</p>
           </div>
         </section>
         <section class="attempt-table">
-          <div><span>Toolbox</span><strong>Opened · 3 min</strong></div>
+          <div><span>Expression preview</span><strong>Opened · 3 min</strong></div>
           <div><span>Review</span><strong>3/5 tasks correct</strong></div>
           <div><span>Preview</span><strong>2 attempts</strong></div>
-          <div><span>Main risk</span><strong>tool selection</strong></div>
+          <div><span>Main risk</span><strong>expression setup</strong></div>
         </section>
       </div>
     `,
@@ -608,7 +659,7 @@ function renderMock(screen) {
           <div class="recap-header">
             <span class="stage-pill">Stage 1 · first 24 hours</span>
             <h4>Quick review after the lesson</h4>
-            <p>5 short tap-friendly questions from today's Algebra I lesson.</p>
+            <p>5 short tap-friendly questions from today's Grade 7 lesson.</p>
           </div>
           <div class="task-progress">
             <span class="is-done">1</span>
@@ -618,12 +669,12 @@ function renderMock(screen) {
             <span>5</span>
           </div>
           <section class="visual-question">
-            ${quadraticModel()}
+            ${rateTableModel()}
             <article class="student-problem">
-              <span>Task 3 of 5 · choose the tool</span>
-              <strong>For h(t) = -5t^2 + 20t + 2, what does the vertex tell us?</strong>
-              ${answerChoices(["When height is 0", "Maximum height", "Starting height", "Average speed"], 1)}
-              <div class="hint-box">Hint: a downward-opening parabola reaches its highest point at the vertex.</div>
+              <span>Task 3 of 5 · choose the answer</span>
+              <strong>A pack of 6 granola bars costs $9. What is the cost per bar?</strong>
+              ${answerChoices(["$1.25", "$1.50", "$3.00", "$15.00"], 1)}
+              <div class="hint-box">Hint: divide the total cost by the number of bars.</div>
             </article>
           </section>
         </section>
@@ -634,7 +685,7 @@ function renderMock(screen) {
         <section class="quest-hero">
           <div>
             <span class="stage-pill">Daily set</span>
-            <h4>Finish 3 exam tasks to keep the streak</h4>
+            <h4>Finish 3 practice tasks to keep the streak</h4>
             <p>Complete the daily set to earn points. If a day is missed, one battery protects the streak.</p>
           </div>
           <div class="quest-reward">
@@ -657,11 +708,11 @@ function renderMock(screen) {
           </div>
         </section>
         <section class="visual-question">
-          ${quadraticModel()}
+          ${dealComparisonModel()}
           <article class="student-problem">
             <span>Daily task · 60 seconds</span>
-            <strong>Which equation finds when the object hits the ground?</strong>
-            ${answerChoices(["h(t)=22", "h(t)=0", "t=-b/(2a)", "h(0)=2"], 1)}
+            <strong>Which deal has the lower price per ounce?</strong>
+            ${answerChoices(["12 oz for $3.60", "20 oz for $5.00", "They are equal", "Need more information"], 1)}
           </article>
         </section>
         ${dailyTrack()}
@@ -673,30 +724,30 @@ function renderMock(screen) {
           <span>Stage 3</span>
           <div>
             <h4>Warm-up 10 minutes before class</h4>
-            <p>Review a compact quadratic toolbox, try a test-style example, and let the teacher see the warm-up result before class.</p>
+            <p>Preview the next worksheet topic, try one algebraic expression, and let the teacher see the warm-up result before class.</p>
           </div>
         </section>
         <section class="rule-grid">${warmupCards()}</section>
         <section class="visual-question">
-          ${quadraticModel()}
+          ${expressionPreviewModel()}
           <article class="student-problem">
             <span>Preview example · optional</span>
-            <strong>A ticket revenue model is R(p)=p(200-5p). What is the fastest first step?</strong>
-            ${answerChoices(["Expand immediately", "Find zeros and the vertex", "Use slope formula", "Set p = 0 only"], 1)}
+            <strong>A photo booth charges $4 per strip plus a $3 fee. Which expression shows the total for s strips?</strong>
+            ${answerChoices(["4 + 3s", "4s + 3", "7s", "s + 43"], 1)}
           </article>
         </section>
         <section class="lesson-plan">
           <div>
             <p class="panel-label">Lesson plan</p>
             <ol>
-              <li>Review the week's mistakes.</li>
-              <li>Compare vertex, zeros, and y-intercept in context.</li>
-              <li>Solve a projectile or revenue problem using the right tool.</li>
+              <li>Open the next worksheet topic.</li>
+              <li>Review the week's business math mistakes.</li>
+              <li>Write pricing rules as algebraic expressions.</li>
             </ol>
           </div>
           <div>
             <p class="panel-label">Teacher sees</p>
-            <div class="preview-problem">Warm-up opened · 1 optional test item attempted · vertex rule reviewed</div>
+            <div class="preview-problem">Warm-up opened · 1 optional expression attempted · fixed-fee rule reviewed</div>
           </div>
         </section>
       </div>
@@ -707,7 +758,7 @@ function renderMock(screen) {
           <span>Reviewed by teacher</span>
           <div>
             <h4>Lesson summary is ready</h4>
-            <p>Today ${lessonSummary.studentName} worked on ${lessonSummary.topic}. The next goal is to choose the right tool before solving.</p>
+            <p>Today ${lessonSummary.studentName} worked on ${lessonSummary.topic}. The next goal is to set up the rate before calculating.</p>
           </div>
         </section>
         <section class="game-settings summary-metrics">
@@ -730,13 +781,13 @@ function renderMock(screen) {
         </section>
         <section class="parent-note">
           <p class="panel-label">Parent note</p>
-          <strong>There is progress: Lily connects the vertex to a maximum in real-world models.</strong>
-          <p>This week, Brighterly will give short test-style practice on the exact tool-choice mistakes from the lesson. The teacher has already reviewed the plan.</p>
+          <strong>There is progress: Lily can find unit rates in simple tables.</strong>
+          <p>This week, Brighterly will give short practice on the exact rate-setting mistakes from the lesson. The teacher has already reviewed the plan.</p>
         </section>
         <section class="summary-timeline">
           <div><strong>${lessonSummary.aiDraftReady}</strong><span>AI drafted summary</span></div>
           <div><strong>${lessonSummary.parentDelivery}</strong><span>parent receives it</span></div>
-          <div><strong>5 tasks</strong><span>exam-style review today</span></div>
+          <div><strong>5 tasks</strong><span>quick review today</span></div>
         </section>
       </div>
     `,
@@ -746,7 +797,7 @@ function renderMock(screen) {
           <div>
             <span class="ai-badge">AI draft · ready in ${lessonSummary.aiDraftReady}</span>
             <h4>Lesson summary for parent</h4>
-            <p>The system collected lesson tasks, tool-choice mistakes, hints, and the next practice step. The teacher verifies facts before sending.</p>
+            <p>The system collected lesson tasks, rate mistakes, hints, and the next practice step. The teacher verifies facts before sending.</p>
           </div>
           <div class="send-window">
             <strong>${lessonSummary.parentDelivery}</strong>
@@ -764,12 +815,12 @@ function renderMock(screen) {
         <section class="summary-review-grid">
           <article class="summary-draft">
             <p class="panel-label">Parent-facing text</p>
-            <strong>Today ${lessonSummary.studentName} practiced quadratic models for projectile motion and revenue.</strong>
-            <p>She is already connecting the vertex to maximum height or revenue. Over the next few days, we will practice choosing between vertex, zeros, and substitution before solving.</p>
+            <strong>Today ${lessonSummary.studentName} practiced Business Math: unit prices, discounts, and sales tax.</strong>
+            <p>She is already finding simple unit prices. Over the next few days, we will practice discounts, tax, and the bridge into algebraic expressions.</p>
           </article>
           <aside class="validation-panel">
             <p class="panel-label">Teacher review</p>
-            <div class="validation-step is-done"><strong>Facts</strong><span>12 tasks, 7 solved independently</span></div>
+            <div class="validation-step is-done"><strong>Facts</strong><span>10 tasks, 7 solved independently</span></div>
             <div class="validation-step is-current"><strong>Tone</strong><span>supportive, no pressure</span></div>
             <div class="validation-step"><strong>Next step</strong><span>weekly practice</span></div>
             <div class="validation-actions">
@@ -819,7 +870,7 @@ function renderMock(screen) {
         </section>
         <section class="reward-grid">
           <article class="reward-card is-active"><strong>1</strong><span>Warm-up task</span></article>
-          <article class="reward-card is-active"><strong>2</strong><span>Graph interpretation</span></article>
+          <article class="reward-card is-active"><strong>2</strong><span>Unit-rate check</span></article>
           <article class="reward-card"><strong>3</strong><span>Final check</span></article>
           <article class="reward-card"><strong>+10</strong><span>bonus for no hints</span></article>
         </section>
