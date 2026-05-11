@@ -384,9 +384,11 @@ const screenLabels = {
 
 const state = {
   featureId: "practice",
-  roleId: "teacher",
+  roleId: "student",
   screenIndex: 0
 };
+
+let processingTimer = null;
 
 function getCurrentFeature() {
   return features[state.featureId];
@@ -724,6 +726,10 @@ function renderMock(screen) {
           <span class="stage-pill">After class · processing</span>
           <h4>Preparing your Lesson Card…</h4>
           <p>Usually ready 2–3 minutes after class. Topics appear below as they process.</p>
+          <div class="processing-progress">
+            <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+            <span class="progress-pct" id="processing-pct">0%</span>
+          </div>
         </section>
 
         <section class="topic-list">
@@ -1168,10 +1174,40 @@ function renderNav() {
   });
 }
 
+function startProcessingTimer() {
+  if (processingTimer) clearInterval(processingTimer);
+  const DURATION = 10000;
+  const TICK = 80;
+  let elapsed = 0;
+
+  processingTimer = setInterval(() => {
+    elapsed += TICK;
+    const pct = Math.min(100, Math.round((elapsed / DURATION) * 100));
+
+    const pctEl = document.getElementById("processing-pct");
+    const fillEl = document.getElementById("progress-fill");
+    if (pctEl) pctEl.textContent = `${pct}%`;
+    if (fillEl) fillEl.style.width = `${pct}%`;
+
+    if (elapsed >= DURATION) {
+      clearInterval(processingTimer);
+      processingTimer = null;
+      state.screenIndex += 1;
+      render();
+    }
+  }, TICK);
+}
+
 function renderSelectedScreen() {
   const role = getCurrentRole();
   const screen = getCurrentScreen();
   const appLabel = role.appLabel || role.label;
+
+  // Stop any running timer when screen changes
+  if (processingTimer) {
+    clearInterval(processingTimer);
+    processingTimer = null;
+  }
 
   appRoleLabel.textContent = appLabel;
   browserUrl.textContent = `app.brighterly.com/${role.path}`;
@@ -1179,6 +1215,10 @@ function renderSelectedScreen() {
   screenTitle.textContent = screen.appTitle || screen.title;
   screenAction.textContent = screen.appAction || screen.action;
   renderMock(screen);
+
+  if (screen.type === "student-recap-processing") {
+    startProcessingTimer();
+  }
 
   syncNestedScreenHeight();
 }
@@ -1198,40 +1238,4 @@ function render() {
 }
 
 // Interactive answer choices — 3 states: idle / wrong / correct
-mockMain.addEventListener("click", (e) => {
-  const btn = e.target.closest(".answer-choice");
-  if (!btn) return;
-  const options = btn.closest(".answer-options");
-  if (!options || options.classList.contains("is-answered")) return;
-
-  options.classList.add("is-answered");
-  btn.classList.add("is-selected");
-
-  if (btn.dataset.correct === "true") {
-    options.classList.add("is-correct");
-    btn.classList.add("is-correct-answer");
-  } else {
-    options.classList.add("is-wrong");
-    btn.classList.add("is-wrong-answer");
-    const correct = options.querySelector("[data-correct='true']");
-    if (correct) correct.classList.add("is-correct-answer");
-  }
-});
-
-featureTabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
-    state.featureId = tab.dataset.feature;
-    state.screenIndex = 0;
-    // If current role has no content in the new feature, switch to first available role
-    const availableRoleIds = features[state.featureId].roles.map((r) => r.id);
-    if (!availableRoleIds.includes(state.roleId)) {
-      state.roleId = availableRoleIds[0];
-    }
-    render();
-  });
-});
-
-render();
-
-window.addEventListener("resize", syncNestedScreenHeight);
-    
+mockMain.addEventLi

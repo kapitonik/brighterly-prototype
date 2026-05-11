@@ -2145,4 +2145,38 @@ h1 {
 .reward-card.is-bonus strong {
   color: #92400e;
 }
+
+/* ── Processing progress bar ─────────────────────────────────── */
+
+.processing-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.progress-track {
+  flex: 1;
+  height: 6px;
+  background: #fed7aa;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #f97316;
+  border-radius: 99px;
+  transition: width 0.08s linear;
+}
+
+.progress-pct {
+  flex: 0 0 auto;
+  color: #b45309;
+  font-size: 13px;
+  font-weight: 900;
+  min-width: 36px;
+  text-align: right;
+}
                                                  
