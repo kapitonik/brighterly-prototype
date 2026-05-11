@@ -81,6 +81,30 @@ const warmupExamples = [
   }
 ];
 
+const lessonSummary = {
+  studentName: "Lily",
+  topic: "сложение дробей с разными знаменателями",
+  duration: "45 мин",
+  totalTasks: 8,
+  independentTasks: 5,
+  guidedTasks: 2,
+  repeatTasks: 1,
+  aiDraftReady: "2 мин",
+  parentDelivery: "до 5 мин",
+  strengths: [
+    "быстро находит общий знаменатель для простых дробей",
+    "уверенно переносит шаги с числовой модели в запись"
+  ],
+  focusAreas: [
+    "иногда складывает знаменатели напрямую",
+    "забывает проверить, разумен ли получившийся ответ"
+  ],
+  nextPractice: [
+    "5 коротких задач в первые 24 часа после урока",
+    "по 2–3 задачи в день до следующего занятия"
+  ]
+};
+
 const features = {
   practice: {
     kicker: "Функция 01",
@@ -176,7 +200,7 @@ const features = {
     kicker: "Функция 02",
     title: "Итоги урока для родителей",
     description:
-      "Родитель видит, что происходило на уроке, какой прогресс сделал ребёнок и что будет закрепляться дальше.",
+      "ИИ собирает краткие итоги урока, преподаватель проверяет факты и тон, родитель быстро видит прогресс ребёнка и следующий шаг.",
     roles: [
       {
         id: "parent",
@@ -189,7 +213,7 @@ const features = {
             title: "Итоги урока",
             caption: "Ключевые моменты и темы",
             action: "Открыть прогресс",
-            notes: ["Меньше чёрного ящика", "Понятная ценность для родителя", "Связь с домашней практикой"]
+            notes: ["Проверено преподавателем", "Родитель получает итоги в течение 5 минут", "Связь с практикой после урока"]
           },
           {
             type: "parent-progress",
@@ -211,7 +235,7 @@ const features = {
             title: "Проверка итогов",
             caption: "Перед отправкой родителю",
             action: "Отправить родителю",
-            notes: ["Контроль тона", "Без лишней нагрузки", "Родитель получает проверенную информацию"]
+            notes: ["ИИ готовит черновик за пару минут", "Преподаватель проверяет факты", "Родитель получает понятный следующий шаг"]
           }
         ]
       }
@@ -394,6 +418,10 @@ function warmupCards() {
     .join("");
 }
 
+function listItems(items) {
+  return items.map((item) => `<li>${item}</li>`).join("");
+}
+
 function metricCards(metrics) {
   return metrics
     .map(
@@ -562,18 +590,39 @@ function renderMock(screen) {
     "parent-summary": `
       <div class="prototype-screen simple-dashboard">
         <section class="stage-banner">
-          <span>После урока</span>
+          <span>Проверено преподавателем</span>
           <div>
-            <h4>Сегодня работали с дробями</h4>
-            <p>Главная цель недели: уверенно складывать дроби с разными знаменателями.</p>
+            <h4>Итоги урока уже готовы</h4>
+            <p>Сегодня ${lessonSummary.studentName} работала над темой: ${lessonSummary.topic}. Следующая цель — закрепить проверку ответа.</p>
           </div>
         </section>
-        <section class="game-settings">
+        <section class="game-settings summary-metrics">
           ${metricCards([
-            { value: "3/5", label: "задачи верно" },
-            { value: "1", label: "главная ошибка" },
-            { value: "5 мин", label: "практика после урока" }
+            { value: lessonSummary.totalTasks, label: "задач разобрали" },
+            { value: lessonSummary.independentTasks, label: "решено самостоятельно" },
+            { value: lessonSummary.guidedTasks, label: "с подсказкой" },
+            { value: lessonSummary.repeatTasks, label: "нужно повторить" }
           ])}
+        </section>
+        <section class="lesson-summary-grid">
+          <article class="lesson-summary-card is-positive">
+            <p class="panel-label">Сильные места</p>
+            <ul class="compact-list">${listItems(lessonSummary.strengths)}</ul>
+          </article>
+          <article class="lesson-summary-card">
+            <p class="panel-label">Что закрепить</p>
+            <ul class="compact-list">${listItems(lessonSummary.focusAreas)}</ul>
+          </article>
+        </section>
+        <section class="parent-note">
+          <p class="panel-label">Коротко для родителя</p>
+          <strong>Прогресс есть: Lily уже понимает, зачем нужен общий знаменатель.</strong>
+          <p>На этой неделе сервис даст короткую практику по тем ошибкам, которые проявились на уроке. Преподаватель уже проверил план закрепления.</p>
+        </section>
+        <section class="summary-timeline">
+          <div><strong>${lessonSummary.aiDraftReady}</strong><span>ИИ подготовил черновик</span></div>
+          <div><strong>${lessonSummary.parentDelivery}</strong><span>родитель получает итоги</span></div>
+          <div><strong>5 задач</strong><span>быстрое закрепление сегодня</span></div>
         </section>
       </div>
     `,
@@ -581,12 +630,50 @@ function renderMock(screen) {
       <div class="prototype-screen simple-dashboard">
         <section class="insight-strip">
           <div>
-            <span class="ai-badge">Черновик ИИ</span>
+            <span class="ai-badge">Черновик ИИ · готов через ${lessonSummary.aiDraftReady}</span>
             <h4>Итоги урока для родителя</h4>
-            <p>Преподаватель проверяет тон, факты и следующий шаг перед отправкой.</p>
+            <p>Система собрала задачи урока, ошибки, подсказки и следующий шаг. Преподаватель проверяет факты перед отправкой.</p>
+          </div>
+          <div class="send-window">
+            <strong>${lessonSummary.parentDelivery}</strong>
+            <span>после завершения урока</span>
           </div>
         </section>
-        <article class="summary-draft">Сегодня Lily тренировалась складывать дроби с разными знаменателями. Ей уже удаётся находить общий знаменатель, но нужно закрепить проверку ответа.</article>
+        <section class="game-settings summary-metrics">
+          ${metricCards([
+            { value: lessonSummary.duration, label: "длительность урока" },
+            { value: lessonSummary.totalTasks, label: "задач в работе" },
+            { value: lessonSummary.independentTasks, label: "самостоятельно" },
+            { value: lessonSummary.guidedTasks, label: "с подсказкой" }
+          ])}
+        </section>
+        <section class="summary-review-grid">
+          <article class="summary-draft">
+            <p class="panel-label">Текст для родителя</p>
+            <strong>Сегодня ${lessonSummary.studentName} тренировалась складывать дроби с разными знаменателями.</strong>
+            <p>Она уже уверенно находит общий знаменатель в простых примерах. В ближайшие дни закрепим проверку ответа и разберём случаи, где хочется сложить знаменатели напрямую.</p>
+          </article>
+          <aside class="validation-panel">
+            <p class="panel-label">Проверка преподавателя</p>
+            <div class="validation-step is-done"><strong>Факты</strong><span>8 задач, 5 решены самостоятельно</span></div>
+            <div class="validation-step is-current"><strong>Тон</strong><span>без давления на ребёнка</span></div>
+            <div class="validation-step"><strong>Следующий шаг</strong><span>практика на неделю</span></div>
+            <div class="validation-actions">
+              <button class="secondary-action" type="button">Поправить текст</button>
+              <button class="primary-action" type="button">Отправить родителю</button>
+            </div>
+          </aside>
+        </section>
+        <section class="lesson-summary-grid">
+          <article class="lesson-summary-card is-positive">
+            <p class="panel-label">Сильные места</p>
+            <ul class="compact-list">${listItems(lessonSummary.strengths)}</ul>
+          </article>
+          <article class="lesson-summary-card">
+            <p class="panel-label">План закрепления</p>
+            <ul class="compact-list">${listItems(lessonSummary.nextPractice)}</ul>
+          </article>
+        </section>
       </div>
     `,
     "teacher-ai-settings": `

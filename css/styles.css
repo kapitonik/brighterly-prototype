@@ -688,6 +688,141 @@ h1 {
   line-height: 1;
 }
 
+.summary-metrics .metric-card {
+  min-height: 94px;
+}
+
+.lesson-summary-grid,
+.summary-review-grid,
+.summary-timeline {
+  display: grid;
+  gap: 14px;
+}
+
+.lesson-summary-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.summary-review-grid {
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+}
+
+.lesson-summary-card,
+.parent-note,
+.validation-panel,
+.summary-timeline div,
+.send-window {
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.lesson-summary-card.is-positive {
+  border-color: #b8e4dd;
+  background: #f0fdfa;
+}
+
+.compact-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+  color: #344054;
+  line-height: 1.45;
+}
+
+.parent-note {
+  display: grid;
+  gap: 8px;
+}
+
+.parent-note strong,
+.summary-draft strong {
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.parent-note p:last-child,
+.summary-draft p:last-child {
+  margin: 0;
+  color: #475467;
+  line-height: 1.45;
+}
+
+.send-window {
+  flex: 0 0 170px;
+  border-color: #b8e4dd;
+  background: #f0fdfa;
+}
+
+.send-window strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--teal-deep);
+  font-size: 30px;
+  line-height: 1;
+}
+
+.send-window span,
+.summary-timeline span,
+.validation-step span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.summary-timeline {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.summary-timeline strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--violet);
+  font-size: 22px;
+}
+
+.validation-panel {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.validation-step {
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: #f8fafc;
+}
+
+.validation-step strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.validation-step.is-done {
+  border-color: #b8e4dd;
+  background: #f0fdfa;
+}
+
+.validation-step.is-current {
+  border-color: #c7d2fe;
+  background: #eef2ff;
+}
+
+.validation-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.validation-actions .primary-action,
+.validation-actions .secondary-action {
+  flex: 1 1 150px;
+  margin-top: 0;
+}
+
 .week-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -930,7 +1065,10 @@ h1 {
   .teacher-signal,
   .lesson-plan,
   .game-settings,
-  .attempt-table {
+  .attempt-table,
+  .lesson-summary-grid,
+  .summary-review-grid,
+  .summary-timeline {
     grid-template-columns: 1fr;
   }
 
