@@ -1,114 +1,114 @@
 const practiceTasks = [
   {
-    label: "Common denominator",
-    prompt: "Which common denominator works for 1/3 + 1/4?",
-    answer: "12",
-    reason: "During the lesson, the student tried to add fractions without converting them to equal-sized parts."
+    label: "Choose the tool",
+    prompt: "A quadratic model is written in factored form: R(p) = p(200 - 5p). What should you look for first?",
+    answer: "Zeros and possible ticket prices",
+    reason: "The student mixed up when to use zeros, vertex form, and the quadratic formula."
   },
   {
-    label: "Adding fractions",
-    prompt: "Solve: 1/3 + 1/4",
-    answer: "7/12",
-    reason: "Checks whether the student can use the common denominator in the calculation."
+    label: "Projectile vertex",
+    prompt: "A ball is modeled by h(t) = -5t^2 + 20t + 2. When does it reach its maximum height?",
+    answer: "t = 2 seconds",
+    reason: "Checks whether the student can identify the vertex from a real-world model."
   },
   {
-    label: "Find the mistake",
-    prompt: "A student wrote: 1/2 + 2/5 = 3/7. Why is this incorrect?",
-    answer: "You cannot add denominators. First, find a common denominator.",
-    reason: "This was the main mistake at the end of the lesson."
+    label: "Ground time",
+    prompt: "For f(t) = -16t^2 + 80t + 64, what equation finds when the object hits the ground?",
+    answer: "-16t^2 + 80t + 64 = 0",
+    reason: "Connects zeros of a quadratic function to an event in context."
   },
   {
-    label: "Word problem",
-    prompt: "Mia used 2/3 cup of oats and 1/4 cup of nuts. How many cups did she use in total?",
-    answer: "11/12 cup",
-    reason: "The same skill in a familiar US school context."
+    label: "Revenue model",
+    prompt: "A school sells tickets at p dollars. Revenue is R(p)=p(200-5p). Which price gives maximum revenue?",
+    answer: "$20",
+    reason: "Builds exam-ready reasoning about vertex and optimization."
   },
   {
-    label: "Subtraction",
-    prompt: "Complete the step: 3/4 - 1/6 = 9/12 - ?/12",
-    answer: "2",
-    reason: "Prepares the student for mixed practice during the week."
+    label: "SAT-style check",
+    prompt: "The graph of y = -2(x-3)^2 + 18 opens downward. What is the maximum value?",
+    answer: "18",
+    reason: "A short multiple-choice style question for high-school test readiness."
   }
 ];
 
 const weekPlan = [
   {
     day: "Mon",
-    focus: "Common denominator",
-    tasks: ["2/5 + 1/10", "3/8 + 1/4"],
+    focus: "Vertex and maximum",
+    tasks: ["h(t)=-5t^2+20t+2", "y=-2(x-3)^2+18"],
     status: "Available"
   },
   {
     day: "Tue",
-    focus: "Subtraction",
-    tasks: ["5/6 - 1/3", "7/10 - 1/5"],
+    focus: "Zeros in context",
+    tasks: ["f(t)=0", "x-intercepts from factored form"],
     status: "Opens tomorrow"
   },
   {
     day: "Wed",
-    focus: "Word problems",
-    tasks: ["3/4 cup - 1/3 cup", "2/3 mile + 1/6 mile"],
-    status: "2-3 tasks"
+    focus: "Projectile motion",
+    tasks: ["height over time", "valid vs invalid root"],
+    status: "2-3 exam tasks"
   },
   {
     day: "Thu",
-    focus: "Mixed numbers",
-    tasks: ["1 1/2 + 2/3", "2 1/4 - 5/6"],
-    status: "2-3 tasks"
+    focus: "Revenue optimization",
+    tasks: ["ticket pricing", "maximum revenue"],
+    status: "2-3 exam tasks"
   },
   {
     day: "Fri",
-    focus: "Weekly check",
-    tasks: ["Find the mistake", "Solve a problem", "Explain one step"],
-    status: "Final practice"
+    focus: "Mixed test set",
+    tasks: ["choose the tool", "solve", "interpret answer"],
+    status: "Final test prep"
   }
 ];
 
 const warmupExamples = [
   {
-    title: "Rule",
-    body: "To add fractions, the parts must be the same size. That is why we find a common denominator first."
+    title: "Vertex",
+    body: "For y = ax^2 + bx + c, the x-value of the vertex is -b/(2a). In context, the vertex often means a maximum or minimum."
   },
   {
-    title: "Example",
-    body: "1/3 + 1/4 = 4/12 + 3/12 = 7/12"
+    title: "Zeros",
+    body: "Zeros are where y = 0. In a projectile problem, that can mean the time when the object hits the ground."
   },
   {
-    title: "Next step",
-    body: "2 x 3/4 can be shown as 3/4 + 3/4. This connects repeated addition to multiplying a fraction by a whole number."
+    title: "Exam move",
+    body: "Before solving, identify what the question asks for: vertex, zeros, y-intercept, or a value of the function."
   }
 ];
 
 const lessonSummary = {
   studentName: "Lily",
-  topic: "adding fractions with unlike denominators",
-  duration: "45 min",
-  totalTasks: 8,
-  independentTasks: 5,
-  guidedTasks: 2,
-  repeatTasks: 1,
+  topic: "quadratic functions, projectile motion, and revenue optimization",
+  duration: "50 min",
+  totalTasks: 12,
+  independentTasks: 7,
+  guidedTasks: 3,
+  repeatTasks: 2,
   aiDraftReady: "2 min",
   parentDelivery: "within 5 min",
   strengths: [
-    "finds common denominators quickly in simple examples",
-    "connects visual models to written fraction work"
+    "recognizes when a quadratic model opens downward",
+    "connects the vertex to maximum height or maximum revenue"
   ],
   focusAreas: [
-    "sometimes adds denominators directly",
-    "needs to check whether the answer is reasonable"
+    "sometimes starts solving before identifying what the question asks",
+    "needs more practice choosing between vertex, zeros, and substitution"
   ],
   nextPractice: [
-    "5 short tasks in the first 24 hours after the lesson",
-    "2-3 tasks per day before the next lesson"
+    "5 short exam-style questions in the first 24 hours",
+    "2-3 quadratic-modeling tasks per day before the next lesson"
   ]
 };
 
 const features = {
   practice: {
     kicker: "Функція 01",
-    title: "Тиждень закріплення",
+    title: "Тиждень підготовки",
     description:
-      "ШІ готує практику за підсумками уроку, викладач перевіряє завдання, учень проходить три короткі етапи між заняттями.",
+      "Сценарій для Grade 9 / Algebra I: після 50-хвилинного уроку учень закріплює квадратичні функції через короткі тестові задачі між заняттями.",
     roles: [
       {
         id: "teacher",
@@ -121,13 +121,13 @@ const features = {
             type: "teacher-ai-review",
             title: "Перевірка добірки ШІ",
             caption: "До відправлення учню",
-            appTitle: "Review AI Practice Drafts",
+            appTitle: "Review Exam-Prep Practice",
             appAction: "Approve 5 Tasks",
             navIndex: 1,
             notes: [
-              "AI drafts tasks from lesson mistakes",
+              "Practice is based on lesson mistakes",
               "Teacher approves or edits every task",
-              "The student sees practice as a continuation of the lesson"
+              "The student sees exam-style tasks as a continuation of the lesson"
             ]
           },
           {
@@ -199,9 +199,9 @@ const features = {
             appAction: "I'm Ready",
             navIndex: 2,
             notes: [
-              "Short cheat sheet with needed rules",
+              "Short cheat sheet with quadratic-function tools",
               "Next lesson plan",
-              "Simple preview examples"
+              "SAT-style preview examples"
             ]
           }
         ]
@@ -212,7 +212,7 @@ const features = {
     kicker: "Функція 02",
     title: "Підсумки уроку для батьків",
     description:
-      "ШІ збирає короткі підсумки уроку, викладач перевіряє факти й тон, батьки швидко бачать прогрес дитини та наступний крок.",
+      "Батьки швидко бачать прогрес за темою Algebra I, сильні місця, ризики перед тестами та наступний крок підготовки.",
     roles: [
       {
         id: "parent",
@@ -300,7 +300,7 @@ const features = {
     kicker: "Функція 04",
     title: "Ігрові механіки",
     description:
-      "Серії днів, батарейки, заряд підказок і пропуски дня підтримують практику, але не карають дитину надто жорстко.",
+      "Серії днів, батарейки, заряд підказок і пропуски дня підтримують регулярну підготовку до шкільних і вступних тестів.",
     roles: [
       {
         id: "student",
@@ -437,30 +437,28 @@ function metricCards(metrics) {
     .join("");
 }
 
-function fractionModel() {
+function quadraticModel() {
   return `
-    <div class="fraction-model" aria-label="Fraction visual model">
-      <div class="fraction-row">
-        <span>1/3</span>
-        <div class="fraction-bar thirds">
-          <i class="is-filled"></i><i></i><i></i>
+    <div class="quadratic-model" aria-label="Quadratic graph visual model">
+      <div class="graph-card">
+        <div class="graph-grid">
+          <svg viewBox="0 0 260 160" role="img" aria-label="Downward-opening parabola for h(t) = -5t squared + 20t + 2">
+            <line x1="26" y1="132" x2="238" y2="132" class="axis"></line>
+            <line x1="44" y1="18" x2="44" y2="144" class="axis"></line>
+            <path d="M 44 122 C 82 28, 178 28, 220 132" class="parabola"></path>
+            <circle cx="132" cy="36" r="5" class="vertex"></circle>
+            <circle cx="218" cy="132" r="5" class="root"></circle>
+            <text x="118" y="24">vertex</text>
+            <text x="198" y="150">zero</text>
+          </svg>
         </div>
       </div>
-      <div class="fraction-row">
-        <span>1/4</span>
-        <div class="fraction-bar fourths">
-          <i class="is-filled"></i><i></i><i></i><i></i>
-        </div>
+      <div class="model-steps">
+        <div><span>1</span><strong>Read the context</strong><small>height, revenue, or graph</small></div>
+        <div><span>2</span><strong>Pick the tool</strong><small>vertex, zeros, or formula</small></div>
+        <div><span>3</span><strong>Interpret</strong><small>check units and context</small></div>
       </div>
-      <div class="fraction-row is-result">
-        <span>?</span>
-        <div class="fraction-bar twelfths">
-          <i class="is-filled"></i><i class="is-filled"></i><i class="is-filled"></i><i class="is-filled"></i>
-          <i class="is-filled accent"></i><i class="is-filled accent"></i><i class="is-filled accent"></i>
-          <i></i><i></i><i></i><i></i><i></i>
-        </div>
-      </div>
-      <div class="fraction-equation">1/3 + 1/4 = 4/12 + 3/12</div>
+      <div class="quadratic-equation">h(t) = -5t^2 + 20t + 2</div>
     </div>
   `;
 }
@@ -532,26 +530,26 @@ function renderMock(screen) {
         <section class="insight-strip">
           <div>
             <span class="ai-badge">Draft prepared</span>
-            <h4>5 practice tasks from lesson mistakes</h4>
-            <p>Grade: US Grade 5 · Common Core 5.NF.A.1 / 5.NF.A.2</p>
+            <h4>5 exam-style tasks from a 50-minute Algebra I lesson</h4>
+            <p>Grade: US Grade 9 · Quadratic functions · HSA-REI.B.4 / HSF-IF.C.7</p>
           </div>
           <div class="confidence-card">
             <strong>86%</strong>
-            <span>fit to lesson errors</span>
+            <span>fit to test gaps</span>
           </div>
         </section>
         <section class="diagnostic-grid">
           <div>
-            <p class="panel-label">Lesson mistakes</p>
+            <p class="panel-label">Lesson gaps</p>
             <div class="tag-cloud">
-              <span>adds denominators</span>
-              <span>drops the numerator</span>
-              <span>skips reasonableness check</span>
+              <span>chooses formula too early</span>
+              <span>mixes vertex and zeros</span>
+              <span>forgets context units</span>
             </div>
           </div>
           <div>
             <p class="panel-label">Teacher decision</p>
-            <div class="approval-box">Review tasks, edit wording, and send to the student in the first 24 hours.</div>
+            <div class="approval-box">Review exam-style tasks, adjust difficulty, and send the first 24-hour check after the lesson.</div>
           </div>
         </section>
         <section class="task-review-list">${taskRows()}</section>
@@ -562,8 +560,8 @@ function renderMock(screen) {
         <section class="stage-banner">
           <span>Stage 2</span>
           <div>
-            <h4>Weekly practice</h4>
-            <p>Each day unlocks 2-3 tasks. Difficulty grows from common denominators to word problems.</p>
+            <h4>Weekly exam-prep practice</h4>
+            <p>Each day unlocks 2-3 tasks. Difficulty grows from identifying the tool to solving contextual quadratic models.</p>
           </div>
         </section>
         <section class="game-settings">
@@ -583,24 +581,24 @@ function renderMock(screen) {
           <span>Stage 3</span>
           <div>
             <h4>Before the next lesson</h4>
-            <p>10 minutes before class, the teacher sees what the student reviewed and which preview examples they tried.</p>
+            <p>10 minutes before class, the teacher sees which quadratic tools the student reviewed and which test-style examples they tried.</p>
           </div>
         </section>
         <section class="teacher-signal">
           <div class="signal-card strong">
             <strong>Readiness: medium</strong>
-            <p>The student opened the cheat sheet, solved 1 of 2 examples, and still missed the common denominator.</p>
+            <p>The student opened the quadratic toolbox, solved 1 of 2 examples, and still confused zeros with the vertex.</p>
           </div>
           <div class="signal-card">
             <strong>Recommended lesson opening</strong>
-            <p>Start with 1/3 + 1/4 on a visual model, then move to 2 x 3/4.</p>
+            <p>Start with the projectile graph, ask what the vertex means, then compare it with the time when height equals zero.</p>
           </div>
         </section>
         <section class="attempt-table">
-          <div><span>Cheat sheet</span><strong>Opened · 2 min</strong></div>
+          <div><span>Toolbox</span><strong>Opened · 3 min</strong></div>
           <div><span>Review</span><strong>3/5 tasks correct</strong></div>
-          <div><span>Preview</span><strong>1 attempt</strong></div>
-          <div><span>Main risk</span><strong>common denominator</strong></div>
+          <div><span>Preview</span><strong>2 attempts</strong></div>
+          <div><span>Main risk</span><strong>tool selection</strong></div>
         </section>
       </div>
     `,
@@ -610,7 +608,7 @@ function renderMock(screen) {
           <div class="recap-header">
             <span class="stage-pill">Stage 1 · first 24 hours</span>
             <h4>Quick review after the lesson</h4>
-            <p>5 short tap-friendly questions focused on what felt hardest today.</p>
+            <p>5 short tap-friendly questions from today's Algebra I lesson.</p>
           </div>
           <div class="task-progress">
             <span class="is-done">1</span>
@@ -620,12 +618,12 @@ function renderMock(screen) {
             <span>5</span>
           </div>
           <section class="visual-question">
-            ${fractionModel()}
+            ${quadraticModel()}
             <article class="student-problem">
-              <span>Task 3 of 5 · choose the answer</span>
-              <strong>What is 1/3 + 1/4?</strong>
-              ${answerChoices(["3/7", "7/12", "2/7", "4/12"], 1)}
-              <div class="hint-box">Hint: first make both fractions into twelfths.</div>
+              <span>Task 3 of 5 · choose the tool</span>
+              <strong>For h(t) = -5t^2 + 20t + 2, what does the vertex tell us?</strong>
+              ${answerChoices(["When height is 0", "Maximum height", "Starting height", "Average speed"], 1)}
+              <div class="hint-box">Hint: a downward-opening parabola reaches its highest point at the vertex.</div>
             </article>
           </section>
         </section>
@@ -636,7 +634,7 @@ function renderMock(screen) {
         <section class="quest-hero">
           <div>
             <span class="stage-pill">Daily set</span>
-            <h4>Finish 3 tasks to keep the streak</h4>
+            <h4>Finish 3 exam tasks to keep the streak</h4>
             <p>Complete the daily set to earn points. If a day is missed, one battery protects the streak.</p>
           </div>
           <div class="quest-reward">
@@ -659,11 +657,11 @@ function renderMock(screen) {
           </div>
         </section>
         <section class="visual-question">
-          ${fractionModel()}
+          ${quadraticModel()}
           <article class="student-problem">
             <span>Daily task · 60 seconds</span>
-            <strong>Which answer matches the model?</strong>
-            ${answerChoices(["5/12", "7/12", "8/12", "3/4"], 1)}
+            <strong>Which equation finds when the object hits the ground?</strong>
+            ${answerChoices(["h(t)=22", "h(t)=0", "t=-b/(2a)", "h(0)=2"], 1)}
           </article>
         </section>
         ${dailyTrack()}
@@ -675,16 +673,16 @@ function renderMock(screen) {
           <span>Stage 3</span>
           <div>
             <h4>Warm-up 10 minutes before class</h4>
-            <p>Review one rule, try one easy example, and let the teacher see the warm-up result before class.</p>
+            <p>Review a compact quadratic toolbox, try a test-style example, and let the teacher see the warm-up result before class.</p>
           </div>
         </section>
         <section class="rule-grid">${warmupCards()}</section>
         <section class="visual-question">
-          ${fractionModel()}
+          ${quadraticModel()}
           <article class="student-problem">
             <span>Preview example · optional</span>
-            <strong>What should you do before adding 1/3 and 1/4?</strong>
-            ${answerChoices(["Add 3 + 4", "Find a common denominator", "Make both numerators 1", "Subtract first"], 1)}
+            <strong>A ticket revenue model is R(p)=p(200-5p). What is the fastest first step?</strong>
+            ${answerChoices(["Expand immediately", "Find zeros and the vertex", "Use slope formula", "Set p = 0 only"], 1)}
           </article>
         </section>
         <section class="lesson-plan">
@@ -692,13 +690,13 @@ function renderMock(screen) {
             <p class="panel-label">Lesson plan</p>
             <ol>
               <li>Review the week's mistakes.</li>
-              <li>Practice adding fractions through equal-sized parts.</li>
-              <li>Move to multiplying a fraction by a whole number.</li>
+              <li>Compare vertex, zeros, and y-intercept in context.</li>
+              <li>Solve a projectile or revenue problem using the right tool.</li>
             </ol>
           </div>
           <div>
             <p class="panel-label">Teacher sees</p>
-            <div class="preview-problem">Warm-up opened · 1 optional example attempted · denominator rule reviewed</div>
+            <div class="preview-problem">Warm-up opened · 1 optional test item attempted · vertex rule reviewed</div>
           </div>
         </section>
       </div>
@@ -709,7 +707,7 @@ function renderMock(screen) {
           <span>Reviewed by teacher</span>
           <div>
             <h4>Lesson summary is ready</h4>
-            <p>Today ${lessonSummary.studentName} worked on ${lessonSummary.topic}. The next goal is to strengthen answer checks.</p>
+            <p>Today ${lessonSummary.studentName} worked on ${lessonSummary.topic}. The next goal is to choose the right tool before solving.</p>
           </div>
         </section>
         <section class="game-settings summary-metrics">
@@ -732,13 +730,13 @@ function renderMock(screen) {
         </section>
         <section class="parent-note">
           <p class="panel-label">Parent note</p>
-          <strong>There is progress: Lily understands why a common denominator matters.</strong>
-          <p>This week, Brighterly will give short practice based on the mistakes from the lesson. The teacher has already reviewed the plan.</p>
+          <strong>There is progress: Lily connects the vertex to a maximum in real-world models.</strong>
+          <p>This week, Brighterly will give short test-style practice on the exact tool-choice mistakes from the lesson. The teacher has already reviewed the plan.</p>
         </section>
         <section class="summary-timeline">
           <div><strong>${lessonSummary.aiDraftReady}</strong><span>AI drafted summary</span></div>
           <div><strong>${lessonSummary.parentDelivery}</strong><span>parent receives it</span></div>
-          <div><strong>5 tasks</strong><span>quick review today</span></div>
+          <div><strong>5 tasks</strong><span>exam-style review today</span></div>
         </section>
       </div>
     `,
@@ -748,7 +746,7 @@ function renderMock(screen) {
           <div>
             <span class="ai-badge">AI draft · ready in ${lessonSummary.aiDraftReady}</span>
             <h4>Lesson summary for parent</h4>
-            <p>The system collected lesson tasks, mistakes, hints, and the next step. The teacher verifies facts before sending.</p>
+            <p>The system collected lesson tasks, tool-choice mistakes, hints, and the next practice step. The teacher verifies facts before sending.</p>
           </div>
           <div class="send-window">
             <strong>${lessonSummary.parentDelivery}</strong>
@@ -766,12 +764,12 @@ function renderMock(screen) {
         <section class="summary-review-grid">
           <article class="summary-draft">
             <p class="panel-label">Parent-facing text</p>
-            <strong>Today ${lessonSummary.studentName} practiced adding fractions with unlike denominators.</strong>
-            <p>She is already finding common denominators in simple examples. Over the next few days, we will strengthen answer checks and review cases where denominators are tempting to add directly.</p>
+            <strong>Today ${lessonSummary.studentName} practiced quadratic models for projectile motion and revenue.</strong>
+            <p>She is already connecting the vertex to maximum height or revenue. Over the next few days, we will practice choosing between vertex, zeros, and substitution before solving.</p>
           </article>
           <aside class="validation-panel">
             <p class="panel-label">Teacher review</p>
-            <div class="validation-step is-done"><strong>Facts</strong><span>8 tasks, 5 solved independently</span></div>
+            <div class="validation-step is-done"><strong>Facts</strong><span>12 tasks, 7 solved independently</span></div>
             <div class="validation-step is-current"><strong>Tone</strong><span>supportive, no pressure</span></div>
             <div class="validation-step"><strong>Next step</strong><span>weekly practice</span></div>
             <div class="validation-actions">
@@ -821,7 +819,7 @@ function renderMock(screen) {
         </section>
         <section class="reward-grid">
           <article class="reward-card is-active"><strong>1</strong><span>Warm-up task</span></article>
-          <article class="reward-card is-active"><strong>2</strong><span>Visual fraction</span></article>
+          <article class="reward-card is-active"><strong>2</strong><span>Graph interpretation</span></article>
           <article class="reward-card"><strong>3</strong><span>Final check</span></article>
           <article class="reward-card"><strong>+10</strong><span>bonus for no hints</span></article>
         </section>
@@ -840,7 +838,8 @@ function syncNestedScreenHeight() {
 
   requestAnimationFrame(() => {
     const barHeight = bar.getBoundingClientRect().height;
-    const appHeight = appFrame.getBoundingClientRect().height;
+    const scale = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--nested-screen-scale")) || 1;
+    const appHeight = Math.max(appFrame.getBoundingClientRect().height, appFrame.scrollHeight * scale);
     shell.style.height = `${Math.ceil(barHeight + appHeight)}px`;
   });
 }

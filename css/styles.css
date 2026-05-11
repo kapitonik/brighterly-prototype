@@ -421,7 +421,7 @@ h1 {
 .mock-main {
   display: block;
   padding: 20px;
-  overflow: auto;
+  overflow: visible;
 }
 
 .mock-empty {
@@ -888,6 +888,7 @@ h1 {
 .student-problem {
   display: grid;
   gap: 12px;
+  align-content: start;
   padding: 18px;
   background: #f8fafc;
   border: 1px solid var(--line);
@@ -919,7 +920,7 @@ h1 {
   align-items: stretch;
 }
 
-.fraction-model,
+.quadratic-model,
 .quest-hero,
 .battery-panel,
 .daily-track,
@@ -928,64 +929,102 @@ h1 {
   background: #ffffff;
 }
 
-.fraction-model {
+.quadratic-model {
   display: grid;
-  gap: 14px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  align-items: stretch;
   padding: 18px;
 }
 
-.fraction-row {
-  display: grid;
-  grid-template-columns: 48px minmax(0, 1fr);
-  gap: 12px;
-  align-items: center;
+.graph-card {
+  min-width: 0;
+  padding: 12px;
+  background: #f8fafc;
+  border: 1px solid var(--line);
 }
 
-.fraction-row span {
-  color: var(--ink);
+.graph-grid {
+  min-height: 154px;
+  background:
+    linear-gradient(#e5edf6 1px, transparent 1px) 0 0 / 32px 32px,
+    linear-gradient(90deg, #e5edf6 1px, transparent 1px) 0 0 / 32px 32px,
+    #ffffff;
+}
+
+.graph-grid svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 154px;
+}
+
+.graph-grid .axis {
+  stroke: #64748b;
+  stroke-width: 2;
+}
+
+.graph-grid .parabola {
+  fill: none;
+  stroke: #0d9488;
+  stroke-linecap: round;
+  stroke-width: 5;
+}
+
+.graph-grid .vertex {
+  fill: #4338ca;
+}
+
+.graph-grid .root {
+  fill: #b45309;
+}
+
+.graph-grid text {
+  fill: #334155;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.model-steps {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+}
+
+.model-steps div {
+  display: grid;
+  grid-template-columns: 28px minmax(92px, auto) minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.model-steps span {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  background: var(--ink);
+  color: #ffffff;
   font-weight: 900;
 }
 
-.fraction-row.is-result {
-  padding-top: 8px;
-  border-top: 1px solid var(--line);
-}
-
-.fraction-bar {
-  display: grid;
-  gap: 4px;
-  min-height: 34px;
-}
-
-.fraction-bar.thirds {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.fraction-bar.fourths {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.fraction-bar.twelfths {
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-}
-
-.fraction-bar i {
+.model-steps strong {
   display: block;
-  border: 1px solid #b8c7d8;
-  background: #f8fafc;
+  margin-bottom: 0;
+  line-height: 1.25;
 }
 
-.fraction-bar i.is-filled {
-  border-color: #0f766e;
-  background: #5eead4;
+.model-steps small {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
 }
 
-.fraction-bar i.accent {
-  border-color: #7c3aed;
-  background: #c4b5fd;
-}
-
-.fraction-equation {
+.quadratic-equation {
+  grid-column: 1 / -1;
   padding: 10px 12px;
   background: #eef2ff;
   color: var(--violet);
@@ -1004,7 +1043,7 @@ h1 {
   grid-template-columns: 32px 1fr;
   gap: 10px;
   align-items: center;
-  min-height: 54px;
+  min-height: 48px;
   padding: 10px;
   border: 1px solid var(--line);
   background: #ffffff;
@@ -1255,6 +1294,8 @@ h1 {
   .game-settings,
   .attempt-table,
   .visual-question,
+  .quadratic-model,
+  .model-steps,
   .battery-panel,
   .daily-track,
   .reward-grid,
