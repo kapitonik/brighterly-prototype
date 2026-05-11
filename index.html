@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ru">
+<html lang="uk">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Brighterly · Product Prototype</title>
+    <title>Brighterly · Прототип функцій</title>
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="css/styles.css">
   </head>
@@ -11,61 +11,61 @@
     <main class="prototype-shell" aria-labelledby="page-title">
       <header class="topbar">
         <div>
-          <p class="eyebrow">Brighterly · Test Task</p>
-          <h1 id="page-title">Прототип продуктовых функций</h1>
+          <p class="eyebrow">Brighterly · Тестове завдання</p>
+          <h1 id="page-title">Прототип продуктових функцій</h1>
         </div>
-        <div class="status-pill">Май 2026</div>
+        <div class="status-pill">Травень 2026</div>
       </header>
 
-      <nav class="feature-tabs" aria-label="Функции" role="tablist">
+      <nav class="feature-tabs" aria-label="Функції" role="tablist">
         <button class="feature-tab is-active" type="button" role="tab" aria-selected="true" data-feature="practice">
           <span>01</span>
-          Неделя закрепления
+          Тиждень закріплення
         </button>
         <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="summary">
           <span>02</span>
-          Итоги урока
+          Підсумки уроку
         </button>
         <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="parent">
           <span>03</span>
-          Панель достижений
+          Панель досягнень
         </button>
         <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="game">
           <span>04</span>
-          Игровые механики
+          Ігрові механіки
         </button>
         <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="ai">
           <span>05</span>
-          Настройки ИИ
+          Налаштування ШІ
         </button>
       </nav>
 
       <section class="prototype-stage" aria-live="polite">
         <section class="feature-summary">
           <div>
-            <p class="eyebrow" id="feature-kicker">Функция 01</p>
-            <h2 id="feature-title">Неделя закрепления</h2>
+            <p class="eyebrow" id="feature-kicker">Функція 01</p>
+            <h2 id="feature-title">Тиждень закріплення</h2>
           </div>
           <p id="feature-description">
-            ИИ готовит практику по итогам урока, преподаватель проверяет задачи,
-            ученик проходит три коротких этапа между занятиями.
+            ШІ готує практику за підсумками уроку, викладач перевіряє завдання,
+            учень проходить три короткі етапи між заняттями.
           </p>
         </section>
 
         <section class="screen-workspace">
-          <aside class="flow-panel" aria-label="Сценарий функции">
+          <aside class="flow-panel" aria-label="Сценарій функції">
             <div class="panel-block">
-              <p class="panel-label">Приложение</p>
+              <p class="panel-label">Застосунок</p>
               <div class="role-switcher" id="role-switcher"></div>
             </div>
 
             <div class="panel-block">
-              <p class="panel-label">Экраны сценария</p>
+              <p class="panel-label">Екрани сценарію</p>
               <div class="screen-list" id="screen-list"></div>
             </div>
           </aside>
 
-          <section class="web-preview" aria-label="Макет выбранного экрана">
+          <section class="web-preview" aria-label="Макет вибраного екрана">
             <div class="browser-shell">
               <div class="browser-bar">
                 <div class="browser-dots" aria-hidden="true">
@@ -79,34 +79,34 @@
               <div class="app-frame">
                 <aside class="app-nav">
                   <strong>Brighterly</strong>
-                  <span id="app-role-label">Преподаватель</span>
-                  <nav aria-label="Разделы макета">
-                    <a class="is-active" href="#">Уроки</a>
-                    <a href="#">Задания</a>
-                    <a href="#">Прогресс</a>
-                    <a href="#">Сообщения</a>
+                  <span id="app-role-label">Teacher</span>
+                  <nav aria-label="Prototype sections">
+                    <a class="is-active" href="#">Lessons</a>
+                    <a href="#">Tasks</a>
+                    <a href="#">Progress</a>
+                    <a href="#">Messages</a>
                   </nav>
                 </aside>
 
                 <section class="app-content">
                   <div class="app-toolbar">
                     <div>
-                      <p class="eyebrow" id="screen-role">Преподаватель</p>
-                      <h3 id="screen-title">Разбор прошедшего урока</h3>
+                      <p class="eyebrow" id="screen-role">Teacher</p>
+                      <h3 id="screen-title">Lesson Review</h3>
                     </div>
-                    <button class="primary-action" type="button" id="screen-action">Подтвердить подборку</button>
+                    <button class="primary-action" type="button" id="screen-action">Approve Drafts</button>
                   </div>
 
                   <div class="mock-layout" id="mock-layout">
                     <div class="mock-main" id="mock-main">
                       <div class="mock-empty">
                         <span class="empty-icon" aria-hidden="true"></span>
-                        <strong id="placeholder-title">Большой веб-макет будет добавлен здесь</strong>
-                        <small id="placeholder-caption">Каркас уже поддерживает разные роли и несколько экранов внутри функции.</small>
+                        <strong id="placeholder-title">The web screen will appear here</strong>
+                        <small id="placeholder-caption">This frame supports multiple roles and screens inside one feature.</small>
                       </div>
                     </div>
                     <aside class="mock-side">
-                      <p class="panel-label">Контекст</p>
+                      <p class="panel-label">Context</p>
                       <ul id="screen-notes"></ul>
                     </aside>
                   </div>

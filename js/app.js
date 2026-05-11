@@ -1,33 +1,33 @@
 const aiTasks = [
   {
-    label: "Общий знаменатель",
-    prompt: "Какой общий знаменатель подойдёт для 1/3 + 1/4?",
+    label: "Common denominator",
+    prompt: "Which common denominator works for 1/3 + 1/4?",
     answer: "12",
-    reason: "На уроке ученик пытался складывать дроби без приведения к одинаковым частям."
+    reason: "During the lesson, the student tried to add fractions without converting them to equal-sized parts."
   },
   {
-    label: "Сложение дробей",
-    prompt: "Реши: 1/3 + 1/4",
+    label: "Adding fractions",
+    prompt: "Solve: 1/3 + 1/4",
     answer: "7/12",
-    reason: "Проверяем, переносит ли ученик найденный знаменатель в вычисление."
+    reason: "Checks whether the student can use the common denominator in the calculation."
   },
   {
-    label: "Поиск ошибки",
-    prompt: "Ученик написал: 1/2 + 2/5 = 3/7. Почему это неверно?",
-    answer: "Нельзя складывать знаменатели. Сначала нужен общий знаменатель.",
-    reason: "Это была главная ошибка в конце урока."
+    label: "Find the mistake",
+    prompt: "A student wrote: 1/2 + 2/5 = 3/7. Why is this incorrect?",
+    answer: "You cannot add denominators. First, find a common denominator.",
+    reason: "This was the main mistake at the end of the lesson."
   },
   {
-    label: "Текстовая задача",
+    label: "Word problem",
     prompt: "Mia used 2/3 cup of oats and 1/4 cup of nuts. How many cups did she use in total?",
     answer: "11/12 cup",
-    reason: "Тот же навык в школьном контексте США."
+    reason: "The same skill in a familiar US school context."
   },
   {
-    label: "Вычитание",
-    prompt: "Заверши шаг: 3/4 - 1/6 = 9/12 - ?/12",
+    label: "Subtraction",
+    prompt: "Complete the step: 3/4 - 1/6 = 9/12 - ?/12",
     answer: "2",
-    reason: "Готовит к смешанным задачам недели."
+    reason: "Prepares the student for mixed practice during the week."
   }
 ];
 
@@ -35,161 +35,169 @@ let reviewTasks = aiTasks.map((task) => ({ ...task }));
 
 const weekPlan = [
   {
-    day: "Пн",
-    focus: "Общий знаменатель",
+    day: "Mon",
+    focus: "Common denominator",
     tasks: ["2/5 + 1/10", "3/8 + 1/4"],
-    status: "Открыто"
+    status: "Available"
   },
   {
-    day: "Вт",
-    focus: "Вычитание",
+    day: "Tue",
+    focus: "Subtraction",
     tasks: ["5/6 - 1/3", "7/10 - 1/5"],
-    status: "Откроется завтра"
+    status: "Opens tomorrow"
   },
   {
-    day: "Ср",
-    focus: "Текстовые задачи",
+    day: "Wed",
+    focus: "Word problems",
     tasks: ["3/4 cup - 1/3 cup", "2/3 mile + 1/6 mile"],
-    status: "2–3 задачи"
+    status: "2-3 tasks"
   },
   {
-    day: "Чт",
-    focus: "Смешанные числа",
+    day: "Thu",
+    focus: "Mixed numbers",
     tasks: ["1 1/2 + 2/3", "2 1/4 - 5/6"],
-    status: "2–3 задачи"
+    status: "2-3 tasks"
   },
   {
-    day: "Пт",
-    focus: "Итог недели",
-    tasks: ["Найди ошибку", "Реши задачу", "Объясни шаг"],
-    status: "Финальная тренировка"
+    day: "Fri",
+    focus: "Weekly check",
+    tasks: ["Find the mistake", "Solve a problem", "Explain one step"],
+    status: "Final practice"
   }
 ];
 
 const warmupExamples = [
   {
-    title: "Правило",
-    body: "Чтобы складывать дроби, части должны быть одинакового размера. Поэтому сначала ищем общий знаменатель."
+    title: "Rule",
+    body: "To add fractions, the parts must be the same size. That is why we find a common denominator first."
   },
   {
-    title: "Пример",
+    title: "Example",
     body: "1/3 + 1/4 = 4/12 + 3/12 = 7/12"
   },
   {
-    title: "Новый шаг",
-    body: "2 × 3/4 можно представить как 3/4 + 3/4. Это мостик к умножению дроби на целое число."
+    title: "Next step",
+    body: "2 x 3/4 can be shown as 3/4 + 3/4. This connects repeated addition to multiplying a fraction by a whole number."
   }
 ];
 
 const lessonSummary = {
   studentName: "Lily",
-  topic: "сложение дробей с разными знаменателями",
-  duration: "45 мин",
+  topic: "adding fractions with unlike denominators",
+  duration: "45 min",
   totalTasks: 8,
   independentTasks: 5,
   guidedTasks: 2,
   repeatTasks: 1,
-  aiDraftReady: "2 мин",
-  parentDelivery: "до 5 мин",
+  aiDraftReady: "2 min",
+  parentDelivery: "within 5 min",
   strengths: [
-    "быстро находит общий знаменатель для простых дробей",
-    "уверенно переносит шаги с числовой модели в запись"
+    "finds common denominators quickly in simple examples",
+    "connects visual models to written fraction work"
   ],
   focusAreas: [
-    "иногда складывает знаменатели напрямую",
-    "забывает проверить, разумен ли получившийся ответ"
+    "sometimes adds denominators directly",
+    "needs to check whether the answer is reasonable"
   ],
   nextPractice: [
-    "5 коротких задач в первые 24 часа после урока",
-    "по 2–3 задачи в день до следующего занятия"
+    "5 short tasks in the first 24 hours after the lesson",
+    "2-3 tasks per day before the next lesson"
   ]
 };
 
 const features = {
   practice: {
-    kicker: "Функция 01",
-    title: "Неделя закрепления",
+    kicker: "Функція 01",
+    title: "Тиждень закріплення",
     description:
-      "ИИ готовит практику по итогам урока, преподаватель проверяет задачи, ученик проходит три коротких этапа между занятиями.",
+      "ШІ готує практику за підсумками уроку, викладач перевіряє завдання, учень проходить три короткі етапи між заняттями.",
     roles: [
       {
         id: "teacher",
-        label: "Преподаватель",
+        label: "Викладач",
+        appLabel: "Teacher",
         path: "teacher/practice-week",
-        nav: ["Урок", "ИИ-задачи", "Неделя", "Разогрев"],
+        nav: ["Lesson", "AI Tasks", "Week", "Warm-up"],
         screens: [
           {
             type: "teacher-ai-review",
-            title: "Проверка ИИ-подборки",
-            caption: "До отправки ученику",
-            action: "Подтвердить 5 задач",
+            title: "Перевірка добірки ШІ",
+            caption: "До відправлення учню",
+            appTitle: "Review AI Practice Drafts",
+            appAction: "Approve 5 Tasks",
             notes: [
-              "ИИ генерирует задачи из ошибок урока",
-              "Преподаватель подтверждает или правит",
-              "Ученик видит задания как продолжение урока"
+              "AI drafts tasks from lesson mistakes",
+              "Teacher approves or edits every task",
+              "The student sees practice as a continuation of the lesson"
             ]
           },
           {
             type: "teacher-week-plan",
-            title: "План практики на неделю",
-            caption: "2–3 задачи в день",
-            action: "Сохранить план",
+            title: "План практики на тиждень",
+            caption: "2-3 завдання на день",
+            appTitle: "Weekly Practice Plan",
+            appAction: "Save Plan",
             notes: [
-              "Та же сущность, но другой режим",
-              "Жизни ограничивают попытки в дневной сессии",
-              "Пропуск дня защищает серию"
+              "Same task pool, different practice mode",
+              "Lives limit retries inside one daily session",
+              "A day pass protects the learning streak"
             ]
           },
           {
             type: "teacher-before-lesson",
             title: "Сигнал перед уроком",
-            caption: "За 10 минут до занятия",
-            action: "Открыть план урока",
+            caption: "За 10 хвилин до заняття",
+            appTitle: "Pre-Lesson Signal",
+            appAction: "Open Lesson Plan",
             notes: [
-              "Видно, как ученик разогрелся",
-              "Ошибки недели попадают в начало урока",
-              "Преподаватель начинает с данных, а не с догадок"
+              "Teacher sees how the student warmed up",
+              "Weekly mistakes feed into the next lesson opening",
+              "The lesson starts with data, not guesses"
             ]
           }
         ]
       },
       {
         id: "student",
-        label: "Ученик",
+        label: "Учень",
+        appLabel: "Student",
         path: "student/practice-week",
-        nav: ["Сегодня", "Неделя", "Разогрев", "Серия"],
+        nav: ["Today", "Week", "Warm-up", "Streak"],
         screens: [
           {
             type: "student-recap",
-            title: "Быстрое закрепление",
-            caption: "В течение 24 часов после урока",
-            action: "Ответить",
+            title: "Швидке закріплення",
+            caption: "Протягом 24 годин після уроку",
+            appTitle: "Quick Review",
+            appAction: "Answer",
             notes: [
-              "До 5 задач на самые слабые места",
-              "5–7 минут без ощущения большой домашки",
-              "ИИ объясняет ошибку простыми шагами"
+              "Up to 5 tasks focused on weak spots",
+              "5-7 minutes without feeling like heavy homework",
+              "AI explains mistakes in simple steps"
             ]
           },
           {
             type: "student-week",
-            title: "Практика в течение недели",
-            caption: "2–3 задачи в день",
-            action: "Начать день",
+            title: "Практика протягом тижня",
+            caption: "2-3 завдання на день",
+            appTitle: "Weekly Practice",
+            appAction: "Start Today",
             notes: [
-              "Дневная сессия короткая",
-              "Жизни работают внутри попытки",
-              "Заряд тратится на подробные подсказки"
+              "Daily sessions stay short",
+              "Lives apply only inside one practice attempt",
+              "Hint charges are spent on deeper help"
             ]
           },
           {
             type: "student-warmup",
-            title: "Разогрев перед уроком",
-            caption: "За 10 минут до занятия",
-            action: "Я готов к уроку",
+            title: "Розігрів перед уроком",
+            caption: "За 10 хвилин до заняття",
+            appTitle: "Pre-Lesson Warm-Up",
+            appAction: "I'm Ready",
             notes: [
-              "Шпаргалка по нужным правилам",
-              "План следующего урока",
-              "Простые примеры для ознакомления"
+              "Short cheat sheet with needed rules",
+              "Next lesson plan",
+              "Simple preview examples"
             ]
           }
         ]
@@ -197,131 +205,144 @@ const features = {
     ]
   },
   summary: {
-    kicker: "Функция 02",
-    title: "Итоги урока для родителей",
+    kicker: "Функція 02",
+    title: "Підсумки уроку для батьків",
     description:
-      "ИИ собирает краткие итоги урока, преподаватель проверяет факты и тон, родитель быстро видит прогресс ребёнка и следующий шаг.",
+      "ШІ збирає короткі підсумки уроку, викладач перевіряє факти й тон, батьки швидко бачать прогрес дитини та наступний крок.",
     roles: [
       {
         id: "parent",
-        label: "Родитель",
+        label: "Батьки",
+        appLabel: "Parent",
         path: "parent/lesson-summary",
-        nav: ["Итоги", "Прогресс", "Задания", "Оплата"],
+        nav: ["Summary", "Progress", "Tasks", "Billing"],
         screens: [
           {
             type: "parent-summary",
-            title: "Итоги урока",
-            caption: "Ключевые моменты и темы",
-            action: "Открыть прогресс",
-            notes: ["Проверено преподавателем", "Родитель получает итоги в течение 5 минут", "Связь с практикой после урока"]
+            title: "Підсумки уроку",
+            caption: "Ключові моменти й теми",
+            appTitle: "Lesson Summary",
+            appAction: "Open Progress",
+            notes: ["Reviewed by the teacher", "Parent receives the summary within 5 minutes", "Connected to post-lesson practice"]
           },
           {
             type: "parent-progress",
-            title: "Прогресс ребёнка",
-            caption: "Динамика по темам",
-            action: "Посмотреть задания",
-            notes: ["Фокус на результате", "Без микроконтроля", "Основание для продления подписки"]
+            title: "Прогрес дитини",
+            caption: "Динаміка за темами",
+            appTitle: "Child Progress",
+            appAction: "View Tasks",
+            notes: ["Focused on outcomes", "No micromanagement", "Clear value for subscription renewal"]
           }
         ]
       },
       {
         id: "teacher",
-        label: "Преподаватель",
+        label: "Викладач",
+        appLabel: "Teacher",
         path: "teacher/parent-summary",
-        nav: ["Урок", "Итоги", "Правки", "Отправка"],
+        nav: ["Lesson", "Summary", "Edits", "Send"],
         screens: [
           {
             type: "teacher-summary-check",
-            title: "Проверка итогов",
-            caption: "Перед отправкой родителю",
-            action: "Отправить родителю",
-            notes: ["ИИ готовит черновик за пару минут", "Преподаватель проверяет факты", "Родитель получает понятный следующий шаг"]
+            title: "Перевірка підсумків",
+            caption: "Перед відправленням батькам",
+            appTitle: "Summary Review",
+            appAction: "Send to Parent",
+            notes: ["AI prepares a draft in a few minutes", "Teacher verifies facts", "Parent receives a clear next step"]
           }
         ]
       }
     ]
   },
   parent: {
-    kicker: "Функция 03",
-    title: "Панель достижений",
+    kicker: "Функція 03",
+    title: "Панель досягнень",
     description:
-      "Родитель видит прогресс ребёнка, выполненные задания, серии и динамику без лишнего контроля.",
+      "Батьки бачать прогрес дитини, виконані завдання, серії та динаміку без зайвого контролю.",
     roles: [
       {
         id: "parent",
-        label: "Родитель",
+        label: "Батьки",
+        appLabel: "Parent",
         path: "parent/achievements",
-        nav: ["Обзор", "Предметы", "Серии", "Турнир"],
+        nav: ["Overview", "Subjects", "Streaks", "Challenge"],
         screens: [
           {
             type: "parent-achievements",
-            title: "Обзор достижений",
-            caption: "Состояние недели",
-            action: "Открыть детали",
-            notes: ["Родитель как болельщик", "Видимый прогресс", "Меньше тревожности"]
+            title: "Огляд досягнень",
+            caption: "Стан тижня",
+            appTitle: "Achievement Overview",
+            appAction: "Open Details",
+            notes: ["Parent acts as a supporter", "Progress is visible", "Less anxiety between lessons"]
           },
           {
             type: "parent-subjects",
-            title: "Динамика по предметам",
-            caption: "Математика и английский",
-            action: "Посмотреть историю",
-            notes: ["Динамика за месяц", "Понятные предметные зоны", "Связь с итогами уроков"]
+            title: "Динаміка за предметами",
+            caption: "Математика й англійська",
+            appTitle: "Subject Progress",
+            appAction: "View History",
+            notes: ["Monthly progress", "Clear subject areas", "Connected to lesson summaries"]
           }
         ]
       }
     ]
   },
   game: {
-    kicker: "Функция 04",
-    title: "Игровые механики",
+    kicker: "Функція 04",
+    title: "Ігрові механіки",
     description:
-      "Серии дней, жизни, заряд подсказок и пропуски дня поддерживают практику, но не наказывают ребёнка слишком жёстко.",
+      "Серії днів, життя, заряд підказок і пропуски дня підтримують практику, але не карають дитину надто жорстко.",
     roles: [
       {
         id: "student",
-        label: "Ученик",
+        label: "Учень",
+        appLabel: "Student",
         path: "student/streaks",
-        nav: ["Сегодня", "Серия", "Турнир", "Награды"],
+        nav: ["Today", "Streak", "Challenge", "Rewards"],
         screens: [
           {
             type: "student-game",
-            title: "Серия и жизни",
-            caption: "Регулярность без лишнего давления",
-            action: "Продолжить серию",
-            notes: ["Жизни на день", "Заряд для подсказок", "Пропуск защищает серию"]
+            title: "Серія та життя",
+            caption: "Регулярність без зайвого тиску",
+            appTitle: "Streaks and Lives",
+            appAction: "Continue Streak",
+            notes: ["Daily lives", "Hint charges", "Day pass protects the streak"]
           },
           {
             type: "student-tournament",
-            title: "Еженедельный турнир",
-            caption: "Очки за полезную практику",
-            action: "Посмотреть рейтинг",
-            notes: ["Сравнение без давления", "Очки за полезные действия", "Итог недели"]
+            title: "Щотижневе змагання",
+            caption: "Бали за корисну практику",
+            appTitle: "Weekly Challenge",
+            appAction: "View Ranking",
+            notes: ["Comparison without pressure", "Points for useful effort", "Weekly wrap-up"]
           }
         ]
       }
     ]
   },
   ai: {
-    kicker: "Функция 05",
-    title: "Настройки ИИ",
+    kicker: "Функція 05",
+    title: "Налаштування ШІ",
     description:
-      "В первой версии ИИ генерирует задачи и объяснения, но преподаватель проверяет подборку до отправки ученику.",
+      "У першій версії ШІ генерує завдання та пояснення, але викладач перевіряє добірку до відправлення учню.",
     roles: [
       {
         id: "teacher",
-        label: "Преподаватель",
+        label: "Викладач",
+        appLabel: "Teacher",
         path: "teacher/ai-settings",
-        nav: ["Правила", "Сложность", "Проверка", "История"],
+        nav: ["Rules", "Difficulty", "Review", "History"],
         screens: [
           {
             type: "teacher-ai-settings",
-            title: "Правила генерации",
-            caption: "Что ИИ может делать сам",
-            action: "Сохранить правила",
+            title: "Правила генерації",
+            caption: "Що ШІ може робити сам",
+            appTitle: "Generation Rules",
+            appAction: "Save Rules",
             notes: [
-              "ИИ не отправляет задания без подтверждения",
-              "Уровень: 5 класс США",
-              "Тема: дроби с разными знаменателями"
+              "AI cannot send tasks without approval",
+              "Level: US Grade 5",
+              "Topic: fractions with unlike denominators"
             ]
           }
         ]
@@ -376,11 +397,11 @@ function taskRows() {
             </div>
           </div>
           <p class="task-prompt">${task.prompt}</p>
-          <div class="task-answer">Ожидаемый ответ: <strong>${task.answer}</strong></div>
+          <div class="task-answer">Expected answer: <strong>${task.answer}</strong></div>
           <div class="task-actions">
-            <button type="button" data-ai-action="keep" data-task-index="${index}">Оставить</button>
-            <button type="button" data-ai-action="simplify" data-task-index="${index}">Упростить через ИИ</button>
-            <button type="button" data-ai-action="alternative" data-task-index="${index}">Заменить через ИИ</button>
+            <button type="button" data-ai-action="keep" data-task-index="${index}">Keep</button>
+            <button type="button" data-ai-action="simplify" data-task-index="${index}">Simplify with AI</button>
+            <button type="button" data-ai-action="alternative" data-task-index="${index}">Replace with AI</button>
           </div>
         </article>
       `
@@ -439,8 +460,8 @@ function renderMock(screen) {
   const fallback = `
     <div class="mock-empty">
       <span class="empty-icon" aria-hidden="true"></span>
-      <strong>Макет будет добавлен здесь</strong>
-      <small>Каркас поддерживает разные роли и несколько экранов внутри функции.</small>
+      <strong>The web screen will appear here</strong>
+      <small>This frame supports multiple roles and screens inside one feature.</small>
     </div>
   `;
 
@@ -449,29 +470,29 @@ function renderMock(screen) {
       <div class="prototype-screen">
         <section class="insight-strip">
           <div>
-            <span class="ai-badge">Сгенерировано ИИ</span>
-            <h4>5 задач по теме «дроби с разными знаменателями»</h4>
-            <p>Уровень: 5 класс США · Common Core 5.NF.A.1 / 5.NF.A.2</p>
+            <span class="ai-badge">Generated by AI</span>
+            <h4>5 tasks on fractions with unlike denominators</h4>
+            <p>Grade: US Grade 5 · Common Core 5.NF.A.1 / 5.NF.A.2</p>
           </div>
-          <button class="secondary-action" type="button" data-ai-action="generate-set">Сгенерировать заново</button>
+          <button class="secondary-action" type="button" data-ai-action="generate-set">Regenerate</button>
           <div class="confidence-card">
             <strong>86%</strong>
-            <span>уверенность в подборке</span>
+            <span>match confidence</span>
           </div>
         </section>
-        <div class="ai-status" id="ai-status">Режим ИИ: ${window.BrighterlyAI?.getMode?.() || "mock"}. В демо-режиме ответы имитируются без запроса к API.</div>
+        <div class="ai-status" id="ai-status">AI mode: ${window.BrighterlyAI?.getMode?.() || "mock"}. In demo mode, responses are mocked without API calls.</div>
         <section class="diagnostic-grid">
           <div>
-            <p class="panel-label">Ошибки с урока</p>
+            <p class="panel-label">Lesson mistakes</p>
             <div class="tag-cloud">
-              <span>складывает знаменатели</span>
-              <span>теряет числитель</span>
-              <span>не проверяет разумность ответа</span>
+              <span>adds denominators</span>
+              <span>drops the numerator</span>
+              <span>skips reasonableness check</span>
             </div>
           </div>
           <div>
-            <p class="panel-label">Решение преподавателя</p>
-            <div class="approval-box">Проверить задачи, поправить формулировки и отправить ученику в первые 24 часа.</div>
+            <p class="panel-label">Teacher decision</p>
+            <div class="approval-box">Review tasks, edit wording, and send to the student in the first 24 hours.</div>
           </div>
         </section>
         <section class="task-review-list">${taskRows()}</section>
@@ -480,18 +501,18 @@ function renderMock(screen) {
     "teacher-week-plan": `
       <div class="prototype-screen">
         <section class="stage-banner">
-          <span>Этап 2</span>
+          <span>Stage 2</span>
           <div>
-            <h4>Практика в течение недели</h4>
-            <p>Каждый день открывается 2–3 задачи. Сложность растёт от общего знаменателя к текстовым задачам.</p>
+            <h4>Weekly practice</h4>
+            <p>Each day unlocks 2-3 tasks. Difficulty grows from common denominators to word problems.</p>
           </div>
         </section>
         <section class="game-settings">
           ${metricCards([
-            { value: "3", label: "жизни на день" },
-            { value: "2", label: "заряда подсказок" },
-            { value: "1", label: "пропуск дня" },
-            { value: "5–7 мин", label: "на дневную сессию" }
+            { value: "3", label: "lives per day" },
+            { value: "2", label: "hint charges" },
+            { value: "1", label: "day pass" },
+            { value: "5-7 min", label: "per daily session" }
           ])}
         </section>
         <section class="week-grid">${weekCards()}</section>
@@ -500,27 +521,27 @@ function renderMock(screen) {
     "teacher-before-lesson": `
       <div class="prototype-screen">
         <section class="stage-banner">
-          <span>Этап 3</span>
+          <span>Stage 3</span>
           <div>
-            <h4>Перед новым уроком</h4>
-            <p>За 10 минут до занятия учитель видит, как ученик повторил материал и попробовал вводные примеры.</p>
+            <h4>Before the next lesson</h4>
+            <p>10 minutes before class, the teacher sees what the student reviewed and which preview examples they tried.</p>
           </div>
         </section>
         <section class="teacher-signal">
           <div class="signal-card strong">
-            <strong>Готовность: средняя</strong>
-            <p>Ученик открыл шпаргалку, решил 1 из 2 примеров и снова ошибся в общем знаменателе.</p>
+            <strong>Readiness: medium</strong>
+            <p>The student opened the cheat sheet, solved 1 of 2 examples, and still missed the common denominator.</p>
           </div>
           <div class="signal-card">
-            <strong>Рекомендуемое начало урока</strong>
-            <p>Начать с 1/3 + 1/4 на визуальной модели, затем перейти к 2 × 3/4.</p>
+            <strong>Recommended lesson opening</strong>
+            <p>Start with 1/3 + 1/4 on a visual model, then move to 2 x 3/4.</p>
           </div>
         </section>
         <section class="attempt-table">
-          <div><span>Шпаргалка</span><strong>Открыта · 2 мин</strong></div>
-          <div><span>Повторение</span><strong>3/5 задач верно</strong></div>
-          <div><span>Новые примеры</span><strong>1 попытка</strong></div>
-          <div><span>Главный риск</span><strong>общий знаменатель</strong></div>
+          <div><span>Cheat sheet</span><strong>Opened · 2 min</strong></div>
+          <div><span>Review</span><strong>3/5 tasks correct</strong></div>
+          <div><span>Preview</span><strong>1 attempt</strong></div>
+          <div><span>Main risk</span><strong>common denominator</strong></div>
         </section>
       </div>
     `,
@@ -528,9 +549,9 @@ function renderMock(screen) {
       <div class="prototype-screen">
         <section class="student-task-shell">
           <div class="recap-header">
-            <span class="stage-pill">Этап 1 · первые 24 часа</span>
-            <h4>Быстрый повтор после урока</h4>
-            <p>5 коротких вопросов по тому, что сегодня было сложнее всего.</p>
+            <span class="stage-pill">Stage 1 · first 24 hours</span>
+            <h4>Quick review after the lesson</h4>
+            <p>5 short questions focused on what felt hardest today.</p>
           </div>
           <div class="task-progress">
             <span class="is-done">1</span>
@@ -540,10 +561,10 @@ function renderMock(screen) {
             <span>5</span>
           </div>
           <article class="student-problem">
-            <span>Задача 3 из 5 · найди ошибку</span>
-            <strong>Ученик написал: 1/2 + 2/5 = 3/7. Почему это неверно?</strong>
-            <textarea aria-label="Ответ ученика" placeholder="Объясни своими словами"></textarea>
-            <div class="hint-box">Подсказка ИИ: проверь, одинакового ли размера части в дробях.</div>
+            <span>Task 3 of 5 · find the mistake</span>
+            <strong>A student wrote: 1/2 + 2/5 = 3/7. Why is this incorrect?</strong>
+            <textarea aria-label="Student answer" placeholder="Explain in your own words"></textarea>
+            <div class="hint-box">AI hint: check whether the fraction parts are the same size.</div>
           </article>
         </section>
       </div>
@@ -552,10 +573,10 @@ function renderMock(screen) {
       <div class="prototype-screen">
         <section class="game-settings">
           ${metricCards([
-            { value: "3/3", label: "жизни" },
-            { value: "2", label: "заряда подсказок" },
-            { value: "1", label: "пропуск дня" },
-            { value: "4 дня", label: "серия" }
+            { value: "3/3", label: "lives" },
+            { value: "2", label: "hint charges" },
+            { value: "1", label: "day pass" },
+            { value: "4 days", label: "streak" }
           ])}
         </section>
         <section class="week-grid">${weekCards()}</section>
@@ -564,25 +585,25 @@ function renderMock(screen) {
     "student-warmup": `
       <div class="prototype-screen">
         <section class="stage-banner">
-          <span>Этап 3</span>
+          <span>Stage 3</span>
           <div>
-            <h4>Разогрев за 10 минут до урока</h4>
-            <p>Можно просто прочитать и попробовать 1–2 лёгких примера. Решать всё не обязательно.</p>
+            <h4>Warm-up 10 minutes before class</h4>
+            <p>The student can read a quick note and try 1-2 easy examples. Solving everything is optional.</p>
           </div>
         </section>
         <section class="rule-grid">${warmupCards()}</section>
         <section class="lesson-plan">
           <div>
-            <p class="panel-label">План урока</p>
+            <p class="panel-label">Lesson plan</p>
             <ol>
-              <li>Разобрать ошибки недели.</li>
-              <li>Повторить сложение дробей через общие части.</li>
-              <li>Перейти к умножению дроби на целое число.</li>
+              <li>Review the week's mistakes.</li>
+              <li>Practice adding fractions through equal-sized parts.</li>
+              <li>Move to multiplying a fraction by a whole number.</li>
             </ol>
           </div>
           <div>
-            <p class="panel-label">Попробуй, если хочешь</p>
-            <div class="preview-problem">Два сэндвича делят между 3 детьми. Какая часть достанется каждому?</div>
+            <p class="panel-label">Try if you want</p>
+            <div class="preview-problem">Two sandwiches are shared among 3 children. What fraction does each child get?</div>
           </div>
         </section>
       </div>
@@ -590,39 +611,39 @@ function renderMock(screen) {
     "parent-summary": `
       <div class="prototype-screen simple-dashboard">
         <section class="stage-banner">
-          <span>Проверено преподавателем</span>
+          <span>Reviewed by teacher</span>
           <div>
-            <h4>Итоги урока уже готовы</h4>
-            <p>Сегодня ${lessonSummary.studentName} работала над темой: ${lessonSummary.topic}. Следующая цель — закрепить проверку ответа.</p>
+            <h4>Lesson summary is ready</h4>
+            <p>Today ${lessonSummary.studentName} worked on ${lessonSummary.topic}. The next goal is to strengthen answer checks.</p>
           </div>
         </section>
         <section class="game-settings summary-metrics">
           ${metricCards([
-            { value: lessonSummary.totalTasks, label: "задач разобрали" },
-            { value: lessonSummary.independentTasks, label: "решено самостоятельно" },
-            { value: lessonSummary.guidedTasks, label: "с подсказкой" },
-            { value: lessonSummary.repeatTasks, label: "нужно повторить" }
+            { value: lessonSummary.totalTasks, label: "tasks covered" },
+            { value: lessonSummary.independentTasks, label: "solved independently" },
+            { value: lessonSummary.guidedTasks, label: "with hints" },
+            { value: lessonSummary.repeatTasks, label: "needs review" }
           ])}
         </section>
         <section class="lesson-summary-grid">
           <article class="lesson-summary-card is-positive">
-            <p class="panel-label">Сильные места</p>
+            <p class="panel-label">Strengths</p>
             <ul class="compact-list">${listItems(lessonSummary.strengths)}</ul>
           </article>
           <article class="lesson-summary-card">
-            <p class="panel-label">Что закрепить</p>
+            <p class="panel-label">Needs practice</p>
             <ul class="compact-list">${listItems(lessonSummary.focusAreas)}</ul>
           </article>
         </section>
         <section class="parent-note">
-          <p class="panel-label">Коротко для родителя</p>
-          <strong>Прогресс есть: Lily уже понимает, зачем нужен общий знаменатель.</strong>
-          <p>На этой неделе сервис даст короткую практику по тем ошибкам, которые проявились на уроке. Преподаватель уже проверил план закрепления.</p>
+          <p class="panel-label">Parent note</p>
+          <strong>There is progress: Lily understands why a common denominator matters.</strong>
+          <p>This week, Brighterly will give short practice based on the mistakes from the lesson. The teacher has already reviewed the plan.</p>
         </section>
         <section class="summary-timeline">
-          <div><strong>${lessonSummary.aiDraftReady}</strong><span>ИИ подготовил черновик</span></div>
-          <div><strong>${lessonSummary.parentDelivery}</strong><span>родитель получает итоги</span></div>
-          <div><strong>5 задач</strong><span>быстрое закрепление сегодня</span></div>
+          <div><strong>${lessonSummary.aiDraftReady}</strong><span>AI drafted summary</span></div>
+          <div><strong>${lessonSummary.parentDelivery}</strong><span>parent receives it</span></div>
+          <div><strong>5 tasks</strong><span>quick review today</span></div>
         </section>
       </div>
     `,
@@ -630,47 +651,47 @@ function renderMock(screen) {
       <div class="prototype-screen simple-dashboard">
         <section class="insight-strip">
           <div>
-            <span class="ai-badge">Черновик ИИ · готов через ${lessonSummary.aiDraftReady}</span>
-            <h4>Итоги урока для родителя</h4>
-            <p>Система собрала задачи урока, ошибки, подсказки и следующий шаг. Преподаватель проверяет факты перед отправкой.</p>
+            <span class="ai-badge">AI draft · ready in ${lessonSummary.aiDraftReady}</span>
+            <h4>Lesson summary for parent</h4>
+            <p>The system collected lesson tasks, mistakes, hints, and the next step. The teacher verifies facts before sending.</p>
           </div>
           <div class="send-window">
             <strong>${lessonSummary.parentDelivery}</strong>
-            <span>после завершения урока</span>
+            <span>after the lesson ends</span>
           </div>
         </section>
         <section class="game-settings summary-metrics">
           ${metricCards([
-            { value: lessonSummary.duration, label: "длительность урока" },
-            { value: lessonSummary.totalTasks, label: "задач в работе" },
-            { value: lessonSummary.independentTasks, label: "самостоятельно" },
-            { value: lessonSummary.guidedTasks, label: "с подсказкой" }
+            { value: lessonSummary.duration, label: "lesson length" },
+            { value: lessonSummary.totalTasks, label: "tasks covered" },
+            { value: lessonSummary.independentTasks, label: "independently" },
+            { value: lessonSummary.guidedTasks, label: "with hints" }
           ])}
         </section>
         <section class="summary-review-grid">
           <article class="summary-draft">
-            <p class="panel-label">Текст для родителя</p>
-            <strong>Сегодня ${lessonSummary.studentName} тренировалась складывать дроби с разными знаменателями.</strong>
-            <p>Она уже уверенно находит общий знаменатель в простых примерах. В ближайшие дни закрепим проверку ответа и разберём случаи, где хочется сложить знаменатели напрямую.</p>
+            <p class="panel-label">Parent-facing text</p>
+            <strong>Today ${lessonSummary.studentName} practiced adding fractions with unlike denominators.</strong>
+            <p>She is already finding common denominators in simple examples. Over the next few days, we will strengthen answer checks and review cases where denominators are tempting to add directly.</p>
           </article>
           <aside class="validation-panel">
-            <p class="panel-label">Проверка преподавателя</p>
-            <div class="validation-step is-done"><strong>Факты</strong><span>8 задач, 5 решены самостоятельно</span></div>
-            <div class="validation-step is-current"><strong>Тон</strong><span>без давления на ребёнка</span></div>
-            <div class="validation-step"><strong>Следующий шаг</strong><span>практика на неделю</span></div>
+            <p class="panel-label">Teacher review</p>
+            <div class="validation-step is-done"><strong>Facts</strong><span>8 tasks, 5 solved independently</span></div>
+            <div class="validation-step is-current"><strong>Tone</strong><span>supportive, no pressure</span></div>
+            <div class="validation-step"><strong>Next step</strong><span>weekly practice</span></div>
             <div class="validation-actions">
-              <button class="secondary-action" type="button">Поправить текст</button>
-              <button class="primary-action" type="button">Отправить родителю</button>
+              <button class="secondary-action" type="button">Edit Text</button>
+              <button class="primary-action" type="button">Send to Parent</button>
             </div>
           </aside>
         </section>
         <section class="lesson-summary-grid">
           <article class="lesson-summary-card is-positive">
-            <p class="panel-label">Сильные места</p>
+            <p class="panel-label">Strengths</p>
             <ul class="compact-list">${listItems(lessonSummary.strengths)}</ul>
           </article>
           <article class="lesson-summary-card">
-            <p class="panel-label">План закрепления</p>
+            <p class="panel-label">Practice plan</p>
             <ul class="compact-list">${listItems(lessonSummary.nextPractice)}</ul>
           </article>
         </section>
@@ -680,27 +701,27 @@ function renderMock(screen) {
       <div class="prototype-screen">
         <section class="settings-list ai-settings-form">
           <label>
-            Режим запросов
+            Request mode
             <select id="ai-mode-select">
-              <option value="mock">Демо без API</option>
-              <option value="direct">Прямой запрос из браузера</option>
+              <option value="mock">Demo without API</option>
+              <option value="direct">Direct browser request</option>
             </select>
           </label>
           <label>
-            Временный OpenAI API key
+            Temporary OpenAI API key
             <input id="ai-key-input" type="password" placeholder="sk-...">
-            <small>Для одноразовой локальной демки. Можно также вставить ключ прямо в js/ai-service.js в поле browserApiKey.</small>
+            <small>For a one-off local demo. You can also paste the key directly into js/ai-service.js in browserApiKey.</small>
           </label>
-          <button class="primary-action" type="button" id="save-ai-settings">Сохранить настройки</button>
-          <div class="ai-status" id="ai-settings-status">Модель: ${window.BrighterlyAI?.config?.model || "gpt-5-nano"}</div>
-          <label class="setting-check"><input type="checkbox" checked> ИИ может предлагать задачи после урока</label>
-          <label class="setting-check"><input type="checkbox" checked> Отправка ученику только после проверки преподавателем</label>
-          <label class="setting-check"><input type="checkbox" checked> Генерировать объяснение ошибки простыми словами</label>
-          <label class="setting-check"><input type="checkbox"> Разрешить автоматическую отправку лёгких задач</label>
+          <button class="primary-action" type="button" id="save-ai-settings">Save Settings</button>
+          <div class="ai-status" id="ai-settings-status">Model: ${window.BrighterlyAI?.config?.model || "gpt-5-nano"}</div>
+          <label class="setting-check"><input type="checkbox" checked> AI can suggest tasks after the lesson</label>
+          <label class="setting-check"><input type="checkbox" checked> Send to student only after teacher review</label>
+          <label class="setting-check"><input type="checkbox" checked> Generate mistake explanations in simple language</label>
+          <label class="setting-check"><input type="checkbox"> Allow automatic sending for very easy tasks</label>
         </section>
         <section class="diagnostic-grid">
-          <div class="approval-box">Уровень: 5 класс США</div>
-          <div class="approval-box">Текущая тема: дроби с разными знаменателями</div>
+          <div class="approval-box">Level: US Grade 5</div>
+          <div class="approval-box">Current topic: fractions with unlike denominators</div>
         </section>
       </div>
     `,
@@ -708,17 +729,17 @@ function renderMock(screen) {
       <div class="prototype-screen">
         <section class="game-settings">
           ${metricCards([
-            { value: "4", label: "дня серии" },
-            { value: "3/3", label: "жизни сегодня" },
-            { value: "2", label: "заряда подсказок" },
-            { value: "1", label: "пропуск дня" }
+            { value: "4", label: "day streak" },
+            { value: "3/3", label: "lives today" },
+            { value: "2", label: "hint charges" },
+            { value: "1", label: "day pass" }
           ])}
         </section>
         <section class="stage-banner">
-          <span>Как работает</span>
+          <span>How it works</span>
           <div>
-            <h4>Серия сохраняется за дневной минимум</h4>
-            <p>Ученик не обязан решать много: достаточно 2–3 задач, но важно возвращаться регулярно.</p>
+            <h4>The streak continues after a daily minimum</h4>
+            <p>The student does not need to solve a lot: 2-3 tasks are enough, but regular return matters.</p>
           </div>
         </section>
       </div>
@@ -757,7 +778,7 @@ function setButtonLoading(button, isLoading) {
   button.disabled = isLoading;
   if (isLoading) {
     button.dataset.originalText = button.textContent;
-    button.textContent = "ИИ думает...";
+    button.textContent = "AI is thinking...";
   } else if (button.dataset.originalText) {
     button.textContent = button.dataset.originalText;
     delete button.dataset.originalText;
@@ -772,32 +793,32 @@ async function handleAiTaskAction(action, taskIndex, button) {
     setButtonLoading(button, true);
 
     if (action === "keep") {
-      setAiStatus("Задача оставлена без изменений. Преподаватель подтвердил этот пункт.", "success");
+      setAiStatus("Task kept as-is. The teacher approved this item.", "success");
       return;
     }
 
     if (action === "simplify") {
-      setAiStatus("Отправляем задачу в OpenAI API на упрощение...", "loading");
+      setAiStatus("Sending the task to the OpenAI API for simplification...", "loading");
       reviewTasks[taskIndex] = await window.BrighterlyAI.simplifyTask(task);
       renderSelectedScreen();
-      setAiStatus("ИИ упростил задачу. Проверь формулировку перед отправкой ученику.", "success");
+      setAiStatus("AI simplified the task. Review the wording before sending it to the student.", "success");
       return;
     }
 
     if (action === "alternative") {
-      setAiStatus("Отправляем запрос на альтернативную задачу...", "loading");
+      setAiStatus("Requesting an alternative task...", "loading");
       reviewTasks[taskIndex] = await window.BrighterlyAI.generateAlternativeTask(task);
       renderSelectedScreen();
-      setAiStatus("ИИ предложил альтернативу. Преподаватель всё ещё должен её проверить.", "success");
+      setAiStatus("AI suggested an alternative. The teacher still needs to review it.", "success");
       return;
     }
 
     if (action === "generate-set") {
-      setAiStatus("Генерируем новый набор из 5 задач...", "loading");
+      setAiStatus("Generating a new set of 5 tasks...", "loading");
       const result = await window.BrighterlyAI.generatePracticeSet(getPracticeContext());
       reviewTasks = result.tasks.map((item) => ({ ...item }));
       renderSelectedScreen();
-      setAiStatus("Новый набор задач готов. Проверь каждую задачу перед отправкой.", "success");
+      setAiStatus("New task set is ready. Review each task before sending.", "success");
     }
   } catch (error) {
     setAiStatus(error.message, "error");
@@ -821,7 +842,7 @@ function bindAiSettings() {
       mode: modeSelect.value,
       apiKey: keyInput.value.trim()
     });
-    setAiStatus(`Настройки сохранены. Режим: ${modeSelect.value}.`, "success");
+    setAiStatus(`Settings saved. Mode: ${modeSelect.value}.`, "success");
   });
 }
 
@@ -916,12 +937,13 @@ function renderNav() {
 function renderSelectedScreen() {
   const role = getCurrentRole();
   const screen = getCurrentScreen();
+  const appLabel = role.appLabel || role.label;
 
-  appRoleLabel.textContent = role.label;
+  appRoleLabel.textContent = appLabel;
   browserUrl.textContent = `app.brighterly.com/${role.path}`;
-  screenRole.textContent = role.label;
-  screenTitle.textContent = screen.title;
-  screenAction.textContent = screen.action;
+  screenRole.textContent = appLabel;
+  screenTitle.textContent = screen.appTitle || screen.title;
+  screenAction.textContent = screen.appAction || screen.action;
   renderMock(screen);
 
   screenNotes.innerHTML = "";

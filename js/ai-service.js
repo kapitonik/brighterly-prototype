@@ -195,34 +195,34 @@ function mockOpenAI(payload) {
     return {
       tasks: [
         {
-          label: "Общий знаменатель",
-          prompt: "Какой общий знаменатель подойдёт для 1/2 + 1/3?",
+          label: "Common denominator",
+          prompt: "Which common denominator works for 1/2 + 1/3?",
           answer: "6",
-          reason: "Упрощённая проверка выбора одинаковых частей."
+          reason: "A simpler check for choosing equal-sized parts."
         },
         {
-          label: "Сложение дробей",
-          prompt: "Реши: 1/2 + 1/3",
+          label: "Adding fractions",
+          prompt: "Solve: 1/2 + 1/3",
           answer: "5/6",
-          reason: "Проверяем перенос общего знаменателя в вычисление."
+          reason: "Checks whether the student can use the common denominator in the calculation."
         },
         {
-          label: "Поиск ошибки",
-          prompt: "Ученик написал: 1/3 + 1/3 = 2/6. Почему это неверно?",
-          answer: "Знаменатель остаётся 3, потому что части уже одинаковые.",
-          reason: "Показывает, что знаменатель не всегда меняется."
+          label: "Find the mistake",
+          prompt: "A student wrote: 1/3 + 1/3 = 2/6. Why is this incorrect?",
+          answer: "The denominator stays 3 because the parts are already the same size.",
+          reason: "Shows that the denominator does not always change."
         },
         {
-          label: "Текстовая задача",
+          label: "Word problem",
           prompt: "A student read 1/2 hour on Monday and 1/3 hour on Tuesday. How many hours did she read?",
           answer: "5/6 hour",
-          reason: "Тот же навык в простом школьном контексте."
+          reason: "The same skill in a simple school context."
         },
         {
-          label: "Вычитание",
-          prompt: "Заверши шаг: 3/4 - 1/2 = 3/4 - ?/4",
+          label: "Subtraction",
+          prompt: "Complete the step: 3/4 - 1/2 = 3/4 - ?/4",
           answer: "2",
-          reason: "Готовит к вычитанию с общим знаменателем."
+          reason: "Prepares the student for subtraction with a common denominator."
         }
       ]
     };
@@ -230,18 +230,18 @@ function mockOpenAI(payload) {
 
   if (prompt.includes("simplified_math_task")) {
     return {
-      label: "Упрощённая задача",
-      prompt: "Реши: 1/2 + 1/4",
+      label: "Simplified task",
+      prompt: "Solve: 1/2 + 1/4",
       answer: "3/4",
-      reason: "Упрощено: один знаменатель уже является кратным второго."
+      reason: "Simplified because one denominator is already a multiple of the other."
     };
   }
 
   return {
-    label: "Альтернативная задача",
-    prompt: "Реши: 2/3 + 1/6",
+    label: "Alternative task",
+    prompt: "Solve: 2/3 + 1/6",
     answer: "5/6",
-    reason: "Новая задача на тот же навык без повторения исходных чисел."
+    reason: "A new task for the same skill without reusing the original numbers."
   };
 }
 
