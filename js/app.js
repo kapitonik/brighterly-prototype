@@ -360,9 +360,33 @@ const screenAction = document.querySelector("#screen-action");
 const appNav = document.querySelector(".app-nav nav");
 const mockMain = document.querySelector("#mock-main");
 
+const appOptions = [
+  { id: "student", label: "Учень", appLabel: "Student", icon: "student" },
+  { id: "parent", label: "Батьки", appLabel: "Parent", icon: "parent" },
+  { id: "teacher", label: "Викладач", appLabel: "Teacher", icon: "teacher" }
+];
+
+const screenLabels = {
+  "teacher-ai-review": { title: "Добірка", caption: "ШІ" },
+  "teacher-week-plan": { title: "Тиждень", caption: "План" },
+  "teacher-before-lesson": { title: "Сигнал", caption: "Перед" },
+  "student-recap-processing": { title: "Готується", caption: "Рекап" },
+  "student-recap": { title: "Рекап", caption: "Після" },
+  "student-week": { title: "Дейлік", caption: "Щодня" },
+  "student-warmup": { title: "Розігрів", caption: "Перед" },
+  "parent-summary": { title: "Підсумок", caption: "Урок" },
+  "parent-progress": { title: "Прогрес", caption: "Теми" },
+  "teacher-summary-check": { title: "Перевірка", caption: "Текст" },
+  "parent-achievements": { title: "Огляд", caption: "Тиждень" },
+  "parent-subjects": { title: "Теми", caption: "Динаміка" },
+  "student-game": { title: "Серія", caption: "Дні" },
+  "student-tournament": { title: "Челендж", caption: "Тиждень" },
+  "app-placeholder": { title: "Огляд", caption: "Скоро" }
+};
+
 const state = {
   featureId: "practice",
-  roleIndex: 0,
+  roleId: "teacher",
   screenIndex: 0
 };
 
@@ -370,8 +394,33 @@ function getCurrentFeature() {
   return features[state.featureId];
 }
 
+function getFallbackRole(appOption) {
+  return {
+    id: appOption.id,
+    label: appOption.label,
+    appLabel: appOption.appLabel,
+    path: `${appOption.id}/${state.featureId}`,
+    nav: ["Overview"],
+    screens: [
+      {
+        type: "app-placeholder",
+        title: "Огляд",
+        caption: "Макет у підготовці",
+        appTitle: `${appOption.appLabel} View`,
+        appAction: "Preview",
+        navIndex: 0
+      }
+    ]
+  };
+}
+
+function getFeatureRoles() {
+  const roleById = new Map(getCurrentFeature().roles.map((role) => [role.id, role]));
+  return appOptions.map((appOption) => roleById.get(appOption.id) || getFallbackRole(appOption));
+}
+
 function getCurrentRole() {
-  return getCurrentFeature().roles[state.roleIndex];
+  return getFeatureRoles().find((role) => role.id === state.roleId) || getFeatureRoles()[0];
 }
 
 function getCurrentScreen() {
@@ -995,6 +1044,24 @@ function renderMock(screen) {
           <article class="reward-card"><strong>+10</strong><span>bonus for no hints</span></article>
         </section>
       </div>
+    `,
+    "app-placeholder": `
+      <div class="prototype-screen simple-dashboard">
+        <section class="stage-banner">
+          <span>Preview</span>
+          <div>
+            <h4>${screen.appTitle || "App View"}</h4>
+            <p>This demo keeps the application switch visible. A dedicated mock for this role can be added as the next iteration.</p>
+          </div>
+        </section>
+        <section class="game-settings">
+          ${metricCards([
+            { value: "3", label: "apps always available" },
+            { value: "1", label: "selected feature" },
+            { value: "0", label: "hidden role switches" }
+          ])}
+        </section>
+      </div>
     `
   };
 
@@ -1024,16 +1091,19 @@ function renderFeatureTabs() {
 }
 
 function renderRoles() {
-  const feature = getCurrentFeature();
   roleSwitcher.innerHTML = "";
 
-  feature.roles.forEach((role, index) => {
+  getFeatureRoles().forEach((role) => {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = `role-button${index === state.roleIndex ? " is-active" : ""}`;
-    button.textContent = role.label;
+    button.className = `role-button${role.id === state.roleId ? " is-active" : ""}`;
+    button.innerHTML = `
+      <span class="role-icon role-icon-${role.id}" aria-hidden="true"></span>
+      <span>${role.label}</span>
+    `;
+    button.setAttribute("aria-label", role.label);
     button.addEventListener("click", () => {
-      state.roleIndex = index;
+      state.roleId = role.id;
       state.screenIndex = 0;
       render();
     });
@@ -1046,14 +1116,15 @@ function renderScreens() {
   screenList.innerHTML = "";
 
   role.screens.forEach((screen, index) => {
+    const label = screenLabels[screen.type] || { title: screen.title, caption: screen.caption };
     const button = document.createElement("button");
     button.type = "button";
     button.className = `screen-button${index === state.screenIndex ? " is-active" : ""}`;
     button.innerHTML = `
       <span class="screen-number">${String(index + 1).padStart(2, "0")}</span>
       <span>
-        <strong>${screen.title}</strong>
-        <small>${screen.caption}</small>
+        <strong>${label.title}</strong>
+        <small>${label.caption || ""}</small>
       </span>
     `;
     button.addEventListener("click", () => {
@@ -1121,7 +1192,6 @@ function render() {
 featureTabs.forEach((tab) => {
   tab.addEventListener("click", () => {
     state.featureId = tab.dataset.feature;
-    state.roleIndex = 0;
     state.screenIndex = 0;
     render();
   });

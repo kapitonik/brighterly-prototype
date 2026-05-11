@@ -136,8 +136,10 @@ h1 {
   display: grid;
   align-content: center;
   gap: 3px;
+  height: 58px;
   padding: 0;
   border-bottom: 0;
+  overflow: hidden;
 }
 
 .feature-summary h2 {
@@ -152,6 +154,11 @@ h1 {
   color: #344054;
   font-size: 12px;
   line-height: 1.25;
+  display: -webkit-box;
+  max-height: 30px;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .screen-workspace {
@@ -183,8 +190,8 @@ h1 {
 }
 
 .role-switcher {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
   gap: 6px;
 }
 
@@ -199,11 +206,88 @@ h1 {
 }
 
 .role-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   width: auto;
   min-height: 30px;
   padding: 5px 9px;
   font-size: 12px;
   font-weight: 800;
+}
+
+.role-icon {
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+}
+
+.role-icon-student::before {
+  position: absolute;
+  top: 1px;
+  left: 5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  content: "";
+}
+
+.role-icon-student::after {
+  position: absolute;
+  right: 3px;
+  bottom: 1px;
+  left: 3px;
+  height: 7px;
+  border: 2px solid currentColor;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  content: "";
+}
+
+.role-icon-parent::before,
+.role-icon-parent::after {
+  position: absolute;
+  border-radius: 50%;
+  background: currentColor;
+  content: "";
+}
+
+.role-icon-parent::before {
+  top: 2px;
+  left: 2px;
+  width: 7px;
+  height: 7px;
+  box-shadow: 6px 4px 0 -1px currentColor;
+}
+
+.role-icon-parent::after {
+  right: 2px;
+  bottom: 1px;
+  left: 2px;
+  height: 5px;
+}
+
+.role-icon-teacher::before {
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  left: 1px;
+  height: 10px;
+  border: 2px solid currentColor;
+  content: "";
+}
+
+.role-icon-teacher::after {
+  position: absolute;
+  right: 3px;
+  bottom: 1px;
+  left: 3px;
+  height: 2px;
+  background: currentColor;
+  content: "";
 }
 
 .role-button:hover,
@@ -258,10 +342,12 @@ h1 {
 }
 
 .screen-button small {
-  display: none;
+  display: block;
   color: var(--muted);
-  font-size: 11px;
-  line-height: 1.35;
+  font-size: 9px;
+  line-height: 1.15;
+  text-transform: uppercase;
+  font-weight: 800;
 }
 
 .web-preview {
