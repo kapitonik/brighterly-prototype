@@ -858,6 +858,241 @@ h1 {
   color: #475467;
 }
 
+.recap-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 142px;
+  gap: 16px;
+  align-items: start;
+}
+
+.recap-time {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+  border: 1px solid #c7d2fe;
+  background: #eef2ff;
+  color: var(--violet);
+  text-align: center;
+}
+
+.recap-time strong {
+  font-size: 24px;
+}
+
+.recap-time span {
+  color: #475467;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.recap-time.is-processing {
+  background: #fff7ed;
+  border-color: #fed7aa;
+  color: #b45309;
+}
+
+.lesson-card-screen {
+  gap: 14px;
+}
+
+.lesson-card-sheet,
+.recap-reflection,
+.recap-checks,
+.processing-grid,
+.transcript-panel {
+  display: grid;
+  gap: 12px;
+}
+
+.lesson-card-sheet {
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+}
+
+.recap-reflection,
+.recap-checks,
+.processing-grid,
+.transcript-panel {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.lesson-card-main,
+.lesson-example-card,
+.reflection-card,
+.available-card,
+.processing-card,
+.transcript-panel > div {
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.available-card {
+  display: grid;
+  gap: 12px;
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+}
+
+.available-card strong {
+  font-size: 20px;
+}
+
+.mini-rule-list {
+  display: grid;
+  gap: 8px;
+}
+
+.mini-rule-list span {
+  padding: 10px 12px;
+  background: #ffffff;
+  border: 1px solid #b8e4dd;
+  color: #344054;
+  font-weight: 800;
+}
+
+.processing-card {
+  display: grid;
+  gap: 8px;
+  background: #f8fafc;
+}
+
+.processing-step {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+}
+
+.processing-step span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.processing-step.is-done {
+  border-color: #a7f3d0;
+}
+
+.processing-step.is-current {
+  border-color: #fed7aa;
+  background: #fff7ed;
+}
+
+.transcript-panel > div {
+  display: grid;
+  gap: 10px;
+}
+
+.audio-wave {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  min-height: 54px;
+  padding: 10px;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+}
+
+.audio-wave i {
+  display: block;
+  width: 100%;
+  background: #0d9488;
+}
+
+.audio-wave i:nth-child(1) { height: 18px; }
+.audio-wave i:nth-child(2) { height: 34px; }
+.audio-wave i:nth-child(3) { height: 24px; }
+.audio-wave i:nth-child(4) { height: 44px; }
+.audio-wave i:nth-child(5) { height: 30px; }
+.audio-wave i:nth-child(6) { height: 48px; }
+.audio-wave i:nth-child(7) { height: 26px; }
+.audio-wave i:nth-child(8) { height: 38px; }
+
+.transcript-preview p {
+  margin: 0;
+  color: #344054;
+}
+
+.transcript-preview .is-muted {
+  color: var(--muted);
+}
+
+.recap-checks.is-locked {
+  opacity: 0.9;
+}
+
+.locked-options {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.locked-options button {
+  min-height: 38px;
+  border: 1px solid var(--line);
+  background: #eef2f7;
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.lesson-example-card {
+  display: grid;
+  gap: 12px;
+  background: #f8fafc;
+}
+
+.lesson-example-card strong {
+  font-size: 18px;
+}
+
+.lesson-example-card ol {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding-left: 20px;
+  color: #344054;
+}
+
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.topic-tile {
+  display: grid;
+  gap: 6px;
+  min-height: 92px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: #f8fafc;
+}
+
+.topic-tile strong,
+.reflection-card strong {
+  line-height: 1.3;
+}
+
+.topic-tile span {
+  color: #475467;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.reflection-card {
+  display: grid;
+  gap: 8px;
+}
+
+.reflection-card.is-positive {
+  border-color: #a7f3d0;
+  background: #ecfdf5;
+}
+
 .task-progress {
   display: flex;
   gap: 8px;
@@ -1351,6 +1586,12 @@ h1 {
   .diagnostic-grid,
   .teacher-signal,
   .lesson-plan,
+  .recap-hero,
+  .lesson-card-sheet,
+  .recap-reflection,
+  .recap-checks,
+  .processing-grid,
+  .transcript-panel,
   .game-settings,
   .attempt-table,
   .visual-question,
@@ -1375,7 +1616,10 @@ h1 {
   .role-switcher,
   .screen-list,
   .week-grid,
-  .rule-grid {
+  .rule-grid,
+  .topic-grid,
+  .deal-cards,
+  .expression-card {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -1403,7 +1647,10 @@ h1 {
   .role-switcher,
   .screen-list,
   .week-grid,
-  .rule-grid {
+  .rule-grid,
+  .topic-grid,
+  .deal-cards,
+  .expression-card {
     grid-template-columns: 1fr;
   }
 

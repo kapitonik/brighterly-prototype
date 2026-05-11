@@ -166,16 +166,29 @@ const features = {
         nav: ["Today", "Week", "Warm-up", "Streak"],
         screens: [
           {
+            type: "student-recap-processing",
+            title: "Рекап готується",
+            caption: "Перші хвилини після уроку",
+            appTitle: "Preparing Lesson Recap",
+            appAction: "Notify Me",
+            navIndex: 0,
+            notes: [
+              "General lesson sheet is available first",
+              "Transcript is still processing",
+              "Personalized checks unlock after teacher review"
+            ]
+          },
+          {
             type: "student-recap",
             title: "Швидке закріплення",
             caption: "Протягом 24 годин після уроку",
-            appTitle: "Quick Review",
-            appAction: "Answer",
+            appTitle: "Lesson Recap",
+            appAction: "Done",
             navIndex: 0,
             notes: [
-              "Up to 5 tasks focused on weak spots",
-              "5-7 minutes without feeling like heavy homework",
-              "AI explains mistakes in simple steps"
+              "One calm lesson card after class",
+              "No open input, only tap-friendly checks",
+              "The student sees progress without a score report"
             ]
           },
           {
@@ -653,28 +666,135 @@ function renderMock(screen) {
         </section>
       </div>
     `,
+    "student-recap-processing": `
+      <div class="prototype-screen">
+        <section class="student-task-shell lesson-recap-screen">
+          <div class="recap-header recap-hero">
+            <div>
+              <span class="stage-pill">Just finished · processing</span>
+              <h4>Preparing your lesson card</h4>
+              <p>The lesson sheet is ready now. Personal notes and practice checks will unlock after the transcript is processed and reviewed.</p>
+            </div>
+            <div class="recap-time is-processing">
+              <strong>62%</strong>
+              <span>transcript ready</span>
+            </div>
+          </div>
+
+          <section class="processing-grid">
+            <article class="available-card">
+              <p class="panel-label">Available now</p>
+              <strong>Business Math quick sheet</strong>
+              <div class="mini-rule-list">
+                <span>Unit price = total price / amount</span>
+                <span>Discount makes the final price lower</span>
+                <span>Sales tax is added after the item price</span>
+              </div>
+            </article>
+
+            <article class="processing-card">
+              <p class="panel-label">Still processing</p>
+              <div class="processing-step is-done"><strong>Lesson plan</strong><span>ready</span></div>
+              <div class="processing-step is-current"><strong>Voice transcript</strong><span>about 2 min left</span></div>
+              <div class="processing-step"><strong>Personal mistakes</strong><span>waiting for transcript</span></div>
+              <div class="processing-step"><strong>Teacher review</strong><span>not started yet</span></div>
+            </article>
+          </section>
+
+          <section class="transcript-panel">
+            <div>
+              <p class="panel-label">Lesson recording</p>
+              <strong>50 min class · saved</strong>
+              <div class="audio-wave" aria-hidden="true">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+            </div>
+            <div class="transcript-preview">
+              <p class="panel-label">Transcript preview</p>
+              <p><strong>Teacher:</strong> Let's compare the unit price first.</p>
+              <p><strong>Student:</strong> So I divide the price by the ounces?</p>
+              <p class="is-muted">More transcript lines are still being processed...</p>
+            </div>
+          </section>
+
+          <section class="recap-checks is-locked">
+            <article class="student-problem">
+              <span>Unlocks after review</span>
+              <strong>Personal check questions will appear here.</strong>
+              <div class="locked-options">
+                <button type="button" disabled>A</button>
+                <button type="button" disabled>B</button>
+                <button type="button" disabled>C</button>
+                <button type="button" disabled>D</button>
+              </div>
+            </article>
+            <article class="student-problem">
+              <span>Why wait?</span>
+              <strong>The system needs the transcript to avoid guessing what was hard for you.</strong>
+              <div class="hint-box">The teacher can approve the final version before the recap becomes active.</div>
+            </article>
+          </section>
+        </section>
+      </div>
+    `,
     "student-recap": `
       <div class="prototype-screen">
-        <section class="student-task-shell student-focus-screen">
-          <div class="recap-header">
-            <span class="stage-pill">Stage 1 · first 24 hours</span>
-            <h4>Quick review after the lesson</h4>
-            <p>5 short tap-friendly questions from today's Grade 7 lesson.</p>
+        <section class="student-task-shell lesson-recap-screen">
+          <div class="recap-header recap-hero">
+            <div>
+              <span class="stage-pill">Stage 1 · after class</span>
+              <h4>Today's Lesson Card</h4>
+              <p>A calm recap of what we practiced today. Two quick tap questions at the end help lock it in.</p>
+            </div>
+            <div class="recap-time">
+              <strong>3 min</strong>
+              <span>no streak pressure</span>
+            </div>
           </div>
-          <div class="task-progress">
-            <span class="is-done">1</span>
-            <span class="is-done">2</span>
-            <span class="is-current">3</span>
-            <span>4</span>
-            <span>5</span>
-          </div>
-          <section class="visual-question">
-            ${rateTableModel()}
+
+          <section class="lesson-card-sheet">
+            <article class="lesson-card-main">
+              <p class="panel-label">Today we learned</p>
+              <div class="topic-grid">
+                <div class="topic-tile"><strong>Unit price</strong><span>Divide total price by amount to compare fairly.</span></div>
+                <div class="topic-tile"><strong>Discount</strong><span>The sale price is lower than the original price.</span></div>
+                <div class="topic-tile"><strong>Sales tax</strong><span>Tax is added after the item price.</span></div>
+                <div class="topic-tile"><strong>Total cost</strong><span>Read the story before choosing the operation.</span></div>
+              </div>
+            </article>
+
+            <article class="lesson-example-card">
+              <p class="panel-label">Example from class</p>
+              <strong>A hoodie costs $40 and is 25% off.</strong>
+              <ol>
+                <li>25% of $40 is $10.</li>
+                <li>$40 - $10 = $30.</li>
+                <li>The sale price is $30.</li>
+              </ol>
+            </article>
+          </section>
+
+          <section class="recap-reflection">
+            <article class="reflection-card is-positive">
+              <p class="panel-label">What clicked today</p>
+              <strong>You found unit prices in simple shopping examples.</strong>
+            </article>
+            <article class="reflection-card">
+              <p class="panel-label">What we will practice</p>
+              <strong>Discounts, tax, and turning price rules into expressions.</strong>
+            </article>
+          </section>
+
+          <section class="recap-checks">
             <article class="student-problem">
-              <span>Task 3 of 5 · choose the answer</span>
-              <strong>A pack of 6 granola bars costs $9. What is the cost per bar?</strong>
-              ${answerChoices(["$1.25", "$1.50", "$3.00", "$15.00"], 1)}
-              <div class="hint-box">Hint: divide the total cost by the number of bars.</div>
+              <span>Check 1 · choose the answer</span>
+              <strong>A $20 item is 10% off. What happens to the final price?</strong>
+              ${answerChoices(["It is more than $20", "It is less than $20", "It stays $20", "It becomes $30"], 1)}
+            </article>
+            <article class="student-problem">
+              <span>Check 2 · choose the expression</span>
+              <strong>A photo booth charges $4 per strip plus a $3 fee. Which expression fits s strips?</strong>
+              ${answerChoices(["4s + 3", "4 + 3s", "7s", "s + 43"], 0)}
             </article>
           </section>
         </section>
