@@ -16,69 +16,103 @@
         <div class="status-pill">Май 2026</div>
       </header>
 
-      <section class="workspace" aria-label="Выбор функции">
-        <aside class="feature-list">
-          <button class="feature-card is-active" type="button" data-feature="practice">
-            <span class="feature-index">01</span>
-            <span>
-              <strong>Закрепление после урока</strong>
-              <small>ИИ-подбор заданий, подтверждение преподавателем</small>
-            </span>
-          </button>
+      <nav class="feature-tabs" aria-label="Функции" role="tablist">
+        <button class="feature-tab is-active" type="button" role="tab" aria-selected="true" data-feature="practice">
+          <span>01</span>
+          Закрепление после урока
+        </button>
+        <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="warmup">
+          <span>02</span>
+          Разминка перед уроком
+        </button>
+        <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="summary">
+          <span>03</span>
+          Итоги урока
+        </button>
+        <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="game">
+          <span>04</span>
+          Игровые механики
+        </button>
+        <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="parent">
+          <span>05</span>
+          Панель достижений
+        </button>
+      </nav>
 
-          <button class="feature-card" type="button" data-feature="warmup">
-            <span class="feature-index">02</span>
-            <span>
-              <strong>Разминка перед уроком</strong>
-              <small>Короткая подготовка в зале ожидания</small>
-            </span>
-          </button>
-
-          <button class="feature-card" type="button" data-feature="summary">
-            <span class="feature-index">03</span>
-            <span>
-              <strong>Итоги урока для родителей</strong>
-              <small>Ключевые моменты, прогресс, следующие шаги</small>
-            </span>
-          </button>
-
-          <button class="feature-card" type="button" data-feature="game">
-            <span class="feature-index">04</span>
-            <span>
-              <strong>Игровые механики</strong>
-              <small>Серии дней, очки, еженедельный турнир</small>
-            </span>
-          </button>
-
-          <button class="feature-card" type="button" data-feature="parent">
-            <span class="feature-index">05</span>
-            <span>
-              <strong>Панель достижений</strong>
-              <small>Прогресс ребёнка в понятном виде</small>
-            </span>
-          </button>
-        </aside>
-
-        <section class="preview-panel" aria-live="polite">
-          <div class="preview-copy">
+      <section class="prototype-stage" aria-live="polite">
+        <section class="feature-summary">
+          <div>
             <p class="eyebrow" id="feature-kicker">Функция 01</p>
             <h2 id="feature-title">Закрепление после урока</h2>
-            <p id="feature-description">
-              Здесь появится цепочка экранов: разбор урока, подтверждение заданий преподавателем,
-              выполнение учеником и возврат результата к следующему занятию.
-            </p>
           </div>
+          <p id="feature-description">
+            ИИ разбирает урок, предлагает задания преподавателю, ученик закрепляет материал,
+            а результат возвращается к следующему занятию.
+          </p>
+        </section>
 
-          <div class="screen-placeholder" aria-label="Заглушка экранов функции">
-            <div class="phone-frame">
-              <div class="phone-bar"></div>
-              <div class="empty-state">
-                <span class="empty-icon" aria-hidden="true"></span>
-                <strong id="placeholder-title">Экраны будут добавлены позже</strong>
-                <small id="placeholder-caption">Сейчас это точка входа для выбора функции.</small>
+        <section class="screen-workspace">
+          <aside class="flow-panel" aria-label="Сценарий функции">
+            <div class="panel-block">
+              <p class="panel-label">Приложение</p>
+              <div class="role-switcher" id="role-switcher"></div>
+            </div>
+
+            <div class="panel-block">
+              <p class="panel-label">Экраны сценария</p>
+              <div class="screen-list" id="screen-list"></div>
+            </div>
+          </aside>
+
+          <section class="web-preview" aria-label="Макет выбранного экрана">
+            <div class="browser-shell">
+              <div class="browser-bar">
+                <div class="browser-dots" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div class="browser-url" id="browser-url">app.brighterly.com/teacher/lesson-review</div>
+              </div>
+
+              <div class="app-frame">
+                <aside class="app-nav">
+                  <strong>Brighterly</strong>
+                  <span id="app-role-label">Преподаватель</span>
+                  <nav aria-label="Разделы макета">
+                    <a class="is-active" href="#">Уроки</a>
+                    <a href="#">Задания</a>
+                    <a href="#">Прогресс</a>
+                    <a href="#">Сообщения</a>
+                  </nav>
+                </aside>
+
+                <section class="app-content">
+                  <div class="app-toolbar">
+                    <div>
+                      <p class="eyebrow" id="screen-role">Преподаватель</p>
+                      <h3 id="screen-title">Разбор прошедшего урока</h3>
+                    </div>
+                    <button class="primary-action" type="button" id="screen-action">Подтвердить подборку</button>
+                  </div>
+
+                  <div class="mock-layout" id="mock-layout">
+                    <div class="mock-main">
+                      <div class="mock-empty">
+                        <span class="empty-icon" aria-hidden="true"></span>
+                        <strong id="placeholder-title">Большой веб-макет будет добавлен здесь</strong>
+                        <small id="placeholder-caption">Каркас уже поддерживает разные роли и несколько экранов внутри функции.</small>
+                      </div>
+                    </div>
+                    <aside class="mock-side">
+                      <p class="panel-label">Контекст</p>
+                      <ul id="screen-notes"></ul>
+                    </aside>
+                  </div>
+                </section>
               </div>
             </div>
-          </div>
+          </section>
         </section>
       </section>
     </main>
