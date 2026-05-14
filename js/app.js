@@ -2775,12 +2775,13 @@ function renderHypothesis() {
   const workPlanModel = {
     recap: {
       title: "Рекап + AI-інсайти",
-      totalDays: 7,
+      totalDays: 10,
       work: [
         ["Запис і транскрипція уроку", "3 дні / до 5 з контекстом", "Базова: аудіозапис → повний текстовий транскрипт. Продвинута: додатково скріншоти слайдів і задач як контекст для AI."],
-        ["Набір метрик + AI-промпт", "2 дні", "Визначити набір метрик, які надійно екстрагуються з транскрипту. Скласти і протестувати структурований промпт."],
+        ["Набір метрик + AI-промпт", "3 дні", "Визначити набір метрик, які надійно екстрагуються з транскрипту. Скласти і протестувати структурований промпт. +1 день на ітерацію промпту за результатами валідації."],
+        ["Валідація якості AI", "2 дні", "Складання скорингової моделі для оцінки якості рекапу. Автоматичний скоринг виходів AI за заздалегідь визначеними критеріями. Паралельна людська оцінка вибірки (15–20 рекапів). Порівняння і калібрування — де машина помиляється."],
         ["Перевірка вчителем + фідбек", "1 день", "Екран перегляду AI-чернетки, форма оцінки якості AI для команди, кнопка публікації учню."],
-        ["Тестування", "1 день", "End-to-end перевірка на реальних уроках: якість транскрипту, точність AI, час від кінця уроку до публікації."]
+        ["End-to-end тестування", "1 день", "Повна перевірка всього pipeline на реальних уроках: якість транскрипту, точність AI, своєчасність доставки. Не про промпт окремо — про весь шлях від кінця уроку до публікації учню."]
       ],
       extraNotes: [
         ["Тижневий план задач", "+2 дні · окрема задача", "Складання і валідація персонального плану на 7 днів на базі рекапу. Технічно — продовження цього блоку, але окремий скоуп."],
@@ -2892,6 +2893,7 @@ function renderHypothesis() {
           </thead>
           <tbody>
             ${riceItems.map((item) => {
+              const isActive = item.id === state.featureId;
               const primaryMetric = resultAspectModel[item.id]?.[0];
               const [mName, mTarget, , mBase, mDelta, mOptions] = primaryMetric || ["—", "—", "", null, null];
               const plan = workPlanModel[item.id];
@@ -2915,7 +2917,7 @@ function renderHypothesis() {
                   </div>
                 </div>` : `<span class="comp-bar-text">${mTarget}</span>`;
               return `
-                <tr>
+                <tr class="comp-row${isActive ? " is-active" : " is-muted"}">
                   <td class="comp-feature-cell">
                     <strong>${item.title}</strong>
                     <span class="rice-badge is-${tone}">RICE ${item.score.toFixed(1)}</span>
@@ -2959,7 +2961,7 @@ function renderHypothesis() {
       </div>
     </section>
   `;
-  const roadmapWeeks = ["18 травня", "25 травня", "1 червня", "8 червня", "15 червня", "22 червня", "29 червня", "6 липня", "13 липня", "20 липня"];
+  const roadmapWeeks = ["18 травня", "25 травня", "1 червня", "8 червня", "15 червня", "22 червня", "29 червня", "6 липня", "13 липня"];
   const roadmapPhases = [
     {
       id: "onboarding",
@@ -3335,7 +3337,7 @@ function renderHypothesis() {
 function getHypCounts(featureId) {
   const hypothesisCount = { recap: 4, practice: 4, review: 3, preview: 3, game: 4 };
   const monetizationCount = { recap: 3, practice: 2, review: 2, preview: 2, game: 2 };
-  const workplanCount = { recap: 3, practice: 4, review: 2, preview: 2, game: 4 };
+  const workplanCount = { recap: 5, practice: 4, review: 2, preview: 2, game: 4 };
   const resultCount = { recap: 5, practice: 4, review: 3, preview: 3, game: 4 };
   return {
     hypotheses: hypothesisCount[featureId] || 3,
@@ -3383,11 +3385,11 @@ function render() {
     hypothesisSectionBlock.id = "hyp-section-block";
     hypothesisSectionBlock.className = "hyp-section-block";
     hypothesisSectionBlock.innerHTML = `
-      <span>Розділ гіпотез</span>
-      <div class="hyp-section-segment" role="group" aria-label="Розділ гіпотез">
+      <span>Бриф фічі</span>
+      <div class="hyp-section-segment" role="group" aria-label="Бриф фічі">
         <button class="hyp-section-choice" type="button" data-hyp-section="hypotheses">Гіпотези</button>
         <button class="hyp-section-choice" type="button" data-hyp-section="results">Метрики</button>
-        <button class="hyp-section-choice" type="button" data-hyp-section="monetization">Дохід</button>
+        <button class="hyp-section-choice" type="button" data-hyp-section="monetization">Монетизація</button>
         <button class="hyp-section-choice" type="button" data-hyp-section="workplan">План</button>
         <button class="hyp-section-choice" type="button" data-hyp-section="comparison">RICE</button>
         <button class="hyp-section-choice" type="button" data-hyp-section="roadmap">Роадмапа</button>
@@ -3425,10 +3427,10 @@ function render() {
     const hypSectionLabels = {
       hypotheses:   `Гіпотези ${badge(hypCounts.hypotheses)}`,
       results:      `Метрики ${badge(hypCounts.results)}`,
-      monetization: `Дохід ${badge(hypCounts.monetization)}`,
+      monetization: `Монетизація ${badge(hypCounts.monetization)}`,
       workplan:     `План ${badge(hypCounts.workplan)}`,
-      comparison:   `RICE ${badge(hypCounts.comparison)}`,
-      roadmap:      `Роадмапа ${badge(hypCounts.roadmap)}`
+      comparison:   `RICE`,
+      roadmap:      `Роадмапа`
     };
     hypothesisSectionBlock.style.display = state.hypothesisMode ? "" : "none";
     hypothesisSectionBlock.querySelectorAll("[data-hyp-section]").forEach((button) => {

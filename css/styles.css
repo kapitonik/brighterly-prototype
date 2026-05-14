@@ -6806,6 +6806,27 @@ span.info-tip:focus-within span.info-tooltip {
   font-size: 11px;
 }
 
+/* ── RICE table active / muted rows ──────────────────────── */
+.comp-row.is-active {
+  background: #f8fafc;
+}
+
+.comp-row.is-active .comp-feature-cell strong {
+  color: var(--teal-deep);
+}
+
+.comp-row.is-active td:first-child {
+  border-left: 3px solid var(--teal-deep);
+}
+
+.comp-row.is-muted td {
+  opacity: 0.55;
+}
+
+.comp-row.is-muted:hover td {
+  opacity: 0.85;
+}
+
 .comp-feature-cell {
   min-width: 160px;
 }
