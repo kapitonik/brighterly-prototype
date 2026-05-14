@@ -6821,7 +6821,7 @@ span.info-tip:focus-within span.info-tooltip {
 }
 
 .comp-row.is-muted td {
-  opacity: 0.72;
+  opacity: 0.4;
 }
 
 .comp-row.is-muted:hover td {
