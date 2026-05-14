@@ -20,21 +20,25 @@
       <section class="prototype-stage" aria-live="polite">
         <section class="demo-controls" aria-label="Керування демо">
           <nav class="feature-tabs" aria-label="Функції" role="tablist">
-            <button class="feature-tab is-active" type="button" role="tab" aria-selected="true" data-feature="practice">
+            <button class="feature-tab is-active" type="button" role="tab" aria-selected="true" data-feature="recap">
               <span>01</span>
-              Підготовка і практика
+              Рекап + AI-інсайти
             </button>
-            <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="summary">
+            <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="practice">
               <span>02</span>
-              Підсумки для батьків
+              Практика між уроками
             </button>
-            <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="parent">
+            <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="review">
               <span>03</span>
-              Панель досягнень
+              Повторення
+            </button>
+            <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="preview">
+              <span>04</span>
+              Превью матеріалу
             </button>
             <button class="feature-tab" type="button" role="tab" aria-selected="false" data-feature="game">
-              <span>04</span>
-              Ігрові механіки
+              <span>05</span>
+              Геймифікація
             </button>
           </nav>
           <p class="feature-desc" id="feature-description"></p>
@@ -74,6 +78,7 @@
                     <a href="#">Progress</a>
                     <a href="#">Messages</a>
                   </nav>
+                  <div class="app-context-panel" id="app-context-panel" aria-label="Workspace context"></div>
                 </aside>
 
                 <section class="app-content">
