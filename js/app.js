@@ -2959,14 +2959,25 @@ function renderHypothesis() {
       </div>
     </section>
   `;
-  const roadmapWeeks = ["18 травня", "25 травня", "1 червня", "8 червня", "15 червня", "22 червня", "29 червня", "6 липня", "13 липня"];
+  const roadmapWeeks = ["11 травня", "18 травня", "25 травня", "1 червня", "8 червня", "15 червня", "22 червня", "29 червня", "6 липня", "13 липня"];
   const roadmapPhases = [
+    {
+      id: "onboarding",
+      dates: "11-17 травня",
+      title: "Онбординг і занурення",
+      label: "Тиждень 0",
+      start: 2,
+      span: 1,
+      tone: "is-onboarding",
+      alwaysActive: true,
+      checkpoint: "Архітектура коду, уроки Brighterly, структура екранів, економіка ринку і конкуренти — все в межах першого тижня"
+    },
     {
       id: "recap",
       dates: "18-29 травня",
       title: "AI-підсумки уроку",
       label: "Основа",
-      start: 2,
+      start: 3,
       span: 2,
       tone: "is-core",
       checkpoint: "Чернетка, перевірка вчителем, публікація для учня"
@@ -2976,7 +2987,7 @@ function renderHypothesis() {
       dates: "1-12 червня",
       title: "Тижнева практика",
       label: "Практика",
-      start: 4,
+      start: 5,
       span: 2,
       tone: "is-practice",
       checkpoint: "Список завдань у вчителя, компактний план в учня"
@@ -2986,7 +2997,7 @@ function renderHypothesis() {
       dates: "15-19 червня",
       title: "Повторення перед уроком",
       label: "Повторення",
-      start: 6,
+      start: 7,
       span: 1,
       tone: "is-lesson",
       checkpoint: "Короткий розігрів учня і сигнал вчителю"
@@ -2996,7 +3007,7 @@ function renderHypothesis() {
       dates: "22-26 червня",
       title: "Прев'ю матеріалу",
       label: "Прев'ю",
-      start: 7,
+      start: 8,
       span: 1,
       tone: "is-quality",
       checkpoint: "Коротке знайомство з темою до уроку"
@@ -3006,7 +3017,7 @@ function renderHypothesis() {
       dates: "29 червня - 10 липня",
       title: "Прогрес і мотивація",
       label: "Мотивація",
-      start: 8,
+      start: 9,
       span: 2,
       tone: "is-game",
       checkpoint: "Бали, серії та правила захисту якості"
@@ -3019,7 +3030,7 @@ function renderHypothesis() {
     <section class="implementation-roadmap">
       <div class="comparison-head roadmap-head">
         <span>Дорожня карта</span>
-        <strong>План реалізації із середини травня до середини липня 2026</strong>
+        <strong>План реалізації з 11 травня до середини липня 2026 · Тиждень 0 — занурення</strong>
       </div>
       <div class="roadmap-calendar">
         <div class="roadmap-calendar-head">
@@ -3028,7 +3039,7 @@ function renderHypothesis() {
         </div>
         <div class="roadmap-lanes">
           ${roadmapPhases.map((phase) => {
-            const isActive = phase.id === state.featureId;
+            const isActive = phase.alwaysActive || phase.id === state.featureId;
             return `
             <div class="roadmap-row ${phase.tone}${isActive ? " is-active" : " is-muted"}">
               <div class="roadmap-row-label">
@@ -3045,7 +3056,7 @@ function renderHypothesis() {
       </div>
       <div class="roadmap-outcomes">
         ${roadmapPhases.map((phase) => {
-          const isActive = phase.id === state.featureId;
+          const isActive = phase.alwaysActive || phase.id === state.featureId;
           return `
           <div class="${phase.tone}${isActive ? " is-active" : " is-muted"}">
             <span>${phase.dates}</span>
@@ -3342,7 +3353,7 @@ function getHypCounts(featureId) {
     monetization: monetizationCount[featureId] || 2,
     workplan: workplanCount[featureId] || 3,
     comparison: 5,
-    roadmap: 5
+    roadmap: 6
   };
 }
 

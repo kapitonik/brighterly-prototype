@@ -7239,6 +7239,11 @@ span.info-tip:focus-within span.info-tooltip {
   color: rgba(255, 255, 255, 0.86);
 }
 
+.roadmap-bar.is-onboarding {
+  --accent: #64748b;
+  border-style: dashed;
+}
+
 .roadmap-bar.is-core {
   --accent: var(--teal-deep);
 }
@@ -7259,6 +7264,8 @@ span.info-tip:focus-within span.info-tooltip {
   --accent: #15803d;
 }
 
+.roadmap-row.is-onboarding,
+.roadmap-outcomes div.is-onboarding { --active-accent: #64748b; }
 .roadmap-row.is-core,
 .roadmap-outcomes div.is-core { --active-accent: var(--teal-deep); }
 .roadmap-row.is-practice,
