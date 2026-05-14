@@ -2959,68 +2959,67 @@ function renderHypothesis() {
       </div>
     </section>
   `;
-  const roadmapWeeks = ["11 травня", "18 травня", "25 травня", "1 червня", "8 червня", "15 червня", "22 червня", "29 червня", "6 липня", "13 липня"];
+  const roadmapWeeks = ["18 травня", "25 травня", "1 червня", "8 червня", "15 червня", "22 червня", "29 червня", "6 липня", "13 липня", "20 липня"];
   const roadmapPhases = [
     {
       id: "onboarding",
-      dates: "11-17 травня",
+      dates: "18–24 травня",
       title: "Онбординг і занурення",
       label: "Тиждень 0",
+      desc: "Знайомство з кодовою базою, архітектурою екранів і структурою уроків Brighterly. Вивчення економіки ринку і ключових конкурентів.",
       start: 2,
       span: 1,
-      tone: "is-onboarding",
-      alwaysActive: true,
-      checkpoint: "Архітектура коду, уроки Brighterly, структура екранів, економіка ринку і конкуренти — все в межах першого тижня"
+      tone: "is-onboarding"
     },
     {
       id: "recap",
-      dates: "18-29 травня",
+      dates: "25 травня – 6 червня",
       title: "AI-підсумки уроку",
       label: "Основа",
+      desc: "Транскрипція, AI-промпт, перевірка вчителем, публікація учню і сім'ї. Email-звіт після демо-уроку.",
       start: 3,
       span: 2,
-      tone: "is-core",
-      checkpoint: "Чернетка, перевірка вчителем, публікація для учня"
+      tone: "is-core"
     },
     {
       id: "practice",
-      dates: "1-12 червня",
+      dates: "9–20 червня",
       title: "Тижнева практика",
       label: "Практика",
+      desc: "Персональний 7-денний план задач між уроками. Серії, батарейки, екран вчителя для затвердження.",
       start: 5,
       span: 2,
-      tone: "is-practice",
-      checkpoint: "Список завдань у вчителя, компактний план в учня"
+      tone: "is-practice"
     },
     {
       id: "review",
-      dates: "15-19 червня",
+      dates: "23–27 червня",
       title: "Повторення перед уроком",
       label: "Повторення",
+      desc: "Короткий розігрів за 10 хв до уроку. Вчитель бачить результати і коригує відкриття заняття.",
       start: 7,
       span: 1,
-      tone: "is-lesson",
-      checkpoint: "Короткий розігрів учня і сигнал вчителю"
+      tone: "is-lesson"
     },
     {
       id: "preview",
-      dates: "22-26 червня",
+      dates: "30 червня – 4 липня",
       title: "Прев'ю матеріалу",
       label: "Прев'ю",
+      desc: "Перший погляд на нову тему до уроку. Вчитель знає рівень знайомства і пропускає базове пояснення.",
       start: 8,
       span: 1,
-      tone: "is-quality",
-      checkpoint: "Коротке знайомство з темою до уроку"
+      tone: "is-quality"
     },
     {
       id: "game",
-      dates: "29 червня - 10 липня",
+      dates: "7–18 липня",
       title: "Прогрес і мотивація",
       label: "Мотивація",
+      desc: "Бали, серії і захист після пропуску. Бейджі для учня і сім'ї без тиску на оцінки.",
       start: 9,
       span: 2,
-      tone: "is-game",
-      checkpoint: "Бали, серії та правила захисту якості"
+      tone: "is-game"
     }
   ];
   const roadmapGridCells = roadmapWeeks
@@ -3030,7 +3029,7 @@ function renderHypothesis() {
     <section class="implementation-roadmap">
       <div class="comparison-head roadmap-head">
         <span>Дорожня карта</span>
-        <strong>План реалізації з 11 травня до середини липня 2026 · Тиждень 0 — занурення</strong>
+        <strong>План реалізації з 18 травня до кінця липня 2026 · Тиждень 0 — онбординг</strong>
       </div>
       <div class="roadmap-calendar">
         <div class="roadmap-calendar-head">
@@ -3039,12 +3038,13 @@ function renderHypothesis() {
         </div>
         <div class="roadmap-lanes">
           ${roadmapPhases.map((phase) => {
-            const isActive = phase.alwaysActive || phase.id === state.featureId;
+            const isActive = phase.id === state.featureId;
             return `
             <div class="roadmap-row ${phase.tone}${isActive ? " is-active" : " is-muted"}">
               <div class="roadmap-row-label">
                 <span>${phase.label}</span>
                 <strong>${phase.title}</strong>
+                ${phase.desc ? `<p class="roadmap-row-desc">${phase.desc}</p>` : ""}
               </div>
               ${roadmapGridCells}
               <div class="roadmap-bar ${phase.tone}${isActive ? " is-active" : " is-muted"}" style="--start:${phase.start};--span:${phase.span}">
@@ -3053,16 +3053,6 @@ function renderHypothesis() {
             </div>
           `;}).join("")}
         </div>
-      </div>
-      <div class="roadmap-outcomes">
-        ${roadmapPhases.map((phase) => {
-          const isActive = phase.alwaysActive || phase.id === state.featureId;
-          return `
-          <div class="${phase.tone}${isActive ? " is-active" : " is-muted"}">
-            <span>${phase.dates}</span>
-            <strong>${phase.checkpoint}</strong>
-          </div>
-        `;}).join("")}
       </div>
     </section>
   `;

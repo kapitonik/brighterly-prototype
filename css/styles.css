@@ -7140,8 +7140,8 @@ span.info-tip:focus-within span.info-tooltip {
 .roadmap-row {
   display: grid;
   grid-template-columns: var(--roadmap-columns);
-  grid-template-rows: minmax(58px, auto);
-  min-height: 58px;
+  grid-template-rows: minmax(72px, auto);
+  min-height: 72px;
   border-bottom: 1px solid var(--line);
   background: #ffffff;
 }
@@ -7174,6 +7174,18 @@ span.info-tip:focus-within span.info-tooltip {
   color: var(--ink);
   font-size: 13px;
   line-height: 1.2;
+}
+
+.roadmap-row-desc {
+  margin: 3px 0 0;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #64748b;
+  font-weight: 400;
+}
+
+.roadmap-row.is-muted .roadmap-row-desc {
+  color: #98a2b3;
 }
 
 .roadmap-row.is-muted .roadmap-row-label {
