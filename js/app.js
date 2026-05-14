@@ -3395,9 +3395,9 @@ function render() {
     hypothesisSectionBlock.innerHTML = `
       <span>Розділ гіпотез</span>
       <div class="hyp-section-segment" role="group" aria-label="Розділ гіпотез">
-        <button class="hyp-section-choice" type="button" data-hyp-section="hypotheses">Гипотезы</button>
+        <button class="hyp-section-choice" type="button" data-hyp-section="hypotheses">Гіпотези</button>
         <button class="hyp-section-choice" type="button" data-hyp-section="results">Метрики</button>
-        <button class="hyp-section-choice" type="button" data-hyp-section="monetization">Доход</button>
+        <button class="hyp-section-choice" type="button" data-hyp-section="monetization">Дохід</button>
         <button class="hyp-section-choice" type="button" data-hyp-section="workplan">План</button>
         <button class="hyp-section-choice" type="button" data-hyp-section="comparison">RICE</button>
         <button class="hyp-section-choice" type="button" data-hyp-section="roadmap">Роадмапа</button>
@@ -3433,9 +3433,9 @@ function render() {
     const hypCounts = getHypCounts(state.featureId);
     const badge = (n) => `<span class="hyp-tab-count">${n}</span>`;
     const hypSectionLabels = {
-      hypotheses:   `Гипотезы ${badge(hypCounts.hypotheses)}`,
+      hypotheses:   `Гіпотези ${badge(hypCounts.hypotheses)}`,
       results:      `Метрики ${badge(hypCounts.results)}`,
-      monetization: `Доход ${badge(hypCounts.monetization)}`,
+      monetization: `Дохід ${badge(hypCounts.monetization)}`,
       workplan:     `План ${badge(hypCounts.workplan)}`,
       comparison:   `RICE ${badge(hypCounts.comparison)}`,
       roadmap:      `Роадмапа ${badge(hypCounts.roadmap)}`
