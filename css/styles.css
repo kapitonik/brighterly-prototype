@@ -4150,6 +4150,7 @@ h1 {
 .tp-fill {
   height: 100%;
   border-radius: 99px;
+  background: var(--teal);
 }
 
 .subject-meta {
@@ -4187,7 +4188,12 @@ h1 {
 .lb-name { font-size: 14px; font-weight: 700; }
 
 .lb-bar-wrap { height: 8px; background: #e2e8f0; border-radius: 99px; overflow: hidden; }
-.lb-bar { height: 100%; background: var(--teal); border-radius: 99px; }
+.lb-bar {
+  height: 8px;
+  border-radius: 99px;
+  align-self: center;
+  background: linear-gradient(to right, var(--teal) var(--w, 0%), #e2e8f0 var(--w, 0%));
+}
 
 .tournament-info { display: grid; }
 
