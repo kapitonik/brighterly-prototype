@@ -800,37 +800,40 @@ h1 {
   filter: grayscale(0.4);
 }
 
-/* Screen selector — compact dropdown */
+/* Screen selector — button group */
 .screen-list {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0;
+  gap: 6px;
 }
 
-.screen-select {
-  flex: 1;
-  min-width: 0;
-  height: 36px;
-  padding: 0 28px 0 10px;
+.screen-btn {
+  flex: 0 0 auto;
+  height: 32px;
+  padding: 0 12px;
   border: 1px solid var(--line);
-  border-radius: 0;
-  background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23667085' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 10px center;
-  appearance: none;
-  color: var(--ink);
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--muted);
   font: inherit;
   font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  outline: none;
-}
-
-.screen-select:focus {
-  border-color: var(--teal);
-  box-shadow: 0 0 0 2px rgba(13,148,136,0.15);
-}
-
-.screen-select option {
   font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.12s, color 0.12s, background 0.12s;
+}
+
+.screen-btn:hover {
+  border-color: var(--teal);
+  color: var(--ink);
+}
+
+.screen-btn.is-active {
+  border-color: var(--teal);
+  background: #f0fdfa;
+  color: var(--ink);
+  font-weight: 700;
 }
 
 .web-preview {
@@ -4548,14 +4551,13 @@ span.info-tip:focus-within span.info-tooltip {
   padding: 6px 10px;
 }
 
-.screen-list,
-.screen-select {
-  width: 100%;
-  height: 46px;
+.screen-list {
+  gap: 6px;
 }
 
-.screen-select {
-  min-height: 46px;
+.screen-btn {
+  height: 38px;
+  font-size: 13px;
 }
 
 .mode-segment,

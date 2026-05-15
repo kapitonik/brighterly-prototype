@@ -2317,28 +2317,17 @@ function renderScreens() {
   const role = getCurrentRole();
   screenList.innerHTML = "";
 
-  const select = document.createElement("select");
-  select.className = "screen-select";
-  select.setAttribute("aria-label", "Вибір екрана");
-
-  const startsAtZero = role.screens[0]?.type === "student-post-lesson-start";
-
   role.screens.forEach((screen, index) => {
-    const option = document.createElement("option");
-    option.value = String(index);
-    option.selected = index === state.screenIndex;
-    const caption = screen.caption ? ` · ${screen.caption}` : "";
-    const screenNumber = startsAtZero ? index : index + 1;
-    option.textContent = `${String(screenNumber).padStart(2, "0")}  ${screen.title}${caption}`;
-    select.append(option);
+    const btn = document.createElement("button");
+    btn.className = "screen-btn" + (index === state.screenIndex ? " is-active" : "");
+    btn.type = "button";
+    btn.textContent = screen.title;
+    btn.addEventListener("click", () => {
+      state.screenIndex = index;
+      render();
+    });
+    screenList.append(btn);
   });
-
-  select.addEventListener("change", () => {
-    state.screenIndex = Number(select.value);
-    render();
-  });
-
-  screenList.append(select);
 }
 
 function renderAppContext(role) {
