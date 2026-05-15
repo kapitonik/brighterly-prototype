@@ -2317,11 +2317,26 @@ function renderScreens() {
   const role = getCurrentRole();
   screenList.innerHTML = "";
 
+  const screenIcons = {
+    "student-post-lesson-start": `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.4"/><polyline points="4.5,7 6.2,9.2 9.5,4.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    "student-recap-processing": `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 1.5h7M3.5 12.5h7M4.5 1.5v3.2L7 7l-2.5 2.3v3.2M9.5 1.5v3.2L7 7l2.5 2.3v3.2" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    "student-recap": `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2.5" y="1.5" width="9" height="11" rx="1.2" stroke="currentColor" stroke-width="1.3"/><line x1="4.5" y1="5" x2="9.5" y2="5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="4.5" y1="7.3" x2="9.5" y2="7.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="4.5" y1="9.6" x2="7.5" y2="9.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>`,
+    "student-week": `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="2.5" width="11" height="10" rx="1.2" stroke="currentColor" stroke-width="1.3"/><line x1="1.5" y1="5.8" x2="12.5" y2="5.8" stroke="currentColor" stroke-width="1.2"/><line x1="5" y1="1.5" x2="5" y2="3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="9" y1="1.5" x2="9" y2="3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`,
+    "teacher-ai-review": `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="8" width="2.5" height="4.5" rx="0.6" fill="currentColor"/><rect x="5.75" y="5" width="2.5" height="7.5" rx="0.6" fill="currentColor"/><rect x="10" y="1.5" width="2.5" height="11" rx="0.6" fill="currentColor"/></svg>`,
+    "teacher-before-review": `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.3"/><polyline points="7,4 7,7.2 9.2,9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    "teacher-before-preview": `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2.5a3.8 3.8 0 0 1 3.8 3.8c0 1.5-.9 2.8-2 3.4V11H5.2V9.7C4.1 9.1 3.2 7.8 3.2 6.3A3.8 3.8 0 0 1 7 2.5z" stroke="currentColor" stroke-width="1.3"/><line x1="5.2" y1="12.5" x2="8.8" y2="12.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`,
+    "student-warmup": `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 12.5c-2.8 0-5-2.2-5-5 0-3 2-4.5 2-4.5s-.3 2 1.5 3c0-2 1.5-4.5 1.5-4.5.5 2.5 2.5 3 2.5 5a2.5 2.5 0 0 1-2.5 2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    "student-preview": `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1.5 7s2-4.5 5.5-4.5S12.5 7 12.5 7s-2 4.5-5.5 4.5S1.5 7 1.5 7z" stroke="currentColor" stroke-width="1.3"/><circle cx="7" cy="7" r="1.8" stroke="currentColor" stroke-width="1.3"/></svg>`,
+    "student-game": `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polygon points="7,2 8.5,5.5 12.5,5.8 9.5,8.5 10.5,12.5 7,10.5 3.5,12.5 4.5,8.5 1.5,5.8 5.5,5.5" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>`,
+  };
+  const defaultIcon = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2.5" y="2.5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/></svg>`;
+
   role.screens.forEach((screen, index) => {
     const btn = document.createElement("button");
     btn.className = "screen-btn" + (index === state.screenIndex ? " is-active" : "");
     btn.type = "button";
-    btn.textContent = screen.title;
+    const icon = screenIcons[screen.type] || defaultIcon;
+    btn.innerHTML = `<span class="screen-btn-icon">${icon}</span><span class="screen-btn-label">${screen.title}</span>`;
     btn.addEventListener("click", () => {
       state.screenIndex = index;
       render();
