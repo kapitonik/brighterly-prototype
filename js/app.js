@@ -1061,12 +1061,6 @@ function lessonActivityTimeline(audience = "student") {
           <small>~25 min</small>
         </div>
       </div>
-      <div class="tl-time-axis" aria-hidden="true">
-        <span>0</span>
-        <span style="left:30%">15 min</span>
-        <span style="left:50%">25 min</span>
-        <span>50 min</span>
-      </div>
       <div class="tl-task-strip" aria-label="Task outcomes">
         <span class="tl-strip-label">Tasks</span>
         <div class="tl-task-row">
